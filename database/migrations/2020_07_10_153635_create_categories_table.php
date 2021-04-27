@@ -18,8 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->string('category_name', 255);
             $table->boolean('status')->default(0);
             $table->foreignId('user_id')
-                    ->constrained()
-                    ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

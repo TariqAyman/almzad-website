@@ -20,11 +20,11 @@ class CreatePostsTable extends Migration
             $table->string('featured_image');
             $table->boolean('status')->default(0);
             $table->foreignId('category_id')->nullable()
-                    ->constrained()
-                    ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
             $table->foreignId('user_id')
-                    ->constrained()
-                    ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

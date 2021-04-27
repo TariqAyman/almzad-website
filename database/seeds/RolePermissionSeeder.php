@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -46,11 +46,11 @@ class RolePermissionSeeder extends Seeder
             Permission::create(['name' => $permission]);
         }
         // Create Super user & role
-        $admin= Role::create(['name' => 'super-admin']);
+        $admin = Role::create(['name' => 'super-admin']);
         $admin->syncPermissions($permissions);
 
         $usr = User::create([
-            'name'=> 'Admin',
+            'name' => 'Admin',
             'email' => 'admin@email.com',
             'password' => 'secret',
             'status' => true,
@@ -67,7 +67,7 @@ class RolePermissionSeeder extends Seeder
         $role->givePermissionTo('view-user');
 
         $user = User::create([
-            'name'=> 'User',
+            'name' => 'User',
             'email' => 'user@email.com',
             'password' => 'secret',
             'status' => true,
