@@ -12,8 +12,8 @@ class RoleController extends Controller
     public function __construct()
     {
         $this->middleware('permission:view-role');
-        $this->middleware('permission:create-role', ['only' => ['create','store']]);
-        $this->middleware('permission:update-role', ['only' => ['edit','update']]);
+        $this->middleware('permission:create-role', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-role', ['only' => ['edit', 'update']]);
         $this->middleware('permission:destroy-role', ['only' => ['destroy']]);
     }
 
@@ -29,7 +29,7 @@ class RoleController extends Controller
             ->log('view');
         $title = 'Manage Roles';
         $roles = Role::paginate(setting('record_per_page', 15));
-        return view('roles.index', compact('roles','title'));
+        return view('roles.index', compact('roles', 'title'));
     }
 
     /**
@@ -44,13 +44,13 @@ class RoleController extends Controller
             ->log('create');
         $title = 'Create role';
         $permissions = Permission::pluck('name', 'id');
-        return view('roles.create', compact('permissions','title'));
+        return view('roles.create', compact('permissions', 'title'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -72,7 +72,7 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
@@ -83,7 +83,7 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
@@ -100,14 +100,14 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Role $role)
     {
         $request->validate([
-            'name' => 'required|unique:roles,name,'.$role->id.'|max:255',
+            'name' => 'required|unique:roles,name,' . $role->id . '|max:255',
         ]);
 
         activity('role')
@@ -122,12 +122,12 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
     {
-        if ($role->id ==1 || $role->name == 'super-admin') {
+        if ($role->id == 1 || $role->name == 'super-admin') {
             flash('Super admin role can not be deleted!')->warning();
             return back();
         }

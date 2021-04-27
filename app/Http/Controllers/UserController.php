@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -16,10 +16,11 @@ class UserController extends Controller
     {
 
         $this->middleware('permission:view-user')->except(['profile', 'profileUpdate']);
-        $this->middleware('permission:create-user', ['only' => ['create','store']]);
-        $this->middleware('permission:update-user', ['only' => ['edit','update']]);
+        $this->middleware('permission:create-user', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-user', ['only' => ['edit', 'update']]);
         $this->middleware('permission:destroy-user', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,12 +30,12 @@ class UserController extends Controller
     {
 
         if ($request->has('search')) {
-            $users = User::where('name', 'like', '%'.$request->search.'%')->paginate(setting('record_per_page', 15));
-        }else{
-            $users= User::paginate(setting('record_per_page', 15));
+            $users = User::where('name', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
+        } else {
+            $users = User::paginate(setting('record_per_page', 15));
         }
-        $title =  'Manage Users';
-        return view('users.index', compact('users','title'));
+        $title = 'Manage Users';
+        return view('users.index', compact('users', 'title'));
     }
 
     /**
@@ -52,7 +53,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserStoreRequest $request)
@@ -71,34 +72,34 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
         $title = "User Details";
         $roles = Role::pluck('name', 'id');
-        return view('users.show', compact('user','title', 'roles'));
+        return view('users.show', compact('user', 'title', 'roles'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
         $title = "User Details";
         $roles = Role::pluck('name', 'id');
-        return view('users.edit', compact('user','title', 'roles'));
+        return view('users.edit', compact('user', 'title', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(UserUpdateRequest $request, User $user)
@@ -116,12 +117,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
-        if ($user->id == Auth::user()->id || $user->id ==1) {
+        if ($user->id == Auth::user()->id || $user->id == 1) {
             flash('You can not delete logged in user!')->warning();
             return back();
         }
@@ -135,8 +136,9 @@ class UserController extends Controller
     public function profile(User $user)
     {
         $title = 'Edit Profile';
-        return view('users.profile', compact('title','user'));
+        return view('users.profile', compact('title', 'user'));
     }
+
     public function profileUpdate(UserUpdateRequest $request, User $user)
     {
         $userData = $request->except('profile_photo');

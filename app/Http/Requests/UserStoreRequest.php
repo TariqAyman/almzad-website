@@ -24,7 +24,7 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'required',
+            'name' => 'required',
             'email' => 'required|unique:users,email|email',
             'password' => 'required|confirmed|min:6'
         ];

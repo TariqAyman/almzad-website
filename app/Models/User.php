@@ -13,6 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasRoles, LogsActivity, ThrottlesLogins;
+
     protected static $ignoreChangedAttributes = ['password'];
 
     /**
@@ -45,21 +46,24 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setStatusAttribute($status)
     {
-        $this->attributes['status'] = ($status)? 1 : 0;
+        $this->attributes['status'] = ($status) ? 1 : 0;
     }
+
     public function setPasswordAttribute($password)
     {
-        if(Hash::needsRehash($password)){
+        if (Hash::needsRehash($password)) {
             $password = Hash::make($password);
             $this->attributes['password'] = $password;
         }
     }
+
     public function categories()
     {
-        return $this->hasMany('App\Category');
+        return $this->hasMany('App\Models\Category');
     }
+
     public function posts()
     {
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Models\Post');
     }
 }
