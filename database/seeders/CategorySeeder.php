@@ -1,8 +1,9 @@
 <?php
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class CurrencySeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,6 @@ class CurrencySeeder extends Seeder
     {
         if (env('APP_ENV') != 'dev') return;
 
-        \App\Models\Currency::factory()->count(5)->create();
+        \App\Models\Category::factory()->count(5)->create();
     }
 }
