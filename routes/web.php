@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('admin.dashboard');
+Route::group(['as' => 'frontend.', 'namespace' => 'Frontend'], function () {
+    Route::get('/', 'HomeController@index');
+    Route::resource('auctions', 'AuctionController')->only(['index', 'show']);
+    Route::resource('profile', 'AuctionController@index');
+    Route::get('user/store', 'AuctionController@index');
+    Route::get('user/auctions', 'AuctionController@index');
+
 });
 
