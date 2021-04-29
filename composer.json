@@ -27,7 +27,6 @@
         "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
-        "tariqayman/gencode": "^1.0",
         "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
