@@ -1,9 +1,9 @@
 <?php
-namespace Database\Seeders;
+namespace Database\seeds;
 
 use Illuminate\Database\Seeder;
 
-class StoreSeeder extends Seeder
+class TypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class StoreSeeder extends Seeder
     {
         if (env('APP_ENV') != 'dev') return;
 
-        \App\Models\Store::factory()->count(5)->create();
+        \App\Models\Type::factory()->count(5)->create();
     }
 }

@@ -1,9 +1,9 @@
 <?php
-namespace Database\Seeders;
+namespace Database\seeds;
 
 use Illuminate\Database\Seeder;
 
-class ContactUsSeeder extends Seeder
+class StoreSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class ContactUsSeeder extends Seeder
     {
         if (env('APP_ENV') != 'dev') return;
 
-        \App\Models\ContactUs::factory()->count(5)->create();
+        \App\Models\Store::factory()->count(5)->create();
     }
 }

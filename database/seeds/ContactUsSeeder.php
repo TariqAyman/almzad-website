@@ -1,9 +1,9 @@
 <?php
-namespace Database\Seeders;
+namespace Database\seeds;
 
 use Illuminate\Database\Seeder;
 
-class AuctionSeeder extends Seeder
+class ContactUsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,6 @@ class AuctionSeeder extends Seeder
     {
         if (env('APP_ENV') != 'dev') return;
 
-        \App\Models\Auction::factory()->has(\App\Models\AuctionsImage::factory()->count(10))->count(100)->create();
-
-
-
+        \App\Models\ContactUs::factory()->count(5)->create();
     }
 }

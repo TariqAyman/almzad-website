@@ -1,5 +1,5 @@
 <?php
-namespace Database\Seeders;
+namespace Database\seeds;
 
 use App\Models\User;
 use Database\Factories\ReviewFactory;
