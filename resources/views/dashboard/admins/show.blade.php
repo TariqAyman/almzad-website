@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.contentLayoutMaster')
+
+@section('title', 'Create New Permission')
+
 @push('pg_btn')
     @can('update-user')
         <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Edit user details" href="{{route('users.edit',$user)}}">
