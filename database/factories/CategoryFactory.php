@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Store;
+use App\Models\Category;
 
-class StoreFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
     * The name of the factory's corresponding model.
     *
     * @var  string
     */
-    protected $model = Store::class;
+    protected $model = Category::class;
 
     /**
     * Define the model's default state.
@@ -22,14 +22,11 @@ class StoreFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
             'name_ar' => $this->faker->word,
             'name_en' => $this->faker->word,
-            'description_ar' => $this->faker->word,
-            'description_en' => $this->faker->word,
             'slug_ar' => $this->faker->word,
             'slug_en' => $this->faker->word,
-            'phone_number' => $this->faker->phoneNumber,
+            'status' => $this->faker->boolean,
         ];
     }
 }

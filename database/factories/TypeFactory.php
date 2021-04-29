@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Setting;
+use App\Models\Type;
 
-class SettingFactory extends Factory
+class TypeFactory extends Factory
 {
     /**
     * The name of the factory's corresponding model.
     *
     * @var  string
     */
-    protected $model = Setting::class;
+    protected $model = Type::class;
 
     /**
     * Define the model's default state.
@@ -22,8 +22,9 @@ class SettingFactory extends Factory
     public function definition(): array
     {
         return [
-            'key' => $this->faker->word,
-            'value' => $this->faker->text,
+            'name_ar' => $this->faker->word,
+            'name_en' => $this->faker->word,
+            'status' => $this->faker->boolean
         ];
     }
 }

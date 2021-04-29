@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Type;
+use App\Models\Permission;
 
-class TypeFactory extends Factory
+class PermissionFactory extends Factory
 {
     /**
     * The name of the factory's corresponding model.
     *
     * @var  string
     */
-    protected $model = Type::class;
+    protected $model = Permission::class;
 
     /**
     * Define the model's default state.
@@ -22,9 +22,9 @@ class TypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name_ar' => $this->faker->word,
-            'name_en' => $this->faker->word,
-            'status' => $this->faker->boolean
+            'name' => $this->faker->name,
+            'display_name' => $this->faker->word,
+            'guard_name' => $this->faker->word,
         ];
     }
 }

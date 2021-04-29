@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\StoresImage;
+use App\Models\Setting;
 
-class StoresImageFactory extends Factory
+class SettingFactory extends Factory
 {
     /**
     * The name of the factory's corresponding model.
     *
     * @var  string
     */
-    protected $model = StoresImage::class;
+    protected $model = Setting::class;
 
     /**
     * Define the model's default state.
@@ -22,8 +22,8 @@ class StoresImageFactory extends Factory
     public function definition(): array
     {
         return [
-            'store_id' => \App\Models\Store::inRandomOrder()->first()->id,
-            'image' => 'frontend/img/clint-pic.png',
+            'key' => $this->faker->word,
+            'value' => $this->faker->text,
         ];
     }
 }

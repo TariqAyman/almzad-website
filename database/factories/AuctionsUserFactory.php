@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Review;
+use App\Models\AuctionsUser;
 
-class ReviewFactory extends Factory
+class AuctionsUserFactory extends Factory
 {
     /**
     * The name of the factory's corresponding model.
     *
     * @var  string
     */
-    protected $model = Review::class;
+    protected $model = AuctionsUser::class;
 
     /**
     * Define the model's default state.
@@ -23,8 +23,8 @@ class ReviewFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::inRandomOrder()->first()->id,
-            'note' => $this->faker->text,
-            'status' => $this->faker->boolean,
+            'auction_id' => \App\Models\Auction::inRandomOrder()->first()->id,
+            'price' => $this->faker->randomFloat(),
         ];
     }
 }
