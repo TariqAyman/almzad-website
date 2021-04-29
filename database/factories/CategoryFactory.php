@@ -9,6 +9,5 @@ $factory->define(Category::class, function (Faker $faker) {
     return [
         'category_name' => $faker->word,
         'status' => 1,
-        'user_id' => App\Models\User::all()->random()->id
     ];
 });
