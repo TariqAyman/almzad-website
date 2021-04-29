@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class AuctionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,9 @@ class CategorySeeder extends Seeder
     {
         if (env('APP_ENV') != 'dev') return;
 
-        \App\Models\Category::factory()->count(5)->create();
+        \App\Models\Auction::factory()->has(\App\Models\AuctionsImage::factory()->count(10))->count(100)->create();
+
+
+
     }
 }
