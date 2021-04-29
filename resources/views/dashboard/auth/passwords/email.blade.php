@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.fullLayoutMaster')
 
-@section('title', 'Forgot Password')
+@section('page-title', 'Forgot Password')
+@section('page-header', 'Forgot Password')
 
 @section('page-style')
     {{-- Page Css files --}}
@@ -41,7 +42,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <h2 class="brand-text text-primary ml-1">{{ env('APP_NAME') }}</h2>
+                        <h2 class="brand-text text-primary ml-1">{{ setting('company_name') }}</h2>
                     </a>
 
                     @if (session('status'))
@@ -53,7 +54,7 @@
                     <h4 class="card-title mb-1">Forgot Password? 🔒</h4>
                     <p class="card-text mb-2">Enter your email and we'll send you instructions to reset your password</p>
 
-                    <form class="auth-forgot-password-form mt-2" method="POST" action="{{ route('password.email') }}">
+                    <form class="auth-forgot-password-form mt-2" method="POST" action="{{ route('admin.password.email') }}">
                         @csrf
                         <div class="form-group">
                             <label for="forgot-password-email" class="form-label">Email</label>
@@ -69,8 +70,8 @@
                     </form>
 
                     <p class="text-center mt-2">
-                        @if (Route::has('login'))
-                            <a href="{{ route('login') }}"> <i data-feather="chevron-left"></i> Back to login </a>
+                        @if (Route::has('admin.login'))
+                            <a href="{{ route('admin.login') }}"> <i data-feather="chevron-left"></i> Back to login </a>
                         @endif
                     </p>
                 </div>

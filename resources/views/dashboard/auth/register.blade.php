@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.fullLayoutMaster')
 
-@section('title', 'Register')
+@section('page-title', 'Register')
+@section('page-header', 'Register')
 
 @section('page-style')
     {{-- Page Css files --}}
@@ -29,8 +30,12 @@
                             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g id="Artboard" transform="translate(-400.000000, -178.000000)">
                                     <g id="Group" transform="translate(400.000000, 178.000000)">
-                                        <path class="text-primary" id="Path" d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z" style="fill: currentColor"></path>
-                                        <path id="Path1" d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z" fill="url(#linearGradient-1)" opacity="0.2"></path>
+                                        <path class="text-primary" id="Path"
+                                              d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z"
+                                              style="fill: currentColor"></path>
+                                        <path id="Path1"
+                                              d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z"
+                                              fill="url(#linearGradient-1)" opacity="0.2"></path>
                                         <polygon id="Path-2" fill="#000000" opacity="0.049999997" points="69.3922914 32.4202615 32.8435758 70.5039241 54.0490008 16.1851325"></polygon>
                                         <polygon id="Path-21" fill="#000000" opacity="0.099999994" points="69.3922914 32.4202615 32.8435758 70.5039241 58.3683556 20.7402338"></polygon>
                                         <polygon id="Path-3" fill="url(#linearGradient-2)" opacity="0.099999994" points="101.428699 0 83.0667527 94.1480575 130.378721 47.0740288"></polygon>
@@ -38,17 +43,17 @@
                                 </g>
                             </g>
                         </svg>
-                        <h2 class="brand-text text-primary ml-1">{{ env('APP_NAME') }}</h2>
+                        <h2 class="brand-text text-primary ml-1">{{ setting('company_name') }}</h2>
                     </a>
 
                     <h4 class="card-title mb-1">Adventure starts here 🚀</h4>
                     <p class="card-text mb-2">Make your app management easy and fun!</p>
 
-                    <form class="auth-register-form mt-2" method="POST" action="{{ route('register') }}">
+                    <form class="auth-register-form mt-2" method="POST" action="{{ route('admin.register') }}">
                         @csrf
                         <div class="form-group">
                             <label for="register-username" class="form-label">{{ __('Name') }}</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="register-username" name="name" placeholder="johndoe" aria-describedby="register-username" tabindex="1" autofocus value="{{ old('name') }}" />
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="register-username" name="name" placeholder="johndoe" aria-describedby="register-username" tabindex="1" autofocus value="{{ old('name') }}"/>
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -57,7 +62,7 @@
                         </div>
                         <div class="form-group">
                             <label for="register-email" class="form-label">Email</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="register-email" name="email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" value="{{ old('email') }}" />
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="register-email" name="email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" value="{{ old('email') }}"/>
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -69,7 +74,8 @@
                             <label for="register-password" class="form-label">Password</label>
 
                             <div class="input-group input-group-merge form-password-toggle @error('password') is-invalid @enderror">
-                                <input type="password" class="form-control form-control-merge @error('password') is-invalid @enderror" id="register-password" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="register-password" tabindex="3" />
+                                <input type="password" class="form-control form-control-merge @error('password') is-invalid @enderror" id="register-password" name="password"
+                                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="register-password" tabindex="3"/>
                                 <div class="input-group-append">
                                     <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                 </div>
@@ -83,7 +89,8 @@
                             <label for="register-password-confirm" class="form-label">Confirm Password</label>
 
                             <div class="input-group input-group-merge form-password-toggle">
-                                <input type="password" class="form-control form-control-merge" id="register-password-confirm" name="password_confirmation" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="register-password" tabindex="3" />
+                                <input type="password" class="form-control form-control-merge" id="register-password-confirm" name="password_confirmation" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                       aria-describedby="register-password" tabindex="3"/>
                                 <div class="input-group-append">
                                     <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                 </div>
@@ -92,7 +99,7 @@
 
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="register-privacy-policy" tabindex="4" />
+                                <input class="custom-control-input" type="checkbox" id="register-privacy-policy" tabindex="4"/>
                                 <label class="custom-control-label" for="register-privacy-policy">
                                     I agree to <a href="javascript:void(0);">privacy policy & terms</a>
                                 </label>
@@ -103,8 +110,8 @@
 
                     <p class="text-center mt-2">
                         <span>Already have an account?</span>
-                        @if (Route::has('login'))
-                            <a href="{{ route('login') }}">
+                        @if (Route::has('admin.login'))
+                            <a href="{{ route('admin.login') }}">
                                 <span>Sign in instead</span>
                             </a>
                         @endif

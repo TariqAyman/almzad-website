@@ -1,6 +1,8 @@
 @extends('layouts/fullLayoutMaster')
 
 @section('title', 'Login Page')
+@section('page-title', 'verify')
+@section('page-header', 'verify')
 
 @section('page-style')
     {{-- Page Css files --}}
@@ -42,13 +44,13 @@
                                 </g>
                             </g>
                         </svg>
-                        <h2 class="brand-text text-primary ml-1">{{ env('APP_NAME') }}</h2>
+                        <h2 class="brand-text text-primary ml-1">{{ setting('company_name') }}</h2>
                     </a>
 
-                    <h4 class="card-title mb-1">Welcome to Vuexy! 👋</h4>
+                    <h4 class="card-title mb-1">Welcome to {{ setting('company_name') }}! 👋</h4>
                     <p class="card-text mb-2">Please confirm your password before continuing.</p>
 
-                    <form class="auth-login-form mt-2" method="POST" action="{{ route('password.confirm') }}">
+                    <form class="auth-login-form mt-2" method="POST" action="{{ route('admin.password.confirm') }}">
                         @csrf
 
                         <div class="form-group">
@@ -66,7 +68,7 @@
 
                     <p class="text-center mt-2">
                         @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                            <a class="btn btn-link" href="{{ route('admin.password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                         @endif

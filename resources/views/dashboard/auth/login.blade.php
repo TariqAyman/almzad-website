@@ -3,7 +3,8 @@
 @endphp
 @extends('dashboard.layouts.fullLayoutMaster')
 
-@section('title', 'Login Page')
+@section('page-title', 'Login Page')
+@section('page-header', 'Login Page')
 
 @section('page-style')
     {{-- Page Css files --}}
@@ -43,7 +44,7 @@
                         </g>
                     </g>
                 </svg>
-                <h2 class="brand-text text-primary ml-1">{{ env('APP_NAME') }}</h2>
+                <h2 class="brand-text text-primary ml-1">{{ setting('company_name') }}</h2>
             </a>
             <!-- /Brand logo-->
             <!-- Left Text-->
@@ -60,14 +61,14 @@
             <!-- Login-->
             <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                    <h4 class="card-title mb-1">Welcome to {{ env('APP_NAME') }}</h4>
+                    <h4 class="card-title mb-1">Welcome to {{ setting('company_name') }}</h4>
                     <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
-                    <form role="form" action="{{ route('login') }}" method="POST" id="login-form" autocomplete="off" class="auth-login-form mt-2">
+                    <form role="form" action="{{ route('admin.login') }}" method="POST" id="login-form" autocomplete="off" class="auth-login-form mt-2">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label class="form-label" for="login-email">Email</label>
                             <input class="form-control" id="login-email" type="text" name="email" placeholder="john@example.com" aria-describedby="login-email" autofocus=""
-                                   tabindex="1" {{ (env('APP_ENV') === 'dev') ? "value=admin@admin.com" : '' }} />
+                                   tabindex="1" {{ (env('APP_ENV') === 'dev') ? "value=admin@email.com" : old('email') }} />
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -77,13 +78,13 @@
                         <div class="form-group">
                             <div class="d-flex justify-content-between">
                                 <label for="login-password">Password</label>
-                                <a href="{{ route('password.request') }}">
+                                <a href="{{ route('admin.password.request') }}">
                                     <small>Forgot Password?</small>
                                 </a>
                             </div>
                             <div class="input-group input-group-merge form-password-toggle">
                                 <input class="form-control form-control-merge" id="login-password" type="password" name="password" placeholder="***********" aria-describedby="login-password"
-                                       tabindex="2" {{ (env('APP_ENV') === 'dev') ? "value=123123" : '' }} />
+                                       tabindex="2" {{ (env('APP_ENV') === 'dev') ? "value=12345678" : '' }} />
                                 <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                 </div>
                                 @error('password')
@@ -104,15 +105,15 @@
 
                     <div class="row mt-3">
                         <div class="col-6">
-                            @if (Route::has('password.request'))
-                                <a class="text-gray" href="{{ route('password.request') }}">
+                            @if (Route::has('admin.password.request'))
+                                <a class="text-gray" href="{{ route('admin.password.request') }}">
                                     Forgot Your Password?
                                 </a>
                             @endif
                         </div>
                         <div class="col-6 text-right">
                             @if (Route::has('register'))
-                                <a class="text-gray" href="{{ route('register') }}">
+                                <a class="text-gray" href="{{ route('admin.register') }}">
                                     Create new account
                                 </a>
                             @endif

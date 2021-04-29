@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.fullLayoutMaster')
 
-@section('title', 'Reset Password')
+@section('page-title', 'Reset Password')
+@section('page-header', 'Reset Password')
 
 @section('page-style')
     {{-- Page Css files --}}
@@ -42,13 +43,13 @@
                                 </g>
                             </g>
                         </svg>
-                        <h2 class="brand-text text-primary ml-1">Vuexy</h2>
+                        <h2 class="brand-text text-primary ml-1">{{ setting('company_name') }}</h2>
                     </a>
 
                     <h4 class="card-title mb-1">Reset Password 🔒</h4>
                     <p class="card-text mb-2">Your new password must be different from previously used passwords</p>
 
-                    <form class="auth-reset-password-form mt-2" method="POST" action="{{ route('password.update') }}">
+                    <form class="auth-reset-password-form mt-2" method="POST" action="{{ route('admin.password.update') }}">
                         @csrf
                         <input type="hidden" name="token" value="{{ $token }}">
 
@@ -95,8 +96,8 @@
                     </form>
 
                     <p class="text-center mt-2">
-                        @if (Route::has('login'))
-                            <a href="{{ route('login') }}">
+                        @if (Route::has('admin.login'))
+                            <a href="{{ route('admin.login') }}">
                                 <i data-feather="chevron-left"></i> Back to login
                             </a>
                         @endif

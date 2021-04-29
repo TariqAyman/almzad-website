@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.fullLayoutMaster')
 
-@section('title', 'Login Page')
+@section('page-title', 'verify')
+@section('page-header', 'verify')
 
 @section('page-style')
     {{-- Page Css files --}}
@@ -42,7 +43,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <h2 class="brand-text text-primary ml-1">{{ env('APP_NAME') }}</h2>
+                        <h2 class="brand-text text-primary ml-1">{{ setting('company_name') }}</h2>
                     </a>
 
                     <h4 class="card-title mb-1">Verify Your Email Address! </h4>
@@ -54,7 +55,7 @@
                     <p class="card-text mb-2">{{ __('Before proceeding, please check your email for a verification link.') }}</p>
                     <p class="card-text">{{ __('If you did not receive the email') }},
 
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    <form class="d-inline" method="POST" action="{{ route('admin.verification.resend') }}">
                         @csrf
                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>
                         .
