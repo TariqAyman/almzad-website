@@ -3,16 +3,16 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Category;
+use App\Models\Review;
 
-class CategoryFactory extends Factory
+class ReviewFactory extends Factory
 {
     /**
     * The name of the factory's corresponding model.
     *
     * @var  string
     */
-    protected $model = Category::class;
+    protected $model = Review::class;
 
     /**
     * Define the model's default state.
@@ -22,10 +22,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name_ar' => $this->faker->word,
-            'name_en' => $this->faker->word,
-            'slug_ar' => $this->faker->word,
-            'slug_en' => $this->faker->word,
+            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            'note' => $this->faker->text,
             'status' => $this->faker->boolean,
         ];
     }
