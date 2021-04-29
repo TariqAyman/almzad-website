@@ -4,7 +4,7 @@
 * Created by GenCode.
 */
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Wallet;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
