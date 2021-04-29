@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -20,10 +20,10 @@ class RolePermissionSeeder extends Seeder
         // create permissions
         $permissions = [
             'update-settings',
-            'view-user',
-            'create-user',
-            'update-user',
-            'destroy-user',
+            'view-admin',
+            'create-admin',
+            'update-admin',
+            'destroy-admin',
             'view-role',
             'view-permission',
             'create-role',
@@ -37,22 +37,20 @@ class RolePermissionSeeder extends Seeder
             'create-category',
             'update-category',
             'destroy-category',
-            'view-post',
-            'create-post',
-            'update-post',
-            'destroy-post',
         ];
+
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::create(['name' => $permission, 'display_name' => $permission, 'guard_name' => 'admin']);
         }
+
         // Create Super user & role
-        $admin = Role::create(['name' => 'super-admin']);
+        $admin = Role::create(['name' => 'super-admin', 'display_name' => 'super-admin', 'guard_name' => 'admin']);
         $admin->syncPermissions($permissions);
 
-        $usr = User::create([
+        $usr = Admin::create([
             'name' => 'Admin',
             'email' => 'admin@email.com',
-            'password' => 'secret',
+            'password' => '12345678',
             'status' => true,
             'email_verified_at' => now(),
         ]);
@@ -62,17 +60,18 @@ class RolePermissionSeeder extends Seeder
         $usr->syncPermissions($permissions);
 
         // Create user & role
-        $role = Role::create(['name' => 'user']);
+        $role = Role::create(['name' => 'user', 'display_name' => 'user', 'guard_name' => 'admin']);
         $role->givePermissionTo('update-settings');
-        $role->givePermissionTo('view-user');
+        $role->givePermissionTo('view-admin');
 
-        $user = User::create([
+        $user = Admin::create([
             'name' => 'User',
             'email' => 'user@email.com',
-            'password' => 'secret',
+            'password' => '12345678',
             'status' => true,
             'email_verified_at' => now(),
         ]);
+
         $user->assignRole($role);
     }
 }
