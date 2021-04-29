@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ar', 255);
-            $table->string('name_en', 255);
-            $table->string('slug_ar', 255);
-            $table->string('slug_en', 255);
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone_number')->nullable();
+            $table->string('profile_photo')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->boolean('status')->default(0);
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +35,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('admins');
     }
 }
