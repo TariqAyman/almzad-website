@@ -195,11 +195,10 @@
                         <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
                     @if (Auth::user()->profile_photo)
-                        <img width="45" height="45" class="img-fluid rounded-pill" src="{{ asset(Auth::user()->profile_photo) }}" alt="">
-                    @else
-                    <i class="far avatar avatar-sm rounded-circle fa-user"></i>
-
-                    @endif
+                          <img width="45" height="45" class="img-fluid rounded-pill" src="{{ asset(Auth::user()->profile_photo) }}" alt="">
+                      @else
+                          <i class="far avatar avatar-sm rounded-circle fa-user"></i>
+                      @endif
                   </span>
                             <div class="media-body  ml-2  d-none d-lg-block">
                                 <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->name }}</span>
@@ -210,29 +209,29 @@
                         <div class="dropdown-header noti-title">
                             <h6 class="text-overflow m-0">Welcome!</h6>
                         </div>
-                        <a href="{{ route('profile.edit', auth()->user()) }}" class="dropdown-item">
+                        <a href="{{ route('admin.profile.edit', auth()->user()) }}" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
                             <span>My profile</span>
                         </a>
                         @can('settings.update')
 
-                        <a href="{{ route('settings.index') }}" class="dropdown-item">
-                            <i class="ni ni-settings-gear-65"></i>
-                            <span>Settings</span>
-                        </a>
+                            <a href="{{ route('admin.settings.index') }}" class="dropdown-item">
+                                <i class="ni ni-settings-gear-65"></i>
+                                <span>Settings</span>
+                            </a>
                         @endcan
                         <a href="#!" class="dropdown-item">
                             <i class="ni ni-support-16"></i>
                             <span>Support</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        <a class="dropdown-item" href="{{ route('admin.logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </div>
