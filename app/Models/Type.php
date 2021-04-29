@@ -13,14 +13,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Category
+ * Class Type
  *
  * @property int $id
  * @property string $name_ar
  * @property string $name_en
- * @property string $slug_ar
- * @property string $slug_en
- * @property bool $status
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -29,41 +26,33 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class Category extends Model
+class Type extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+	use SoftDeletes;
+	protected $table = 'types';
 
-    protected $table = 'categories';
+	protected $fillable = [
+		'name_ar',
+		'name_en',
+        'status'
+	];
 
     protected $casts = [
         'status' => 'bool'
     ];
 
-    protected $fillable = [
-        'name_ar',
-        'name_en',
-        'slug_ar',
-        'slug_en',
-        'status'
+	protected $appends =[
+	    'name'
     ];
 
-    protected $appends = [
-        'name', 'slug'
-    ];
-
-    public function auctions()
-    {
-        return $this->hasMany(Auction::class);
-    }
+	public function auctions()
+	{
+		return $this->hasMany(Auction::class);
+	}
 
     public function getNameAttribute()
     {
         return $this->attributes['name_ar'];
-    }
-
-    public function getSlugAttribute()
-    {
-        return $this->attributes['slug_ar'];
     }
 }

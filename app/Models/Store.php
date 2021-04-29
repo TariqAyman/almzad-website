@@ -13,49 +13,60 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Category
+ * Class Store
  *
  * @property int $id
+ * @property int $user_id
  * @property string $name_ar
  * @property string $name_en
+ * @property string $description_ar
+ * @property string $description_en
  * @property string $slug_ar
  * @property string $slug_en
- * @property bool $status
+ * @property string $phone_number
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
- * @property Collection|Auction[] $auctions
+ * @property User $user
+ * @property Collection|StoresImage[] $stores_images
  *
  * @package App\Models
  */
-class Category extends Model
+class Store extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+	use SoftDeletes;
+	protected $table = 'stores';
 
-    protected $table = 'categories';
+	protected $casts = [
+		'user_id' => 'int'
+	];
 
-    protected $casts = [
-        'status' => 'bool'
-    ];
-
-    protected $fillable = [
-        'name_ar',
-        'name_en',
-        'slug_ar',
-        'slug_en',
-        'status'
-    ];
+	protected $fillable = [
+		'user_id',
+		'name_ar',
+		'name_en',
+		'description_ar',
+		'description_en',
+		'slug_ar',
+		'slug_en',
+		'phone_number'
+	];
 
     protected $appends = [
         'name', 'slug'
     ];
 
-    public function auctions()
-    {
-        return $this->hasMany(Auction::class);
-    }
+    public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+
+	public function storesImages()
+	{
+		return $this->hasMany(StoresImage::class);
+	}
 
     public function getNameAttribute()
     {
