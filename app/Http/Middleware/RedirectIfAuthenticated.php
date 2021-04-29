@@ -18,6 +18,25 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        switch ($guard) {
+            case 'admin':
+                if (\Auth::guard($guard)->check()) {
+                    return redirect()->route('admin.login');
+                }
+                break;
+
+            case 'api':
+//                if (\Auth::guard($guard)->check()) {
+//                    return response()->json(['errors' => trans('app.Unauthenticated',[],ApiHelper::$lang), 'status' => 0], 401);
+//                }
+                break;
+            default:
+                if (\Auth::guard($guard)->check()) {
+                    return redirect()->url('/');
+                }
+                break;
+        }
+
         if (Auth::guard($guard)->check()) {
             return redirect(RouteServiceProvider::HOME);
         }
