@@ -25,11 +25,18 @@
                     <h6 class="heading-small text-muted mb-4">Category information</h6>
 
                     <div class="form-group row">
-                        <label class="col-form-label col-sm-2 text-sm-right">@lang('app.category_name')</label>
+                        <label class="col-form-label col-sm-2 text-sm-right">@lang('app.name_en')</label>
                         <div class="col-sm-10">
-                            {{ Form::text('category_name', $edit ? $category->category_name : old('category_name'), ['class' => 'form-control']) }}
+                            {{ Form::text('name_en', $edit ? $category->name_en : old('name_en'), ['class' => 'form-control']) }}
                         </div>
                     </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-sm-2 text-sm-right">@lang('app.name_ar')</label>
+                            <div class="col-sm-10">
+                                {{ Form::text('name_ar', $edit ? $category->name_ar : old('name_ar'), ['class' => 'form-control']) }}
+                            </div>
+                        </div>
 
                     <div class="form-group row">
                         <div class="pl-lg-4">

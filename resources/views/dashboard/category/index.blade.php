@@ -56,7 +56,8 @@
                 ajax: '{!! route('admin.category.getDatatable') !!}',
                 columns: [
                     {data: 'DT_RowIndex', orderable: false, searchable: false},
-                    {data: 'category_name', name: 'category_name'},
+                    {data: 'name_ar', name: 'name_ar'},
+                    {data: 'name_en', name: 'name_en'},
                     {data: 'status', name: 'status'},
                     {data: 'created_at', name: 'created_at', orderable: false,},
                     {data: 'updated_at', name: 'updated_at', orderable: false,},
