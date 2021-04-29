@@ -7,10 +7,11 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail
+class Admin extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasRoles, LogsActivity, ThrottlesLogins;
 
@@ -22,7 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone_number', 'profile_photo', 'status'];
+        'name', 'email', 'password', 'phone_number', 'profile_photo', 'status'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -32,9 +34,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     protected static $logFillable = true;
-    protected static $logName = 'user';
+    protected static $logName = 'admin';
     protected static $logOnlyDirty = true;
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -55,15 +59,5 @@ class User extends Authenticatable implements MustVerifyEmail
             $password = Hash::make($password);
             $this->attributes['password'] = $password;
         }
-    }
-
-    public function categories()
-    {
-        return $this->hasMany('App\Models\Category');
-    }
-
-    public function posts()
-    {
-        return $this->hasMany('App\Models\Post');
     }
 }

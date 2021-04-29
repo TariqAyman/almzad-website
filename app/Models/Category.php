@@ -9,7 +9,7 @@ class Category extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['category_name', 'status', 'user_id'];
+    protected $fillable = ['category_name', 'status'];
 
     protected static $logFillable = true;
     protected static $logName = 'category';
@@ -19,15 +19,5 @@ class Category extends Model
     public function setStatusAttribute($status)
     {
         $this->attributes['status'] = ($status) ? 1 : 0;
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
-
-    public function posts()
-    {
-        return $this->hasMany('App\Models\Post');
     }
 }
