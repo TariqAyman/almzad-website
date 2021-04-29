@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest
+class AdminStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $this->user->id,
-            'password' => 'nullable|confirmed|min:6'
+            'email' => 'required|unique:admins,email|email',
+            'password' => 'required|confirmed|min:6'
         ];
     }
 }
