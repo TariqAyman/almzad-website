@@ -1,5 +1,5 @@
 <?php
-namespace Database\seeds;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use anlutro\LaravelSettings\Facade as Setting;
