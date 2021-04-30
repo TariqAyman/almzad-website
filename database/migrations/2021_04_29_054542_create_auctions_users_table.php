@@ -19,7 +19,7 @@ class CreateAuctionsUsersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('auction_id');
             $table->foreign('auction_id')->references('id')->on('auctions')->onDelete('cascade');
-            $table->boolean('price');
+            $table->decimal('price',18);
             $table->softDeletes();
             $table->timestamps();
         });

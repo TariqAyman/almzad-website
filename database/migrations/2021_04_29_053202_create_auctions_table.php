@@ -27,11 +27,13 @@ class CreateAuctionsTable extends Migration
             $table->string('name_en', 255);
             $table->string('description_ar', 255);
             $table->string('description_en', 255);
+            $table->string('conditions_ar', 255);
+            $table->string('conditions_en', 255);
             $table->string('slug_ar', 255);
             $table->string('slug_en', 255);
             $table->boolean('status')->default(0);
-            $table->double('start_form');
-            $table->double('price');
+            $table->decimal('start_from');
+            $table->decimal('price',13);
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->boolean('shipping')->default(0);
