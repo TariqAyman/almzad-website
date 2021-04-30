@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Review
@@ -43,7 +44,14 @@ class Review extends Model
 		'status'
 	];
 
-	public function user()
+    use LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'reviews';
+    protected static $logOnlyDirty = true;
+
+
+    public function user()
 	{
 		return $this->belongsTo(User::class);
 	}

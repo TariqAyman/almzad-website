@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class AuctionsUser
@@ -44,6 +45,12 @@ class AuctionsUser extends Model
 		'auction_id',
 		'price'
 	];
+
+    use LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'auctions_users';
+    protected static $logOnlyDirty = true;
 
 	public function auction()
 	{

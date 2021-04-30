@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Currency
@@ -30,37 +31,50 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Currency extends Model
 {
     use HasFactory;
-	use SoftDeletes;
-	protected $table = 'currencies';
+    use SoftDeletes;
+
+    protected $table = 'currencies';
 
     protected $casts = [
         'status' => 'bool'
     ];
 
-	protected $fillable = [
-		'name_ar',
-		'name_en',
+    protected $fillable = [
+        'name_ar',
+        'name_en',
         'symbol_ar',
         'symbol_en',
         'status'
-	];
-
-	protected $appends = [
-	  'name'
     ];
 
-	public function auctions()
-	{
-		return $this->hasMany(Auction::class);
-	}
+    protected $appends = [
+        'name', 'symbol'
+    ];
 
-	public function wallets()
-	{
-		return $this->hasMany(Wallet::class);
-	}
+    use LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'currencies';
+    protected static $logOnlyDirty = true;
+
+
+    public function auctions()
+    {
+        return $this->hasMany(Auction::class);
+    }
+
+    public function wallets()
+    {
+        return $this->hasMany(Wallet::class);
+    }
 
     public function getNameAttribute()
     {
         return $this->attributes['name_ar'];
+    }
+
+    public function getSymbolAttribute()
+    {
+        return $this->attributes['symbol_ar'];
     }
 }

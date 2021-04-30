@@ -6,11 +6,18 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class User
@@ -38,8 +45,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class User extends Model
+class User extends Authenticatable implements MustVerifyEmail
 {
+    use Notifiable, LogsActivity, ThrottlesLogins;
+
     use HasFactory;
 	use SoftDeletes;
 	protected $table = 'users';
@@ -74,6 +83,20 @@ class User extends Model
 	    'name'
     ];
 
+
+    protected static $logFillable = true;
+    protected static $logName = 'users';
+    protected static $logOnlyDirty = true;
+
+
+    public function setPasswordAttribute($password)
+    {
+        if (Hash::needsRehash($password)) {
+            $password = Hash::make($password);
+            $this->attributes['password'] = $password;
+        }
+    }
+
 	public function auctions()
 	{
 		return $this->belongsToMany(Auction::class, 'auctions_users')
@@ -104,5 +127,10 @@ class User extends Model
     public function getNameAttribute()
     {
         return $this->attributes['first_name'];
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

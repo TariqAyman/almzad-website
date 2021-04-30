@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Store
@@ -57,6 +58,14 @@ class Store extends Model
     protected $appends = [
         'name', 'slug'
     ];
+
+
+    use LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'stores';
+    protected static $logOnlyDirty = true;
+
 
     public function user()
 	{

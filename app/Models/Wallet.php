@@ -9,10 +9,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Wallet
- * 
+ *
  * @property int $id
  * @property int $user_id
  * @property int|null $auction_id
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $balance
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Auction|null $auction
  * @property Currency $currency
  * @property User $user
@@ -55,7 +56,14 @@ class Wallet extends Model
 		'balance'
 	];
 
-	public function auction()
+
+    use LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'wallets';
+    protected static $logOnlyDirty = true;
+
+    public function auction()
 	{
 		return $this->belongsTo(Auction::class);
 	}
