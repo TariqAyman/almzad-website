@@ -51,7 +51,7 @@ class RolePermissionSeeder extends Seeder
         $usr = Admin::create([
             'name' => 'Admin',
             'email' => 'admin@email.com',
-            'password' => '12345678',
+            'password' => '123456789',
             'status' => true,
             'email_verified_at' => now(),
         ]);
@@ -68,7 +68,7 @@ class RolePermissionSeeder extends Seeder
         $user = Admin::create([
             'name' => 'User',
             'email' => 'user@email.com',
-            'password' => '12345678',
+            'password' => '123456789',
             'status' => true,
             'email_verified_at' => now(),
         ]);
