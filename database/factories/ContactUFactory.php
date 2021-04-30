@@ -23,10 +23,10 @@ class ContactUFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::inRandomOrder()->first()->id,
-            'subject' => $this->faker->word,
+            'subject' => $this->faker->text,
             'email' => $this->faker->safeEmail,
             'phone' => $this->faker->phoneNumber,
-            'message' => $this->faker->word,
+            'message' => $this->faker->text,
             'name' => $this->faker->name,
         ];
     }

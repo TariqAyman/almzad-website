@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'phone_number' => $this->faker->phoneNumber,
             'profile_photo' => 'frontend/img/clint-pic.png',
             'email_verified_at' => $this->faker->dateTime(),
-            'password' => bcrypt($this->faker->password),
+            'password' => '123456789',
             'status' => $this->faker->boolean,
             'remember_token' => Str::random(10),
         ];
