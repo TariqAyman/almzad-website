@@ -7,23 +7,23 @@ $(function(){
     {
         document.getElementById("mySidepanel").style.width = "0";
     });
-    
+
 });
 /**-----------show scrolling To top button---------------------**/
 window.onscroll = function() {scrollFunction()};
 function scrollFunction() {
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-         $('#myBtn').fadeIn(); 
+         $('#myBtn').fadeIn();
          $('#top').addClass("sticky");
-        } else { 
-            $('#myBtn').fadeOut(); 
+        } else {
+            $('#myBtn').fadeOut();
               $('#top').removeClass("sticky");
-        } 
+        }
 }
 // When the user clicks on the button, scroll to the top of the document
-$('#myBtn').click(function(){ 
-        $("html, body").animate({ scrollTop: 0 }, 400); 
-        return false; 
+$('#myBtn').click(function(){
+        $("html, body").animate({ scrollTop: 0 }, 400);
+        return false;
     });
 /*--owlCarousel--*/
 $('.owl-clints').owlCarousel({
@@ -90,15 +90,15 @@ function Countdown(node){
         minutes: this.$.minutes.parent().attr('data-init-value'),
         seconds: this.$.seconds.parent().attr('data-init-value'),
     };
-    
+
     // Initialize total seconds
     this.total_seconds = this.values.days * 60 * 60 * 24 + this.values.hours * 60 * 60 + (this.values.minutes * 60) + this.values.seconds;
 
-    // Animate countdown to the end 
-    this.count();    
+    // Animate countdown to the end
+    this.count();
   };
   this.count = function() {
-    
+
     var that    = this,
         $days_1 = this.$.days.eq(0),
         $days_2 = this.$.days.eq(1),
@@ -112,16 +112,16 @@ function Countdown(node){
         $sec_1  = this.$.seconds.eq(0),
         $sec_2  = this.$.seconds.eq(1),
         $sec_3  = this.$.seconds.eq(2);
-    
+
         this.countdown_interval = setInterval(function() {
 
         if(that.total_seconds > 0) {
 
-            --that.values.seconds;              
+            --that.values.seconds;
 
             if(that.values.minutes >= 0 && that.values.seconds < 0) {
 
-                that.values.seconds = 59; 
+                that.values.seconds = 59;
                 --that.values.minutes;
             }
 
@@ -138,7 +138,7 @@ function Countdown(node){
 
             // Update DOM values
             // Hours
-            that.checkHour(that.values.days, $days_1, $days_2);
+            that.checkHour(that.values.days, $days_1, $days_2,$days_3);
             // Hours
             that.checkHour(that.values.hours, $hour_1, $hour_2);
 
@@ -153,7 +153,7 @@ function Countdown(node){
         else {
             clearInterval(that.countdown_interval);
         }
-    }, 1000);    
+    }, 1000);
   };
   this.animateFigure = function($el, value) {
      var that         = this,
@@ -176,39 +176,52 @@ function Countdown(node){
         onComplete          : function() {
 
             $top.html(value);
- 
+
             $bottom.html(value);
 
             TweenMax.set($top, { rotationX: 0 });
         }
     });
 
-    TweenMax.to($back_top, 0.8, { 
+    TweenMax.to($back_top, 0.8, {
         rotationX           : 0,
         transformPerspective: 300,
-	      ease                : Quart.easeOut, 
-        clearProps          : 'all' 
-    });    
+	      ease                : Quart.easeOut,
+        clearProps          : 'all'
+    });
   };
-  this.checkHour= function(value, $el_1, $el_2) {
-    
+  this.checkHour= function(value, $el_1, $el_2,$el_3) {
+
     var val_1       = value.toString().charAt(0),
         val_2       = value.toString().charAt(1),
+        val_3       = value.toString().charAt(2),
         fig_1_value = $el_1.find('.top').html(),
         fig_2_value = $el_2.find('.top').html();
 
-    if(value >= 10) {
+    if ($el_3){
+        fig_3_value = $el_3.find('.top').html();
+    }
+
+      if(value >= 100) {
+
+          // Animate only if the figure has changed
+          if(fig_1_value !== val_1) this.animateFigure($el_1, val_1);
+          if(fig_2_value !== val_2) this.animateFigure($el_2, val_2);
+          if(fig_3_value !== val_3) this.animateFigure($el_3, val_3);
+
+      }
+      else if(value >= 10) {
 
         // Animate only if the figure has changed
         if(fig_1_value !== val_1) this.animateFigure($el_1, val_1);
         if(fig_2_value !== val_2) this.animateFigure($el_2, val_2);
     }
     else {
- 
+
         // If we are under 10, replace first figure with 0
         if(fig_1_value !== '0') this.animateFigure($el_1, 0);
         if(fig_2_value !== val_1) this.animateFigure($el_2, val_1);
-    }    
+    }
   }
 }
 
@@ -236,7 +249,7 @@ $('document').ready(function () {
 $('#passwor, #confirm_password').on('keyup', function () {
   if ($('#passwor').val() == $('#confirm_password').val()) {
     $('#message').html('متطابقة').css('color', 'green');
-  } else 
+  } else
     $('#message').html('غير متطابقة').css('color', 'red');
 });
 ///
