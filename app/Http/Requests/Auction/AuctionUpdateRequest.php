@@ -43,7 +43,7 @@ class AuctionUpdateRequest extends FormRequest
             'slug_ar' => 'required|string',
             'slug_en' => 'required|string',
             'status' => 'required|boolean',
-            'start_form' => 'required|numeric',
+            'start_from' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'shipping' => 'required|boolean',
