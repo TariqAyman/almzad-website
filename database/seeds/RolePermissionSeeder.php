@@ -53,6 +53,7 @@ class RolePermissionSeeder extends Seeder
             'email' => 'admin@email.com',
             'password' => '123456789',
             'status' => true,
+            'phone_number' => '+201003003200',
             'email_verified_at' => now(),
         ]);
 
@@ -70,6 +71,7 @@ class RolePermissionSeeder extends Seeder
             'email' => 'user@email.com',
             'password' => '123456789',
             'status' => true,
+            'phone_number' => '+201003003201',
             'email_verified_at' => now(),
         ]);
 
