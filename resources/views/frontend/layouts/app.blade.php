@@ -1,4 +1,4 @@
-<html dir="rlt" lang="ar" >
+<html dir="rlt" lang="ar">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -12,7 +12,7 @@
     <title>المزاد الخيري</title>
 </head>
 <body>
-<div id="myBtn" class="top" >
+<div id="myBtn" class="top">
     <a class="scroll" href="#top"><span class="fa fa-chevron-up"></span></a>
 </div>
 <!--Start-Header-->
@@ -53,7 +53,29 @@
                             <li class="nav-item sid-log">
                                 <a class="nav-link" href="#"><span class="ub-font">ENG</span></a>
                             </li>
-                            <button class="btn btn-login sid-log mr-2">@lang('app.register_now')</button>
+                            @auth('user')
+                                <div class="sid-log">
+                                    <ul class="nav fav">
+                                        <li class="note-icon sid-log">
+                                            <a href="#" class="note">
+                                                <span class="num">3</span>
+                                                <img src="{{ asset('frontend/img/note.png') }}" alt="المزاد الخيري">
+                                            </a>
+                                        </li>
+                                        <li class="note-icon sid-log">
+                                            <a class="dropdown-toggle note" href="#" role="button" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src="{{ asset('frontend/img/pro.png') }}" alt="الملف الشخصي">
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="setting">
+                                                <a class="dropdown-item" href="#">البروفايل</a>
+                                                <a class="dropdown-item" href="#">تسجيل الخروج </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @else
+                                <button class="btn btn-login sid-log mr-2">@lang('app.register_now')</button>
+                            @endif
                         </ul>
                     </nav><!--navbar-->
                 </div>
@@ -68,7 +90,30 @@
                         <a class="dropdown-item" href="#"><span class="ub-font">ENG</span></a>
                     </div>
                 </div>
-                <button class="btn btn-login">@lang('app.register_now')</button>
+                @auth('user')
+                    <ul class="nav fav">
+                        <li class="note-icon">
+                            <a href="#" class="note">
+                                <span class="num">3</span>
+                                <img src="{{ asset('frontend/img/note.png') }}" alt="المزاد الخيري">
+                            </a>
+                        </li>
+                        <li class="note-icon">
+                            <a class="dropdown-toggle note" href="#" role="button" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ asset('frontend/img/pro.png') }}" alt="الملف الشخصي">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="setting">
+                                <a class="dropdown-item" href="{{ route('frontend.profile.index') }}">البروفايل</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">تسجيل الخروج </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                @else
+                    <button class="btn btn-login" onclick="location.href='{{ route('register') }}'">@lang('app.register_now')</button>
+                @endif
             </div>
         </div>
     </div>
@@ -174,5 +219,7 @@
 <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+@yield('page-script')
 </body>
 </html>
