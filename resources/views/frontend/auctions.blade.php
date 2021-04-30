@@ -40,17 +40,6 @@
                     </div>
                     <!--sort-03-->
                     <div class="col-lg-4  d-flex px-0 mt-2 serch-w">
-                        <select name="type" class="form-control">
-                            @foreach($types as $type)
-                                <option value="{{ $type->id }}">{{ $type->name }}</option>
-                            @endforeach
-                        </select>
-
-                        <select name="category" class="form-control">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
                         <input type="text" value="" class="form-control" placeholder="البحث">
                         <a href="#" class="valid ml-1"><i class="fas fa-search"></i></a>
                         <a href="#" class="valid"><i class="fas fa-filter"></i></a>
