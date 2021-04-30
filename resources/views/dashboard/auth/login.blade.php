@@ -84,7 +84,7 @@
                             </div>
                             <div class="input-group input-group-merge form-password-toggle">
                                 <input class="form-control form-control-merge" id="login-password" type="password" name="password" placeholder="***********" aria-describedby="login-password"
-                                       tabindex="2" {{ (env('APP_ENV') === 'dev') ? "value=12345678" : '' }} />
+                                       tabindex="2" {{ (env('APP_ENV') === 'dev') ? "value=123456789" : '' }} />
                                 <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                 </div>
                                 @error('password')
