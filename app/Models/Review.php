@@ -40,7 +40,7 @@ class Review extends Model
 
 	protected $fillable = [
 		'user_id',
-		'note',
+		'review',
 		'status'
 	];
 

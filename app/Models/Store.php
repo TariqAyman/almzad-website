@@ -30,7 +30,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property Carbon|null $updated_at
  *
  * @property User $user
- * @property Collection|StoresImage[] $stores_images
  *
  * @package App\Models
  */
@@ -52,7 +51,11 @@ class Store extends Model
 		'description_en',
 		'slug_ar',
 		'slug_en',
-		'phone_number'
+		'phone_number',
+        'image',
+        'email',
+        'identity',
+        'status'
 	];
 
     protected $appends = [
@@ -70,11 +73,6 @@ class Store extends Model
     public function user()
 	{
 		return $this->belongsTo(User::class);
-	}
-
-	public function storesImages()
-	{
-		return $this->hasMany(StoresImage::class);
 	}
 
     public function getNameAttribute()

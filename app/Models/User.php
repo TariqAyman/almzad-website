@@ -70,6 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
 		'first_name',
 		'last_name',
 		'username',
+        'address',
 		'email',
 		'phone_number',
 		'profile_photo',
@@ -132,5 +133,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function store()
+    {
+        return $this->hasOne(Store::class);
     }
 }

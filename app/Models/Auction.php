@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -33,7 +34,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property Carbon $start_date
  * @property Carbon $end_date
  * @property bool $shipping
- * @property bool $shippingFree
+ * @property bool $shipping_free
  * @property bool $multi_auction
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
@@ -70,7 +71,7 @@ class Auction extends Model
         'start_from' => 'float',
         'price' => 'float',
         'shipping' => 'bool',
-        'shippingFree' => 'bool',
+        'shipping_free' => 'bool',
         'multi_auction' => 'bool'
     ];
 
@@ -98,9 +99,8 @@ class Auction extends Model
         'start_date',
         'end_date',
         'shipping',
-        'shippingFree',
+        'shipping_free',
         'multi_auction',
-
     ];
 
     protected $appends = [
@@ -156,7 +156,7 @@ class Auction extends Model
 
     public function getImageAttribute()
     {
-        return $this->auctionsImages()->first();
+        return $this->auctionsImages()->first() ?? null;
     }
 
     public function getNameAttribute()
