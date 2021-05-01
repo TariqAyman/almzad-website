@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="{{ asset('frontend/img/icon.png') }}">
     <!--FontWesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    @yield('style')
     <title>المزاد الخيري</title>
 </head>
 <body>
@@ -39,10 +40,10 @@
                                 <a class="nav-link" href="{{ url('/') }}">@lang('app.home') <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="userstore.html">@lang('app.my_store')</a>
+                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_store')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="useracount.html">@lang('app.wallet')</a>
+                                <a class="nav-link" href="{{ route('frontend.wallet.index') }}">@lang('app.wallet')</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.auctions.index') }}">@lang('app.auctions')</a>
@@ -119,7 +120,10 @@
     </div>
 </header>
 <!--End-Header-->
-@yield('content')
+<div class="container">
+    @include('frontend.layouts.alert')
+    @yield('content')
+</div>
 <!--EndClint-->
 <footer>
     <div class="container">
@@ -215,11 +219,20 @@
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 <script src="{{ asset('frontend/js/jquery-3.2.1.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
 <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('frontend/js/main.js') }}"></script>
 
+<script>
+    $(document).ready(function () {
+
+        $('.toast').toast('show');
+
+    });
+</script>
 @yield('page-script')
 </body>
 </html>
