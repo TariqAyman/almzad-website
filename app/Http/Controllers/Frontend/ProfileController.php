@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Helpers\UploadFile;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    use UploadFile;
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $user = \Auth::guard('user')->user();
+        return view('frontend.user.profile', compact('user'));
     }
 
     /**
@@ -30,18 +35,33 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserUpdateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserUpdateRequest $request)
     {
-        //
+        $user = \Auth::guard('user')->user();
+
+        $userData = $request->except('profile_photo','oldPassword','newPassword');
+
+        if ($request->profile_photo) {
+            $userData['profile_photo'] = $this->uploadFile($request, 'profile_photo', 'users');
+        }
+
+        if ($request->has('newPassword') && \Hash::check($request->oldPassword,$user->password)){
+            dd(123);
+            $userData['password'] = $request->newPassword;
+        }
+
+        $user->update($userData);
+
+        return redirect()->back()->withsuccess('Profile updated successfully!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +72,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,8 +83,8 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,7 +95,7 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

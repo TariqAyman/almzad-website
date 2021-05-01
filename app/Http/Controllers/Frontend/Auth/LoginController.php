@@ -67,7 +67,7 @@ class LoginController extends Controller
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
             $this->sendLockoutResponse($request);
-            return redirect()->route('user.login')->withInput()->withwarning('You are locked! Too many attempts. please try ' . setting('lockout_delay') . ' minutes later.');
+            return redirect()->route('login')->withInput()->withwarning('You are locked! Too many attempts. please try ' . setting('lockout_delay') . ' minutes later.');
         }
 
         $credentials = $request->only('email', 'password');

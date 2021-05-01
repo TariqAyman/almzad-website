@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BidCreateRequest;
 use App\Models\Auction;
+use App\Models\AuctionsUser;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Type;
@@ -40,14 +42,17 @@ class AuctionController extends Controller
 
         $comments = Comment::query()->where('status',1)->where('auction_id',$auction->id)->paginate(setting('record_per_page'));
 
-//        dump(str_pad($auction->expiredIn['minutes'], 2, '0', STR_PAD_LEFT));
-//        dump(($auction->expired_in['minutes_split']));
-//        dd(($auction->expired_in));
-//
-//        dd(1);
-////        dd($auction->expired_in);
-//
-//        //        dd(strlen($auction->expired_in['minutes']));
         return view('frontend.auction-info',compact('auction','comments'));
+    }
+
+    public function store(BidCreateRequest $request)
+    {
+        AuctionsUser::create([
+            'user_id' => auth('user')->user()->id,
+            'auction_id' => $request->auction_id,
+            'price' => $request->price
+        ]);
+
+        return redirect()->back()->withSuccess('Saved Bid For this Auction');
     }
 }
