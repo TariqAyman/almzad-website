@@ -22,8 +22,8 @@ class AuctionSeeder extends Seeder
         Auction::factory()
             ->has(AuctionsImage::factory()->count(10))
             ->has(AuctionsUser::factory()->count(10))
-            ->has(Comment::factory()->count(100))
-            ->count(100)
+            ->has(Comment::factory()->count(50))
+            ->count(30)
             ->create();
 
     }

@@ -14,6 +14,6 @@ class ReviewSeeder extends Seeder
     {
         if (env('APP_ENV') != 'dev') return;
 
-        \App\Models\Review::factory()->count(100)->create();
+        \App\Models\Review::factory()->count(20)->create();
     }
 }
