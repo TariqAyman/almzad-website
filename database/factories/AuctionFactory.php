@@ -41,7 +41,7 @@ class AuctionFactory extends Factory
             'start_date' => Carbon::now(),
             'end_date' => Carbon::now()->subMonths(rand(1,3))->addMonths(rand(1,3)),
             'shipping' => $this->faker->boolean,
-            'shippingFree' => $this->faker->boolean,
+            'shipping_free' => $this->faker->boolean,
             'multi_auction' => $this->faker->boolean,
         ];
     }

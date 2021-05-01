@@ -23,7 +23,8 @@ class ReviewFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::inRandomOrder()->first()->id,
-            'note' => $this->faker->text,
+            'auction_id' => \App\Models\Auction::inRandomOrder()->first()->id,
+            'review' => $this->faker->text,
             'status' => $this->faker->boolean,
         ];
     }
