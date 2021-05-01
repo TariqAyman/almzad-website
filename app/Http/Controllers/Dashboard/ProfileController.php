@@ -29,7 +29,7 @@ class ProfileController extends Controller
         }
 
         $admin->update($userData);
-        flash('Profile updated successfully!')->success();
-        return back();
+
+        return redirect()->back()->withsuccess('Profile updated successfully!');
     }
 }
