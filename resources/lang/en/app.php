@@ -162,7 +162,7 @@ return [
     'expires_at' => 'Expires At',
     'code' => 'Code',
     'in' => 'In',
-    'note' => 'Note',
+    'review' => 'Review',
     'package' => 'Package',
     'payment_method' => 'Payment Method',
     'paymentsMethods' => 'Payments Methods',
