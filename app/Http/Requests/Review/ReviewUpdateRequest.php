@@ -33,7 +33,7 @@ class ReviewUpdateRequest extends FormRequest
     {
         return [
             'user_id' => 'required|numeric|integer',
-            'note' => 'required|text',
+            'review' => 'required|text',
             'status' => 'required|numeric',
         ];
     }

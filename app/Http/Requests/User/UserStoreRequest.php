@@ -35,6 +35,7 @@ class UserStoreRequest extends FormRequest
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'username' => 'required|string',
+            'address' =>  'required|string',
             'email' => 'required|string',
             'phone_number' => 'required|string',
             'profile_photo' => 'required|string',
