@@ -13,6 +13,22 @@
     font-family: "Ubuntu-Bold";
     src: url("../fonts/Ubuntu-B.ttf");
 }
+@font-face {
+    font-family: "BeIN Black";
+    src: url("../fonts/ArbFONTS-4_B0.ttf");
+}
+@font-face {
+    font-family: "BeIN Black";
+    src: url("../fonts/ArbFONTS-23830-4_b0.ttf");
+}
+@font-face {
+    font-family: "BeIN Black";
+    src: url("../fonts/ArbFONTS-beIN Black .ttf");
+}
+@font-face {
+    font-family: "BeIN Black";
+    src: url("../fonts/ArbFONTS-bein-ar-black.ttf");
+}
 body
 {
     text-align: right;
@@ -23,7 +39,7 @@ body
     padding: 0;
     direction: rtl;
     background: #FFF;
-  font-family: 'ge_flow_regular';
+    font-family: "BeIN Black";
 }
 *{
     transition: all .1s ease-in-out;
@@ -277,7 +293,7 @@ li.sub-social a:hover i
 }
 h1,.btn,footer h4,footer .footer-link a,.contact-info,footer .pub-body,.new-mzad h3,.box-detail p.price,.smalltex,.work-box h4,.clint-name .pub-body h6,.tit-box h6,.page-header,.nav-detail a,.start-with,.start-price,.end-in,.store-pro,.offer-start,.add-mzad h4,table,.user-acount .det-name h4,.dropdown,.user-acount .tab-pane p.tit,.forget-pass,.form-body,.modal-body h6,.comment-tit,.no-comment,.add-tit,.com-name,.comment p
 {
-    font-family: "ge-flow-bold";
+    font-family: "BeIN Black";
 }
 .mzadhead h2,h1 span,footer h4,.footer-link li,.footer-contact,.new-mzad h3,.new-name
 {
@@ -467,7 +483,7 @@ h1,.btn,footer h4,footer .footer-link a,.contact-info,footer .pub-body,.new-mzad
     direction: ltr;
 }
 .countdown .bloc-time {
-  margin-right: 5px;
+  margin-right: 4px;
   text-align: center;
 }
 .countdown .count-title {
@@ -1066,7 +1082,7 @@ a.note span.num {
 }
 .offer-e,.offer-s,.offer-st,.email,.tab-wall td,.ub-font,a.note span.num,.page-link,.all-product .sort-product .date-f .form-control,.days-1,.hours-1,.min-1,.sec-1
 {
-    font-family: "Ubuntu-Bold";
+    font-family: "BeIN Black";
 }
 .offer-e,.offer-s,.offer-st
 {

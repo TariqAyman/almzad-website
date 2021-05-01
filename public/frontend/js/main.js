@@ -246,8 +246,8 @@ $('document').ready(function () {
     });
     });
 //confirm password//
-$('#passwor, #confirm_password').on('keyup', function () {
-  if ($('#passwor').val() == $('#confirm_password').val()) {
+$('#newPassword, #confirm_password').on('keyup', function () {
+  if ($('#newPassword').val() == $('#confirm_password').val()) {
     $('#message').html('متطابقة').css('color', 'green');
   } else
     $('#message').html('غير متطابقة').css('color', 'red');
