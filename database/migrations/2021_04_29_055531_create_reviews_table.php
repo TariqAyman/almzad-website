@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('note');
+            $table->text('review');
             $table->boolean('status')->default(0);
             $table->softDeletes();
             $table->timestamps();

@@ -24,6 +24,10 @@ class CreateStoresTable extends Migration
             $table->string('slug_ar', 255);
             $table->string('slug_en', 255);
             $table->string('phone_number');
+            $table->string('email');
+            $table->string('image')->nullable();
+            $table->string('identity');
+            $table->boolean('status')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
