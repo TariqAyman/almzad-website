@@ -83,18 +83,21 @@
                                 </div>
                             </div><!--detail-name-->
                             <div class="detail-name mt-3">
+                                {!! Form::open(['route' => 'frontend.auctions.store', 'id' => 'bid-form']) !!}
+                                {!! Form::hidden('auction_id',$auction->id) !!}
                                 <div class="add-icon">
                                     <p class="det-name det-icon">+</p>
-                                    <input type="text" class="input-num">
+                                    <input type="text" name="price" class="input-num">
                                     <p class="det-name det-icon01">-</p>
                                 </div>
-                                <button class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
+                                <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
+                                {!! Form::close() !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="bord">
                                 <div class="big-img">
-                                    <img class="detailsbigimg w-100" src="{{ $auction->image->image ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}" id="expandedImg">
+                                    <img class="detailsbigimg w-100" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}" id="expandedImg">
                                 </div>
                                 <div class="d-flex pic-detail">
                                     @foreach($auction->auctionsImages as $image)
@@ -163,17 +166,19 @@
                             <div class="row">
                                 <h3 class="my-4 end-in">@lang('app.Comments')</h3>
                                 @foreach($comments as $comment)
-                                    <div class="comment-box">
-                                        <div class="new-name">
-                                            <div class="com-name">
-                                                <i class="fas fa-user"></i>{{ $comment->user->name }}
+                                    <div class="col-12">
+                                        <div class="comment-box">
+                                            <div class="new-name">
+                                                <div class="com-name">
+                                                    <i class="fas fa-user"></i>{{ $comment->user->name }}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="sort-product">
-                                            <p>
-                                                {{ $comment->comment }}
-                                            </p>
-                                            <p class="float-left pb-3">{{ $comment->created_at->diffForHumans() }}</p>
+                                            <div class="sort-product">
+                                                <p>
+                                                    {{ $comment->comment }}
+                                                </p>
+                                                <p class="float-left pb-3">{{ $comment->created_at->diffForHumans() }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -184,13 +189,16 @@
 
                     @auth('user')
                         <div class="add-comment">
+                            {!! Form::open(['route' => 'frontend.user.comment', 'id' => 'review-form']) !!}
+                            {!! Form::hidden('auction_id',$auction->id) !!}
                             <div class="row">
                                 <h3 class="my-4 end-in">أضف تعليق</h3>
-                                <textarea class="form-control" rows="7" id="comment" placeholder="اضف تعليق"></textarea>
+                                <textarea class="form-control" rows="7" id="comment" name="comment" placeholder="اضف تعليق"></textarea>
                                 <div class="b-left w-100 my-4">
                                     <button class="btn btn-show" type="submit">إضلفة تعليق</button>
                                 </div>
                             </div>
+                            {!! Form::close() !!}
                         </div>
                     @endauth
                 </div>

@@ -5,7 +5,6 @@
         <div class="container pt-5">
             <div class="row">
                 <div class="col-md-6 col-sm-8 mx-auto">
-                    @include('frontend.layouts.alert')
                     <div class="form-login">
                         <div class="form-title">
                             <a href="{{ url('/') }}">

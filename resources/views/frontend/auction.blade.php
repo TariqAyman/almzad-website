@@ -2,10 +2,10 @@
     <div class="new-mzad">
         <figure>
             <a href="{{ route('frontend.auctions.show',$auction->slug) }}">
-                <img class="img-fluid" alt="" src="{{ $auction->image->image ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}">
+                <img class="img-fluid" alt="" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}">
             </a>
         </figure>
-        <p class="top-offer">@lang('app.height_price'): {{ $auction->highest_price }}</p>
+        <p class="top-offer">{{ $auction->highest_price }}</p>
         <div class="new-box">
             <h3>{{ $auction->name }}</h3>
             <div class="new-name">

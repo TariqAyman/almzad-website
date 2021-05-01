@@ -1,31 +1,47 @@
 @extends('frontend.layouts.app')
 
 @section('content')
+    <div class="page-header">
+        <div class="container">
+            <h2>حسابي</h2>
+            <div class="tit"><i class="fas fa-home"></i><a href="{{ url('/') }}">الرئيسية</a> / <span>حسابي</span></div>
+        </div>
+    </div>
     <section class="user-acount">
         <div class="container">
             <div class="sort-product">
                 <div class="row user-box">
                     <div class="col-md-4">
                         <div class="user-pic">
-                            <label for="file-5"> <img id="imgshow" src="img/user-pic.png" class="img-fluid"> </label>
+                            <label for="file-5">
+                                @if($user->profile_photo)
+                                    <img id="imgshow" src="{{ asset($user->profile_photo) }}" class="img-fluid">
+                                @else
+                                    <img id="imgshow" src="{{ asset('frontend/img/user-pic.png') }}" class="img-fluid">
+                                @endif
+                            </label>
                         </div>
                     </div>
                     <div class="col-md-4 det-name">
-                        <h4>محمد حسبو</h4>
-                        <p class="email ub-font">Auction@gmail.com</p>
+                        <h4>{{ $user->name }}</h4>
+                        <p class="email ub-font">{{ $user->email }}</p>
                     </div>
                     <div class="col-md-4">
+                        {!! Form::open(['route' => ['frontend.profile.store'], 'files' => true]) !!}
                         <div class="upload-pic">
-                            <input type="file" name="file-5[]" id="file-5" class="inputfile inputfile-1 form-control" data-multiple-caption="{count} files selected" multiple accept="image/*">
-                            <label for="file-5" class="btn btn-show">تعديل الصورة</label>
+                            <input type="file" name="profile_photo" id="file-5" class="inputfile inputfile-1 form-control" accept="image/*">
+                            <label for="file-5" class="btn btn-show">تغير الصورة</label>
+                            <button type="submit" class="btn btn-show">@lang('app.Edit image')</button>
                         </div>
+                        {!! Form::close() !!}
                     </div>
-                </div></div>
+                </div>
+            </div>
             <div class="row mt-3">
                 <div class="col-md-3">
                     <div class="tab-title">
                         <ul class="nav nav-tabs nav-detail">
-                            <li ><a href="#info" class="tabs__trigger active" role="tab" data-toggle="tab"> معلومات شخصية </a>
+                            <li><a href="#info" class="tabs__trigger active" role="tab" data-toggle="tab"> @lang('app.Personal Info') </a>
                             </li>
                             <li><a href="#password" class="tabs__trigger" role="tab" data-toggle="tab">
                                     تغيير كلمة المرور</a>
@@ -50,10 +66,10 @@
                                 <!--name-->
 
                                 <div class="col-sm-6">
-                                    <p class="tit">الاسم</p>
+                                    <p class="tit">@lang('app.name')</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p>محمد حسبو</p>
+                                    <p>{{ $user->name }}</p>
                                 </div>
                                 <!--taype-->
                                 <div class="col-sm-6">
@@ -64,31 +80,31 @@
                                 </div>
                                 <!--email-->
                                 <div class="col-sm-6">
-                                    <p class="tit">البريد الالكتروني</p>
+                                    <p class="tit">@lang('app.email')</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p class="det ub-font">Auction@gmail.com</p>
+                                    <p class="det ub-font">{{ $user->email }}</p>
                                 </div>
                                 <!--username-->
                                 <div class="col-sm-6">
-                                    <p class="tit">اسم المستخدم</p>
+                                    <p class="tit">@lang('app.username')</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p class="det ub-font">Hasabou93</p>
+                                    <p class="det ub-font">{{ $user->username }}</p>
                                 </div>
                                 <!--address-->
                                 <div class="col-sm-6">
-                                    <p class="tit">العنوان</p>
+                                    <p class="tit">@lang('app.address')</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p class="det">القاهرة - مصر</p>
+                                    <p class="det">{{ $user->address }}</p>
                                 </div>
                                 <!--acount-->
                                 <div class="col-sm-6">
-                                    <p class="tit">حالة الحساب</p>
+                                    <p class="tit">@lang('app.account_status')</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p class="det">مفعل</p>
+                                    <p class="det">{{ $user->status ? trans('app.active') : trans('app.disable') }}</p>
                                 </div>
                                 <!--aboutE-->
                                 <div class="col-sm-6">
@@ -108,13 +124,17 @@
                         </div>
                         <!--Startpassword-->
                         <div class="tab-pane" role="tabpanel" id="password">
+                            {!! Form::open(['route' => ['frontend.profile.store'], 'files' => false]) !!}
                             <div class="row">
-                                <input type="text" type="text" class="form-control" placeholder="كلمة المرور الحالية">
-                                <input id="passwor" type="password" class="form-control" placeholder="كلمة المرور الجديدة" >
-                                <input name="confirm_password" id="confirm_password" type="password" class="form-control" placeholder="تأكيد كلمة المرور الجديدة"><span id='message'></span>
+                                <input type="password" name="oldPassword" class="form-control" placeholder="كلمة المرور الحالية">
+                                <input id="newPassword" type="password" name="password" class="form-control" placeholder="كلمة المرور الجديدة">
+                                <input name="password_confirmation" id="confirm_password" type="password" class="form-control" placeholder="تأكيد كلمة المرور الجديدة">
+                                <span id='message'></span>
                                 <div class="b-left w-100">
-                                    <button class="btn btn-show" type ="submit">تأكيد التعديل</button></div>
+                                    <button class="btn btn-show" type="submit">تأكيد التعديل</button>
+                                </div>
                             </div>
+                            {!! Form::close() !!}
                         </div>
                         <!--Startaddress-->
                         <div class="tab-pane" role="tabpanel" id="address">
@@ -123,10 +143,10 @@
                                 <div class="col-12 green-bg">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p class="tit">الاسم</p>
+                                            <p class="tit">@lang('app.name')</p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p>محمد حسبو</p>
+                                            <p>{{ $user->name }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -134,10 +154,10 @@
                                 <div class="col-12 ">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p class="tit">العنوان</p>
+                                            <p class="tit">@lang('app.address')</p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="det">القاهرة - مصر</p>
+                                            <p class="det">{{ $user->address }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +168,7 @@
                                             <p class="tit">رقم الجوال</p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="det ub-font">0966 553637736737</p>
+                                            <p class="det ub-font">{{ $user->phone_number }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +179,7 @@
                                             <p class="tit">كود البريد</p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="det ub-font">1324</p>
+                                            <p class="det ub-font">{{ $user->postcode }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +190,7 @@
                                             <p class="tit">حالة الحساب</p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="det">مفعل</p>
+                                            <p class="det">{{ $user->status }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +202,7 @@
                                             <div class="modal-content blue-color">
                                                 <div class="modal-box upZindex">
                                                     <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true" ><i class="fas fa-times"></i></span>
+                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
                                                     </button>
                                                     <div class="modal-header text-center mx-auto">
                                                         <div class="modal-title  blue-color">
@@ -210,7 +230,7 @@
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button class="btn btn-show">إضافة العنوان </button>
+                                                        <button class="btn btn-show">إضافة العنوان</button>
                                                     </div>
                                                 </div>
                                             </div>
