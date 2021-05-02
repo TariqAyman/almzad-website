@@ -900,6 +900,7 @@ a.note span.num {
 }
 .sort-product .valid
 {
+    padding-top: 12px;
     width: 20%;
 }
 #datepicker{width:180px; margin: 0 20px 20px 20px;}
@@ -1006,7 +1007,7 @@ a.note span.num {
 }
 .start-price
 {
-    font-size: 70px;
+    font-size: 35px;
     text-align: center
 }
 .product-details .valid
@@ -1572,7 +1573,7 @@ table .dropdown-toggle::after,.note.dropdown-toggle::after
     opacity: 0.6;
     }
     .start-price {
-    font-size: 50px;
+    font-size: 25px;
 }
 .user-acount .nav-detail a
     {
