@@ -24,7 +24,10 @@ class BidCreateRequest extends FormRequest
      */
     public function rules()
     {
-        $highest_price = Auction::find($this->auction_id)->highest_price;
+        $auction = Auction::find($this->auction_id);
+
+        $highest_price = $auction->highest_price;
+
         return [
             'auction_id' => 'required',
             'price' => 'required|numeric|min:' . $highest_price,

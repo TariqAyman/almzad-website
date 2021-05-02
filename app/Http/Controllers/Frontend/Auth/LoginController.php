@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
@@ -70,9 +71,11 @@ class LoginController extends Controller
             return redirect()->route('login')->withInput()->withwarning('You are locked! Too many attempts. please try ' . setting('lockout_delay') . ' minutes later.');
         }
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('phone_number', 'password');
 
-        if (Auth::guard('user')->attempt(['email' => $credentials['email'], 'password' => $credentials['password']], $request->remember)) {
+        $user = User::where('phone_number',$request->phone_number)->first();
+
+        if (Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']], $request->remember)) {
             $userStatus = Auth::guard('user')->user()->status;
 
 //            if ($userStatus == 1) {

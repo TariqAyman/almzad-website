@@ -38,15 +38,19 @@ class AuctionController extends Controller
      */
     public function show($slug)
     {
-        $auction = Auction::where('slug_ar',$slug)->orwhere('slug_en',$slug)->firstOrFail();
+        $auction = Auction::where('slug_ar', $slug)->orwhere('slug_en', $slug)->firstOrFail();
 
-        $comments = Comment::query()->where('status',1)->where('auction_id',$auction->id)->paginate(setting('record_per_page'));
+        $comments = Comment::query()->where('status', 1)->where('auction_id', $auction->id)->paginate(setting('record_per_page'));
 
-        return view('frontend.auction-info',compact('auction','comments'));
+        return view('frontend.auction-info', compact('auction', 'comments'));
     }
 
     public function store(BidCreateRequest $request)
     {
+        $auction = Auction::find($this->auction_id);
+
+        if (!$auction->allowBid) return redirect()->back()->withErrors('Cant bid in this auction');
+
         AuctionsUser::create([
             'user_id' => auth('user')->user()->id,
             'auction_id' => $request->auction_id,

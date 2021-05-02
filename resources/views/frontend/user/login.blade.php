@@ -15,7 +15,7 @@
                             <form class="form-horizontal" action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="email" placeholder="@lang('app.email')" required {{--pattern="[0-9]"--}} value="{{ old('email') }}" title="@lang('app.email')">
+                                    <input type="tel" class="form-control" name="phone_number" placeholder="@lang('app.phone_number')" required {{--pattern="[0-9]"--}} value="{{ old('phone_number') }}" title="@lang('app.phone_number')">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
                                 <div class="form-group">

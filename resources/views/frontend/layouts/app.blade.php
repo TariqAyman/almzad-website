@@ -119,12 +119,8 @@
         </div>
     </div>
 </header>
-<!--End-Header-->
-<div class="container">
-    @include('frontend.layouts.alert')
-    @yield('content')
-</div>
-<!--EndClint-->
+@include('frontend.layouts.alert')
+@yield('content')
 <footer>
     <div class="container">
         <div class="row">
@@ -226,13 +222,6 @@
 <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('frontend/js/main.js') }}"></script>
 
-<script>
-    $(document).ready(function () {
-
-        $('.toast').toast('show');
-
-    });
-</script>
 @yield('page-script')
 </body>
 </html>

@@ -215,6 +215,13 @@ class Auction extends Model
 
     public function getHighestPriceAttribute()
     {
-        return $this->auctionsUsers()->max('price');
+        return $this->auctionsUsers()->max('price') ?? $this->attributes['start_from'];
+    }
+
+    public function allowBid(): bool
+    {
+        if ($this->attributes['multi_auction']) return true;
+
+        return !$this->auctionsUsers()->where('user_id',auth('user')->user()->id)->exists();
     }
 }

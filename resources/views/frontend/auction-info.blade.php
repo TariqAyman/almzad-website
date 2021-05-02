@@ -75,24 +75,28 @@
                                 </div>
                                 <div class="add-det">
                                     <p class="det-name">@lang('app.Lowest bid price')</p>
-                                    <p class="det-type"><span class="ub-font">{{ $auction->start_from }}</span> {{ $auction->currency->symbol }}</p>
+                                    <p class="det-type"><span class="ub-font">{{ $auction->hightest_price }}</span> {{ $auction->currency->symbol }}</p>
                                 </div>
-                                <div class="add-det ">
-                                    <p class="det-name">@lang('app.available balance')</p>
-                                    <p class="det-type"><span class="ub-font">225</span> ريال</p>
-                                </div>
+                                @auth('user')
+                                    <div class="add-det ">
+                                        <p class="det-name">@lang('app.available balance')</p>
+                                        <p class="det-type"><span class="ub-font">{{ auth('user')->user()->balance }}</span></p>
+                                    </div>
+                                @endif
                             </div><!--detail-name-->
-                            <div class="detail-name mt-3">
-                                {!! Form::open(['route' => 'frontend.auctions.store', 'id' => 'bid-form']) !!}
-                                {!! Form::hidden('auction_id',$auction->id) !!}
-                                <div class="add-icon">
-                                    <p class="det-name det-icon">+</p>
-                                    <input type="text" name="price" class="input-num">
-                                    <p class="det-name det-icon01">-</p>
+                            @if(auth('user')->check() && !$auction->isExpired)
+                                <div class="detail-name mt-3">
+                                    {!! Form::open(['route' => 'frontend.auctions.store', 'id' => 'bid-form']) !!}
+                                    {!! Form::hidden('auction_id',$auction->id) !!}
+                                    <div class="add-icon">
+                                        <p class="det-name det-icon">+</p>
+                                        <input type="number" name="price" class="input-num" min="{{ $auction->hightest_price ?? $auction->start_from  }}" value="{{ $auction->hightest_price ?? $auction->start_from  }}">
+                                        <p class="det-name det-icon01">-</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
+                                    {!! Form::close() !!}
                                 </div>
-                                <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
-                                {!! Form::close() !!}
-                            </div>
+                            @endif
                         </div>
                         <div class="col-md-6">
                             <div class="bord">
@@ -217,7 +221,7 @@
                                 <tbody>
                                 @foreach($auction->auctionsUsers as $user)
                                     <tr>
-                                        <td class="ub-font">{{ $user->created_at->format('Y/m/d') }}</td>
+                                        <td class="ub-font">{{ $user->created_at->locale(app()->getLocale())->format('Y/m/d H:s') }}</td>
                                         <td><span class="ub-font">{{ $user->price }}</span> {{ $auction->currency->symbol }}</td>
                                     </tr>
                                 @endforeach
