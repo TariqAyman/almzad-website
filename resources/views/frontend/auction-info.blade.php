@@ -106,7 +106,7 @@
                                 <div class="d-flex pic-detail">
                                     @foreach($auction->auctionsImages as $image)
                                         <div class="m-3">
-                                            <img  src="{{ asset($image->image) }}" onclick="myFunction(this);" >
+                                            <img  src="{{ asset($image->image) }}" onclick="myFunction(this);" class="img-fluid" style="height: 100px" >
                                         </div>
                                     @endforeach
                                 </div>
