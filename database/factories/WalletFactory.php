@@ -25,10 +25,10 @@ class WalletFactory extends Factory
             'user_id' => \App\Models\User::factory(),
             'auction_id' => \App\Models\Auction::factory(),
 //            'currency_id' => \App\Models\Currency::factory(),
-            'in' => $this->faker->randomFloat(2,100,100000),
-            'out' => $this->faker->randomFloat(2,100,100000),
-            'hold' => $this->faker->randomFloat(2,100,100000),
-            'balance' =>$this->faker->randomFloat(2,100,100000),
+            'in' => $this->faker->randomNumber(99999),
+            'out' => $this->faker->randomNumber(99999),
+            'hold' => $this->faker->randomNumber(99999),
+            'balance' =>$this->faker->randomNumber(99999),
         ];
     }
 }

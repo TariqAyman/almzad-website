@@ -35,7 +35,7 @@ class CreateAuctionsTable extends Migration
             $table->string('slug_en', 255);
             $table->boolean('status')->default(0);
             $table->decimal('start_from');
-            $table->decimal('price',13)->nullable();
+            $table->decimal('purchase_price',13)->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->boolean('shipping')->default(0);
