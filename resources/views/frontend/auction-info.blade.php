@@ -221,7 +221,7 @@
                                 <tbody>
                                 @foreach($auction->auctionsUsers as $user)
                                     <tr>
-                                        <td class="ub-font">{{ $user->created_at->locale(app()->getLocale())->format('Y/m/d H:s') }}</td>
+                                        <td class="ub-font">{{ $user->created_at->locale(app()->getLocale())->format('Y/m/d H:s a') }}</td>
                                         <td><span class="ub-font">{{ $user->price }}</span> {{ $auction->currency->symbol }}</td>
                                     </tr>
                                 @endforeach

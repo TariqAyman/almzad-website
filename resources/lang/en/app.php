@@ -81,7 +81,7 @@ return [
     'yes' => 'Yes',
     'no' => 'No',
     'title' => 'Title',
-    'price' => 'Price',
+    'price' => 'السعر',
     'is_free' => 'Free',
     'featured' => 'Featured',
     'trending' => 'Trending',
