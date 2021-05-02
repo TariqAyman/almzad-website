@@ -63,7 +63,7 @@ class Auction extends Model
     protected static $logOnlyDirty = true;
 
     protected $casts = [
-        'currency_id' => 'int',
+//        'currency_id' => 'int',
         'type_id' => 'int',
         'category_id' => 'int',
         'user_id' => 'int',
@@ -81,7 +81,7 @@ class Auction extends Model
     ];
 
     protected $fillable = [
-        'currency_id',
+//        'currency_id',
         'type_id',
         'category_id',
         'user_id',
@@ -119,10 +119,10 @@ class Auction extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function currency()
-    {
-        return $this->belongsTo(Currency::class);
-    }
+//    public function currency()
+//    {
+//        return $this->belongsTo(Currency::class);
+//    }
 
     public function type()
     {

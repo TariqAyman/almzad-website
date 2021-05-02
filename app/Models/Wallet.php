@@ -39,7 +39,7 @@ class Wallet extends Model
 	protected $casts = [
 		'user_id' => 'int',
 		'auction_id' => 'int',
-		'currency_id' => 'int',
+//		'currency_id' => 'int',
 		'in' => 'float',
 		'out' => 'float',
 		'hold' => 'float',
@@ -49,7 +49,7 @@ class Wallet extends Model
 	protected $fillable = [
 		'user_id',
 		'auction_id',
-		'currency_id',
+//		'currency_id',
 		'in',
 		'out',
 		'hold',
@@ -68,10 +68,10 @@ class Wallet extends Model
 		return $this->belongsTo(Auction::class);
 	}
 
-	public function currency()
-	{
-		return $this->belongsTo(Currency::class);
-	}
+//	public function currency()
+//	{
+//		return $this->belongsTo(Currency::class);
+//	}
 
 	public function user()
 	{

@@ -24,7 +24,7 @@ class AuctionUserCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'currency_id' => 'required|numeric|integer',
+//            'currency_id' => 'required|numeric|integer',
             'type_id' => 'required|numeric|integer',
             'category_id' => 'required|numeric|integer',
             'name_ar' => 'required|string',

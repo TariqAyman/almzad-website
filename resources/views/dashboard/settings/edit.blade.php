@@ -88,8 +88,14 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{Form::label('company_currency_symbol', 'Currency Symbol', ['class' => 'form-control-label'])}}
-                                {{ Form::text('company_currency_symbol', setting('company_currency_symbol'), ['class'=>"form-control"])}}
+                                {{Form::label('company_currency_symbol_ar', 'Currency Symbol Ar', ['class' => 'form-control-label'])}}
+                                {{ Form::text('company_currency_symbol_ar', setting('company_currency_symbol_ar'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('company_currency_symbol_en', 'Currency Symbol En', ['class' => 'form-control-label'])}}
+                                {{ Form::text('company_currency_symbol_en', setting('company_currency_symbol_en'), ['class'=>"form-control"])}}
                             </div>
                         </div>
                     </div>

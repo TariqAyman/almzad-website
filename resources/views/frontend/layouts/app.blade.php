@@ -39,9 +39,9 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="{{ url('/') }}">@lang('app.home') <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_store')</a>
-                            </li>
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_store')</a>--}}
+{{--                            </li>--}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.wallet.index') }}">@lang('app.wallet')</a>
                             </li>

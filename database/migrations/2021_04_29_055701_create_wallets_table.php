@@ -19,7 +19,7 @@ class CreateWalletsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('auction_id')->nullable();
             $table->foreign('auction_id')->references('id')->on('auctions')->onDelete('cascade');
-            $table->unsignedBigInteger('currency_id');
+            $table->unsignedBigInteger('currency_id')->nullable();
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
             $table->decimal('in',18);
             $table->decimal('out',18);

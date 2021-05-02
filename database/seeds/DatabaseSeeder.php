@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             SettingsSeeder::class,
             TypeSeeder::class,
-            CurrencySeeder::class,
+//            CurrencySeeder::class,
             CategorySeeder::class,
             UserSeeder::class,
             AuctionSeeder::class,

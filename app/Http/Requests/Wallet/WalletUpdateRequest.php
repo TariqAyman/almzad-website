@@ -34,7 +34,7 @@ class WalletUpdateRequest extends FormRequest
         return [
             'user_id' => 'required|numeric|integer',
             'auction_id' => 'required|numeric|integer',
-            'currency_id' => 'required|numeric|integer',
+//            'currency_id' => 'required|numeric|integer',
             'in' => 'required|numeric',
             'out' => 'required|numeric',
             'hold' => 'required|numeric',

@@ -23,7 +23,7 @@ class AuctionFactory extends Factory
     public function definition(): array
     {
         return [
-            'currency_id' => \App\Models\Currency::inRandomOrder()->first()->id,
+//            'currency_id' => \App\Models\Currency::inRandomOrder()->first()->id,
             'type_id' => \App\Models\Type::inRandomOrder()->first()->id,
             'category_id' => \App\Models\Category::inRandomOrder()->first()->id,
             'user_id' => \App\Models\User::inRandomOrder()->first()->id,

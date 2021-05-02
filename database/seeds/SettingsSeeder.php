@@ -18,7 +18,8 @@ class SettingsSeeder extends Seeder
         Setting::set('company_phone', '+201003003200');
         Setting::set('company_address', 'Egypt');
         Setting::set('company_city', 'Egypt');
-        Setting::set('company_currency_symbol', 'L.E');
+        Setting::set('company_currency_symbol_ar', 'L.E');
+        Setting::set('company_currency_symbol_en', 'L.E');
         Setting::set('record_per_page', 15);
         Setting::set('default_role', 2);
         Setting::set('max_login_attempts', 3);

@@ -54,11 +54,11 @@
         <div class="container">
             <h4>المحتوى الأساسي</h4>
             <div class="bord">
-                <select name="currency_id" class="form-control">
-                    @foreach($currencies as $currency)
-                        <option value="{{ $currency->id }}" {{ ($edit && $auction->currency_id === $currency->id) ? 'selected' : '' }} >{{ $currency->name }}</option>
-                    @endforeach
-                </select>
+{{--                <select name="currency_id" class="form-control">--}}
+{{--                    @foreach($currencies as $currency)--}}
+{{--                        <option value="{{ $currency->id }}" {{ ($edit && $auction->currency_id === $currency->id) ? 'selected' : '' }} >{{ $currency->name }}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
                 <select name="type_id" class="form-control">
                     @foreach($types as $type)
                         <option value="{{ $type->id }}" {{ ($edit && $auction->type_id === $type->id) ? 'selected' : '' }} >{{ $type->name }}</option>

@@ -26,7 +26,7 @@
             <div class="new-det-01 flex-fill"><p class="take">@lang('app.shopping')</p>
                 <p class="price">@lang('app.paid')</p></div>
             <div class="new-det-02 flex-fill"><p class="take">@lang('app.price_start')</p>
-                <p class="price"><span class="ub-font">{{ $auction->start_from }}</span> {{ $auction->currency->name }}</p></div>
+                <p class="price"><span class="ub-font">{{ $auction->start_from }}</span> @lang('app.currency')</p></div>
             <div class="new-det-03 flex-fill"><p class="take">@lang('app.multiple')</p>
                 <p class="price">@lang('app.yes')</p>
             </div>

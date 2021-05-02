@@ -41,7 +41,7 @@
                             </div><!--end detail-name-->
                             <div class="col-sm-3">
                                 <p class="start-with">@lang('app.start_from')</p>
-                                <p class="start-price"><span class="ub-font">{{ $auction->start_from }}</span> {{ $auction->currency->symbol }}</p>
+                                <p class="start-price"><span class="ub-font">{{ $auction->start_from }}</span> @lang('app.currency')</p>
                                 @if($auction->isExpired)
                                     <p class="dept-end">@lang('app.expired')</p>
                                 @else
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="add-det">
                                     <p class="det-name">@lang('app.Lowest bid price')</p>
-                                    <p class="det-type"><span class="ub-font">{{ $auction->hightest_price }}</span> {{ $auction->currency->symbol }}</p>
+                                    <p class="det-type"><span class="ub-font">{{ $auction->highest_price }}</span> @lang('app.currency')</p>
                                 </div>
                                 @auth('user')
                                     <div class="add-det ">
@@ -84,18 +84,22 @@
                                     </div>
                                 @endif
                             </div><!--detail-name-->
-                            @if(auth('user')->check() && !$auction->isExpired)
-                                <div class="detail-name mt-3">
-                                    {!! Form::open(['route' => 'frontend.auctions.store', 'id' => 'bid-form']) !!}
-                                    {!! Form::hidden('auction_id',$auction->id) !!}
-                                    <div class="add-icon">
-                                        <p class="det-name det-icon">+</p>
-                                        <input type="number" name="price" class="input-num" min="{{ $auction->hightest_price ?? $auction->start_from  }}" value="{{ $auction->hightest_price ?? $auction->start_from  }}">
-                                        <p class="det-name det-icon01">-</p>
+                            @if(!$auction->isExpired)
+                                @if(auth('user')->check())
+                                    <div class="detail-name mt-3">
+                                        {!! Form::open(['route' => 'frontend.auctions.store', 'id' => 'bid-form']) !!}
+                                        {!! Form::hidden('auction_id',$auction->id) !!}
+                                        <div class="add-icon">
+                                            <p class="det-name det-icon">+</p>
+                                            <input type="number" name="price" class="input-num" min="{{ $auction->highest_price  }}" value="{{ $auction->highest_price ?? $auction->start_from  }}">
+                                            <p class="det-name det-icon01">-</p>
+                                        </div>
+                                        <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
+                                        {!! Form::close() !!}
                                     </div>
-                                    <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
-                                    {!! Form::close() !!}
-                                </div>
+                                @else
+                                    <button type="submit" class="btn btn-show w-100 mt-3" onclick="location.href='{{ route('login') }}'">@lang('app.Add bid')</button>
+                                @endif
                             @endif
                         </div>
                         <div class="col-md-6">
@@ -106,7 +110,7 @@
                                 <div class="d-flex pic-detail">
                                     @foreach($auction->auctionsImages as $image)
                                         <div class="m-3">
-                                            <img  src="{{ asset($image->image) }}" onclick="myFunction(this);" class="img-fluid" style="height: 100px" >
+                                            <img src="{{ asset($image->image) }}" onclick="myFunction(this);" class="img-fluid" style="height: 100px">
                                         </div>
                                     @endforeach
                                 </div>
@@ -222,7 +226,7 @@
                                 @foreach($auction->auctionsUsers as $user)
                                     <tr>
                                         <td class="ub-font">{{ $user->created_at->locale(app()->getLocale())->format('Y/m/d H:s a') }}</td>
-                                        <td><span class="ub-font">{{ $user->price }}</span> {{ $auction->currency->symbol }}</td>
+                                        <td><span class="ub-font">{{ $user->price }}</span> @lang('app.currency')</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
