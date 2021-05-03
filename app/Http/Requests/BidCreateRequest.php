@@ -28,9 +28,11 @@ class BidCreateRequest extends FormRequest
 
         $highest_price = $auction->highest_price;
 
+        $min = intval($highest_price) + 1;
+
         return [
             'auction_id' => 'required',
-            'price' => 'required|numeric|min:' . $highest_price,
+            'price' => 'required|numeric|integer|min:' . $min,
         ];
     }
 }
