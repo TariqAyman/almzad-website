@@ -81,7 +81,8 @@
                         <input type="text" name="name_en" class="form-control" placeholder="العنوان انجليزي" data-bv-field="address" value="{{ $edit ? $auction->name_en : old('name_en') }}">
                     </div>
                 </div>
-                <input type="text" name="start_from" class="form-control" placeholder="سعر بداية المزاد" data-bv-field="price" value="{{ $edit ? $auction->start_from : old('start_from') }}">
+                <input type="number" name="start_from" class="form-control" placeholder="سعر بداية المزاد" data-bv-field="price" value="{{ $edit ? $auction->start_from : old('start_from') }}" step="1">
+                <input type="number" name="purchase_price" class="form-control" placeholder="سعر الشراء الفوري" data-bv-field="price" value="{{ $edit ? $auction->price : old('price') }}" step='1'>
                 <div class="date-box">
                     <div class="date-a flex-fill ml-lg-2">
                         <label class="text-d">تاريح البداية</label>
