@@ -47,9 +47,9 @@ class AuctionController extends Controller
 
     public function store(BidCreateRequest $request)
     {
-        $auction = Auction::find($this->auction_id);
+        $auction = Auction::find($request->auction_id);
 
-        if (!$auction->allowBid) return redirect()->back()->withErrors('Cant bid in this auction');
+        if (!$auction->allowBid()) return redirect()->back()->withErrors('Cant bid in this auction');
 
         AuctionsUser::create([
             'user_id' => auth('user')->user()->id,
