@@ -25,7 +25,7 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
-            'username' => $this->faker->userName,
+            'username' => $this->faker->safeEmail,
             'email' => $this->faker->safeEmail,
             'phone_number' => $this->faker->phoneNumber,
             'profile_photo' => 'frontend/img/clint-pic.png',

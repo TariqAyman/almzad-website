@@ -23,7 +23,7 @@ class AuctionFactory extends Factory
     public function definition(): array
     {
         return [
-//            'currency_id' => \App\Models\Currency::inRandomOrder()->first()->id,
+//            'currency_id' => \App\Models\Currency::factory(),
             'type_id' => \App\Models\Type::inRandomOrder()->first()->id,
             'category_id' => \App\Models\Category::inRandomOrder()->first()->id,
             'user_id' => \App\Models\User::inRandomOrder()->first()->id,
@@ -36,8 +36,8 @@ class AuctionFactory extends Factory
             'slug_ar' => $this->faker->word,
             'slug_en' => $this->faker->word,
             'status' => $this->faker->boolean,
-            'start_from' => $this->faker->randomNumber(99999),
-            'purchase_price' => $this->faker->randomNumber(99999),
+            'start_from' => $this->faker->randomNumber(),
+            'purchase_price' => $this->faker->randomNumber(),
             'start_date' => Carbon::now(),
             'end_date' => Carbon::now()->subMonths(rand(1,3))->addMonths(rand(1,3)),
             'shipping' => $this->faker->boolean,
