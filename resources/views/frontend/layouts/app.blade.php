@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <!--Icon Website-->
     <link rel="shortcut icon" href="{{ asset('frontend/img/icon.png') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--FontWesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     @yield('style')
-    <title>المزاد الخيري</title>
+    <title>@yield('page-title') | المزاد الخيري</title>
 </head>
 <body>
 <div id="myBtn" class="top">
@@ -39,12 +40,17 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="{{ url('/') }}">@lang('app.home') <span class="sr-only">(current)</span></a>
                             </li>
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_store')</a>--}}
-{{--                            </li>--}}
+                            {{--                            <li class="nav-item">--}}
+                            {{--                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_store')</a>--}}
+                            {{--                            </li>--}}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('frontend.wallet.index') }}">@lang('app.wallet')</a>
+                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_auctions')</a>
                             </li>
+                            @auth('user')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('frontend.wallet.index') }}">@lang('app.wallet')</a>
+                                </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.auctions.index') }}">@lang('app.auctions')</a>
                             </li>
@@ -126,88 +132,87 @@
         <div class="row">
             <div class="col-lg col-sm-12">
                 <a href="{{ url('/') }}">
-                    <img class="img-fluid" src="{{ asset('frontend/img/logo.png') }}" alt="المزاد الخيري"></a>
+                    <img class="img-fluid" src="{{ setting('company_logo') ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}"></a>
                 <div class="col-12 social-bg">
                     <ul class="nav socail-media mt-4">
-                        <li class="sub-social">
-                            <a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li class="sub-social">
-                            <a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li class="sub-social">
-                            <a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                        <li class="sub-social">
-                            <a href="#"><i class="fab fa-youtube"></i></a></li>
+                        @if( setting('youtube_url') )
+                            <li class="sub-social">
+                                <a href="{{ setting('instagram_url') }}"><i class="fab fa-instagram"></i></a>
+                            </li>
+                        @endif
+                        @if( setting('youtube_url') )
+                            <li class="sub-social">
+                                <a href="{{ setting('twitter_url') }}"><i class="fab fa-twitter"></i></a>
+                            </li>
+                        @endif
+                        @if( setting('youtube_url') )
+                            <li class="sub-social">
+                                <a href="{{ setting('facebook_url') }}"><i class="fab fa-facebook-square"></i></a>
+                            </li>
+                        @endif
+                        @if( setting('youtube_url') )
+                            <li class="sub-social">
+                                <a href="{{ setting('youtube_url') }}"><i class="fab fa-youtube"></i></a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
             <div class="col-lg col-sm-6">
                 <h4>الأقسام الشائعة</h4>
                 <div class="foot-dept">
-                    <ul class="nav footer-link">
-                        <li><a href="#"><i class="fas fas fa-angle-left pl-1"></i>اسم القسم</a></li>
-                        <li><a href="#"><i class="fas fas fa-angle-left pl-1"></i>اسم القسم</a></li>
-                        <li><a href="#"><i class="fas fas fa-angle-left pl-1"></i>اسم القسم</a></li>
-                    </ul>
-                    <ul class="nav footer-link">
-                        <li><a href="#"><i class="fas fas fa-angle-left pl-1"></i>اسم القسم</a></li>
-                        <li><a href="#"><i class="fas fas fa-angle-left pl-1"></i>اسم القسم</a></li>
-                        <li><a href="#"><i class="fas fas fa-angle-left pl-1"></i>اسم القسم</a></li>
-                    </ul>
+                    @foreach($categoriesLayout->splitIn(2) as $categories)
+                        <ul class="nav footer-link">
+                            @foreach($categories as $category)
+                                <li><a href="{{ route('frontend.auctions.index',['category' => $category->id]) }}"><i class="fas fas fa-angle-left pl-1"></i>{{ $category->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    @endforeach
                 </div>
             </div>
             <div class="col-lg col-sm-6">
                 <h4>المزادات الشائعة</h4>
                 <ul class="nav footer-link">
-                    <li class="pub-mzad">
-                        <div class="pub-pic">
-                            <img alt="مائده طعام" src="{{ asset('frontend/img/min-mzad-01.png') }}">
-                        </div>
-                        <div class="pub-body">
-                            <h6>مائده طعام</h6>
-                            <p>منذ اسبوعين </p>
-                        </div>
-                    </li>
-                    <li class="pub-mzad">
-                        <div class="pub-pic">
-                            <img alt="مائده طعام" src="{{ asset('frontend/img/min-mzad-02.png') }}">
-                        </div>
-                        <div class="pub-body">
-                            <h6>مائده طعام</h6>
-                            <p>منذ اسبوعين </p>
-                        </div>
-                    </li>
-                    <li class="pub-mzad">
-                        <div class="pub-pic">
-                            <img alt="مائده طعام" src="{{ asset('frontend/img/min-mzad-03.png') }}">
-                        </div>
-                        <div class="pub-body">
-                            <h6>مائده طعام</h6>
-                            <p>منذ اسبوعين </p>
-                        </div>
-                    </li>
+                    @foreach($auctionsLayout as $auction)
+                        <li class="pub-mzad">
+                            <div class="pub-pic">
+                                <img alt="{{ $auction->name }}" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}" class="img-fluid" style="max-height: 37px; max-width: 57px">
+                            </div>
+                            <div class="pub-body">
+                                <h6>{{ $auction->name }}</h6>
+                                <p>{{ $auction->created_at->diffForHumans() }} </p>
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="col-lg col-sm-6">
                 <h4>تواصل معانا</h4>
                 <div class="footer-contact">
                     <i class="fas fa-map-marker-alt"></i>
-                    <div class="contact-info pr-2">السعودية - الرياض</div>
+                    <div class="contact-info pr-2">{{ setting('company_city') }} - {{ setting('company_address') }}</div>
                 </div>
                 <div class="footer-contact">
                     <i class="fas fa-phone"></i>
-                    <div class="contact-info ub-font pr-2"> Phone: (064) 332-1233</div>
+                    <div class="contact-info ub-font pr-2"> @lang('app.phone_number'): {{ setting('company_phone') }}</div>
                 </div>
                 <div class="footer-contact">
                     <i class="fas fa-print"></i>
-                    <div class="contact-info ub-font pr-2"> info@ghazalazboutique.com</div>
+                    <div class="contact-info ub-font pr-2"> {{ setting('company_email') }}</div>
                 </div>
             </div>
             <div class="col-lg col-sm-6">
                 <h4>اكتشف الروابط</h4>
                 <ul class="nav footer-link">
-                    <li><a href="#">قوائد المزادات</a></li>
-                    <li><a href="#">قوائد المزادات</a></li>
-                    <li><a href="#">قوائد المزادات</a></li>
+                    @if(setting('url_1') &&  setting('url_1_text'))
+                        <li><a href="{{ setting('url_1') }}">{{ setting('url_1') }}</a></li>
+                    @endif
+                    @if(setting('url_2') &&  setting('url_2_text'))
+                        <li><a href="{{ setting('url_2') }}">{{ setting('url_2') }}</a></li>
+                    @endif
+                    @if(setting('url_3') &&  setting('url_3_text'))
+                        <li><a href="{{ setting('url_3') }}">{{ setting('url_3') }}</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
