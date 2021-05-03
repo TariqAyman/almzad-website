@@ -14,13 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Frontend'], function () {
+    Route::get('test','PhoneVerifyController@Test');
+
     Auth::routes(['verify' => true]);
+    Route::get('phone_verify', 'PhoneVerifyController@index')->name('phone_verify');
+    Route::post('phone_verify', 'PhoneVerifyController@store')->name('phone_verify.post');
 
     Route::group(['as' => 'frontend.', 'middleware' => 'web'], function () {
         Route::get('/', 'HomeController@index');
-        Route::resource('auctions', 'AuctionController')->only(['index', 'show','store']);
+        Route::resource('auctions', 'AuctionController')->only(['index', 'show', 'store']);
 
-        Route::group(['middleware' => 'auth:user'], function () {
+        Route::group(['middleware' => ['auth:user','phoneVerify']], function () {
             Route::resource('profile', 'ProfileController');
             Route::resource('wallet', 'WalletController');
             Route::get('user/store', 'StoreController@myStore')->name('user.store');
