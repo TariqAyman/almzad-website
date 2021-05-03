@@ -118,37 +118,38 @@
         </div><!--container-->
     </section>
     <!--EndnewMzad-->
+    <br>
     <!--StartClint-->
-    <section class="clints">
-        <div class="container">
-            <div class="row">
-                <div class="bigtit">
-                    <div class="tit-box">
-                        <img class="img-fluid" src="{{ asset('frontend/img/clinticon.png') }}" alt="@lang('app.customer_review')">
-                        <h5>@lang('app.customer_review')</h5>
-                    </div>
-                </div>
-                <!--clint-01-->
-                <div class="owl-clints owl-carousel">
-                    @foreach($reviews as $review)
-                        <div class="item">
-                            <div class="clint-box">
-                                <i class="fas fa-quote-right"></i>
-                                <p>
-                                    {{ $review->note }}
-                                </p>
-                            </div>
-                            <div class="clint-name">
-                                <div><img class="img-fluid" src="{{ $review->user->profile_photo }}" alt="{{ $review->user->profile_photo }}"></div>
-                                <div class="pub-body">
-                                    <h6>{{ $review->user->name }}</h6>
-                                    <p>مصمم جرافيك </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
+{{--    <section class="clints">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row">--}}
+{{--                <div class="bigtit">--}}
+{{--                    <div class="tit-box">--}}
+{{--                        <img class="img-fluid" src="{{ asset('frontend/img/clinticon.png') }}" alt="@lang('app.customer_review')">--}}
+{{--                        <h5>@lang('app.customer_review')</h5>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <!--clint-01-->--}}
+{{--                <div class="owl-clints owl-carousel">--}}
+{{--                    @foreach($reviews as $review)--}}
+{{--                        <div class="item">--}}
+{{--                            <div class="clint-box">--}}
+{{--                                <i class="fas fa-quote-right"></i>--}}
+{{--                                <p>--}}
+{{--                                    {{ $review->note }}--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                            <div class="clint-name">--}}
+{{--                                <div><img class="img-fluid" src="{{ $review->user->profile_photo }}" alt="{{ $review->user->profile_photo }}"></div>--}}
+{{--                                <div class="pub-body">--}}
+{{--                                    <h6>{{ $review->user->name }}</h6>--}}
+{{--                                    <p>مصمم جرافيك </p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 @endsection
