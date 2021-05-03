@@ -76,6 +76,70 @@
                 </div>
             </div>
             <div class="card mb-5">
+                <div class="card-header bg-transparent"><h3 class="mb-0">Social Media Settings</h3></div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('instagram_url', 'instagram', ['class' => 'form-control-label'])}}
+                                {{ Form::url('instagram_url', setting('instagram_url'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('twitter_url', 'twitter', ['class' => 'form-control-label'])}}
+                                {{ Form::url('twitter_url', setting('twitter_url'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('facebook_url', 'facebook', ['class' => 'form-control-label'])}}
+                                {{ Form::url('facebook_url', setting('facebook_url'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('youtube_url', 'youtube_url', ['class' => 'form-control-label'])}}
+                                {{ Form::url('youtube_url', setting('youtube_url'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-5">
+                <div class="card-header bg-transparent"><h3 class="mb-0">اكتشف الروابط</h3></div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('url_1', 'url_1', ['class' => 'form-control-label'])}}
+                                {{ Form::text('url_1_text', setting('url_1_text'), ['class'=>"form-control"])}}
+                                {{ Form::url('url_1', setting('url_1'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('url_2', 'url_2', ['class' => 'form-control-label'])}}
+                                {{ Form::text('url_2_text', setting('url_2_text'), ['class'=>"form-control"])}}
+                                {{ Form::url('url_2', setting('url_2'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('url_3', 'url_3', ['class' => 'form-control-label'])}}
+                                {{ Form::text('url_3_text', setting('url_3_text'), ['class'=>"form-control"])}}
+                                {{ Form::url('url_3', setting('url_3'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-5">
                 <div class="card-header bg-transparent"><h4 class="mb-0">Display Settings</h4></div>
                 <div class="card-body">
                     <div class="row">
@@ -86,18 +150,18 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{Form::label('company_currency_symbol_ar', 'Currency Symbol Ar', ['class' => 'form-control-label'])}}
-                                {{ Form::text('company_currency_symbol_ar', setting('company_currency_symbol_ar'), ['class'=>"form-control"])}}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{Form::label('company_currency_symbol_en', 'Currency Symbol En', ['class' => 'form-control-label'])}}
-                                {{ Form::text('company_currency_symbol_en', setting('company_currency_symbol_en'), ['class'=>"form-control"])}}
-                            </div>
-                        </div>
+{{--                        <div class="col-md-6">--}}
+{{--                            <div class="form-group">--}}
+{{--                                {{Form::label('company_currency_symbol_ar', 'Currency Symbol Ar', ['class' => 'form-control-label'])}}--}}
+{{--                                {{ Form::text('company_currency_symbol_ar', setting('company_currency_symbol_ar'), ['class'=>"form-control"])}}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-6">--}}
+{{--                            <div class="form-group">--}}
+{{--                                {{Form::label('company_currency_symbol_en', 'Currency Symbol En', ['class' => 'form-control-label'])}}--}}
+{{--                                {{ Form::text('company_currency_symbol_en', setting('company_currency_symbol_en'), ['class'=>"form-control"])}}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -114,12 +178,12 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                {{ Form::label('default_role', 'Select default register role', ['class' => 'form-control-label']) }}
-                                {{ Form::select('default_role', $roles, setting('default_role', null), [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select role...']) }}
-                            </div>
-                        </div>
+{{--                        <div class="col-lg-6">--}}
+{{--                            <div class="form-group">--}}
+{{--                                {{ Form::label('default_role', 'Select default register role', ['class' => 'form-control-label']) }}--}}
+{{--                                {{ Form::select('default_role', $roles, setting('default_role', null), [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select role...']) }}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="col-md-6">
                             <div class="form-group">
