@@ -1694,3 +1694,19 @@ table .dropdown-toggle::after,.note.dropdown-toggle::after
        width: 146px;
     }
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input {
+    text-align: center;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
