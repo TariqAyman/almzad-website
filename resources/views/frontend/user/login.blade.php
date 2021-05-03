@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('page-title' , trans('app.login'))
+
 @section('content')
     <section>
         <div class="container pt-5">
@@ -15,7 +17,7 @@
                             <form class="form-horizontal" action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" name="phone_number" placeholder="@lang('app.phone_number')" required {{--pattern="[0-9]"--}} value="{{ old('phone_number') }}" title="@lang('app.phone_number')">
+                                    <input type="tel" style="direction: ltr;text-align: left;" class="form-control" name="phone_number" placeholder="@lang('app.phone_number')" required {{--pattern="[0-9]"--}} value="{{ old('phone_number') }}" title="@lang('app.phone_number')">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
                                 <div class="form-group">

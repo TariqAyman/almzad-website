@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('page-title' , trans('app.Edit Profile'))
+
 @section('content')
     <div class="page-header">
         <div class="container">
@@ -46,12 +48,12 @@
                             <li><a href="#password" class="tabs__trigger" role="tab" data-toggle="tab">
                                     تغيير كلمة المرور</a>
                             </li>
-                            <li><a href="#address" class="tabs__trigger" role="tab" data-toggle="tab">
-                                    عناويني</a>
-                            </li>
-                            <li><a href="#idactive" class="tabs__trigger" role="tab" data-toggle="tab">
-                                    تفعيل الهوية</a>
-                            </li>
+{{--                            <li><a href="#address" class="tabs__trigger" role="tab" data-toggle="tab">--}}
+{{--                                    عناويني</a>--}}
+{{--                            </li>--}}
+{{--                            <li><a href="#idactive" class="tabs__trigger" role="tab" data-toggle="tab">--}}
+{{--                                    تفعيل الهوية</a>--}}
+{{--                            </li>--}}
                             <li><a href="#updatefile" class="tabs__trigger" role="tab" data-toggle="tab">
                                     تعديل الملف</a>
                             </li>
@@ -194,49 +196,49 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="b-left w-100 mt-3">
-                                    <button class="btn btn-show" type="submit" data-toggle="modal" data-target="#addaddress"> إضافة عنوان جديد</button>
-                                    <!-- ModaladdBalance -->
-                                    <div class="modal fade" id="addaddress" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content blue-color">
-                                                <div class="modal-box upZindex">
-                                                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                                                    </button>
-                                                    <div class="modal-header text-center mx-auto">
-                                                        <div class="modal-title  blue-color">
-                                                            <h4 id="addPriceLabel">اضافة عنوان جديد</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="form-group my-3">
-                                                                <h6>العنوان</h6>
-                                                                <input type="email" class="form-control" placeholder="العنوان">
-                                                            </div>
-                                                            <div class="form-group my-3">
-                                                                <h6>رقم الجوال</h6>
-                                                                <input type="text" class="form-control" placeholder="رقم الجوال">
-                                                            </div>
-                                                            <div class="form-group my-3">
-                                                                <h6>كود البريد</h6>
-                                                                <input type="text" class="form-control" placeholder="كود البريد">
-                                                            </div>
-                                                            <div class="form-group my-3">
-                                                                <h6>حالة الحساب</h6>
-                                                                <input type="text" class="form-control" placeholder="حالة الحساب">
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-show">إضافة العنوان</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+{{--                                <div class="b-left w-100 mt-3">--}}
+{{--                                    <button class="btn btn-show" type="submit" data-toggle="modal" data-target="#addaddress"> إضافة عنوان جديد</button>--}}
+{{--                                    <!-- ModaladdBalance -->--}}
+{{--                                    <div class="modal fade" id="addaddress" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">--}}
+{{--                                        <div class="modal-dialog" role="document">--}}
+{{--                                            <div class="modal-content blue-color">--}}
+{{--                                                <div class="modal-box upZindex">--}}
+{{--                                                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">--}}
+{{--                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>--}}
+{{--                                                    </button>--}}
+{{--                                                    <div class="modal-header text-center mx-auto">--}}
+{{--                                                        <div class="modal-title  blue-color">--}}
+{{--                                                            <h4 id="addPriceLabel">اضافة عنوان جديد</h4>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="modal-body">--}}
+{{--                                                        <form>--}}
+{{--                                                            <div class="form-group my-3">--}}
+{{--                                                                <h6>العنوان</h6>--}}
+{{--                                                                <input type="email" class="form-control" placeholder="العنوان">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="form-group my-3">--}}
+{{--                                                                <h6>رقم الجوال</h6>--}}
+{{--                                                                <input type="text" class="form-control" placeholder="رقم الجوال">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="form-group my-3">--}}
+{{--                                                                <h6>كود البريد</h6>--}}
+{{--                                                                <input type="text" class="form-control" placeholder="كود البريد">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="form-group my-3">--}}
+{{--                                                                <h6>حالة الحساب</h6>--}}
+{{--                                                                <input type="text" class="form-control" placeholder="حالة الحساب">--}}
+{{--                                                            </div>--}}
+{{--                                                        </form>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="modal-footer">--}}
+{{--                                                        <button class="btn btn-show">إضافة العنوان</button>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                         <!--Startidactive-->
