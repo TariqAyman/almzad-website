@@ -18,7 +18,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $id
  * @property int $user_id
  * @property string $note
- * @property float $status
+ * @property int $status
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at

@@ -29,8 +29,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $slug_ar
  * @property string $slug_en
  * @property bool $status
- * @property float $start_from
- * @property float $price
+ * @property int $start_from
+ * @property int $price
  * @property Carbon $start_date
  * @property Carbon $end_date
  * @property bool $shipping
@@ -141,7 +141,7 @@ class Auction extends Model
 
     public function auctionsUsers()
     {
-        return $this->hasMany(AuctionsUser::class);
+        return $this->hasMany(AuctionsUser::class)->latest();
     }
 
     public function users()
@@ -186,7 +186,7 @@ class Auction extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->latest();
     }
 
     public function getExpiredInAttribute()

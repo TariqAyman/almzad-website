@@ -18,10 +18,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $user_id
  * @property int|null $auction_id
  * @property int $currency_id
- * @property float $in
- * @property float $out
- * @property float $hold
- * @property float $balance
+ * @property int $in
+ * @property int $out
+ * @property int $hold
+ * @property int $balance
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -40,10 +40,10 @@ class Wallet extends Model
 		'user_id' => 'int',
 		'auction_id' => 'int',
 //		'currency_id' => 'int',
-		'in' => 'float',
-		'out' => 'float',
-		'hold' => 'float',
-		'balance' => 'float'
+		'in' => 'int',
+		'out' => 'int',
+		'hold' => 'int',
+		'balance' => 'int'
 	];
 
 	protected $fillable = [

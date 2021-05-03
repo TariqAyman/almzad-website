@@ -37,7 +37,7 @@ class AuctionsUser extends Model
 	protected $casts = [
 		'user_id' => 'int',
 		'auction_id' => 'int',
-		'price' => 'float'
+		'price' => 'int'
 	];
 
 	protected $fillable = [
