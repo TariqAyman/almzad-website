@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => $data['password'],
         ]);
-        if (setting('register_notification_email')) {
+        if (setting('register_notification_email') == true) {
             Mail::to($data['email'])->send(new UserRegistered($user));
         }
         if (setting('default_role')) {
