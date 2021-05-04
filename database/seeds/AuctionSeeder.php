@@ -20,9 +20,9 @@ class AuctionSeeder extends Seeder
         if (env('APP_ENV') != 'dev') return;
 
         Auction::factory()
-            ->has(AuctionsImage::factory()->count(10))
-            ->has(AuctionsUser::factory()->count(10))
-            ->has(Comment::factory()->count(50))
+            ->has(AuctionsImage::factory()->count(3))
+            ->has(AuctionsUser::factory()->count(5))
+            ->has(Comment::factory()->count(20))
             ->count(30)
             ->create();
 
