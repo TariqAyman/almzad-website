@@ -29,6 +29,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>@lang('app.name')</th>
+                                <th>@lang('app.name')</th>
                                 <th>@lang('app.status')</th>
                                 <th>@lang('app.Updated at')</th>
                                 <th>@lang('app.Created at')</th>

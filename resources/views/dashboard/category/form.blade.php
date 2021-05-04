@@ -22,7 +22,7 @@
                     @else
                         {!! Form::open(['route' => 'admin.category.store', 'files' => true, 'id' => 'category-form']) !!}
                     @endif
-                    <h6 class="heading-small text-muted mb-4">Category information</h6>
+                    <h6 class="heading-small text-muted mb-4">@lang('app.Category information')</h6>
 
                     <div class="form-group row">
                         <label class="col-form-label col-sm-2 text-sm-right">@lang('app.name_en')</label>
@@ -43,7 +43,7 @@
                             <div class="col-md-12">
                                 <div class="custom-control custom-checkbox">
                                     {{ Form::checkbox('status', $edit ? $category->status : 1, 1, ['id'=>"status",'class' => 'custom-control-input']) }}
-                                    {{ Form::label('status', 'Status', ['class' => 'custom-control-label']) }}
+                                    {{ Form::label('status', trans('app.status'), ['class' => 'custom-control-label']) }}
                                 </div>
                             </div>
                         </div>
@@ -51,8 +51,8 @@
 
                     <div class="form-group row">
                         <div class="col-sm-10 ml-sm-auto">
-                            @can('update-user')
-                                {{ Form::submit('Submit', ['class'=> 'mt-5 btn btn-primary']) }}
+                            @can('update-category')
+                                {{ Form::submit(trans('app.submit'), ['class'=> 'mt-5 btn btn-primary']) }}
                             @endcan
                         </div>
                     </div>

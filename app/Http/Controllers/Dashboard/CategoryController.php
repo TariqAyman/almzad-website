@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
@@ -39,7 +40,7 @@ class CategoryController extends Controller
                 return $edit . ' ' . $delete;
             })
             ->addColumn('status', function ($model) {
-                return $model->status ? '<span class="badge badge-pill badge-lg badge-success">Active</span>' : '<span class="badge badge-pill badge-lg badge-danger">Disabled</span>';
+                return $model->status ? '<span class="badge badge-pill badge-lg badge-success">مفعل</span>' : '<span class="badge badge-pill badge-lg badge-danger">معطل</span>';
             })
             ->addColumn('created_at', function ($model) {
                 return $model->created_at->diffForHumans();
@@ -71,7 +72,13 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        Category::create($request->all());
+        $data = $request->all();
+
+        $data['slug_ar'] = Str::slug($request->name_ar,'-','ar');
+        $data['slug_en'] = Str::slug($request->name_en,'-','en');
+
+        Category::create($data);
+
         return redirect()->route('admin.category.index')->withSuccess('Category created successfully!');
     }
 
