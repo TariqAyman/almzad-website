@@ -75,7 +75,7 @@ class LoginController extends Controller
 
         $user = User::where('phone_number',$request->phone_number)->first();
 
-        if (Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']], $request->remember)) {
+        if ($user && Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']], $request->remember)) {
             $userStatus = Auth::guard('user')->user()->status;
 
 //            if ($userStatus == 1) {

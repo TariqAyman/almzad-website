@@ -61,6 +61,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'tos' => ['required'],
         ]);
     }
 
@@ -74,7 +75,7 @@ class RegisterController extends Controller
     {
         $user = User::create($data);
 
-        if (setting('register_notification_email')) {
+        if (setting('register_notification_email') == true) {
             Mail::to($data['email'])->send(new UserRegistered($user));
         }
 
