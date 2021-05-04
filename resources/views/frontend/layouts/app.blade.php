@@ -43,10 +43,10 @@
                             {{--                            <li class="nav-item">--}}
                             {{--                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_store')</a>--}}
                             {{--                            </li>--}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_auctions')</a>
-                            </li>
                             @auth('user')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_auctions')</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('frontend.wallet.index') }}">@lang('app.wallet')</a>
                                 </li>
@@ -55,7 +55,7 @@
                                 <a class="nav-link" href="{{ route('frontend.auctions.index') }}">@lang('app.auctions')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">@lang('app.content_us')</a>
+                                <a class="nav-link" href="{{ route('frontend.contact-us.index') }}">@lang('app.content_us')</a>
                             </li>
                             <li class="nav-item sid-log">
                                 <a class="nav-link" href="#"><span class="ub-font">ENG</span></a>
@@ -125,7 +125,6 @@
         </div>
     </div>
 </header>
-@include('frontend.layouts.alert')
 @yield('content')
 <footer>
     <div class="container">
@@ -226,7 +225,15 @@
 <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('frontend/js/main.js') }}"></script>
+@include('frontend.layouts.alert')
 
+<script>
+    $(document).ready(function () {
+        $('.error-modal').modal({
+            show: true
+        });
+    });
+</script>
 @yield('page-script')
 </body>
 </html>

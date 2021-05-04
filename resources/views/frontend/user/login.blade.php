@@ -26,7 +26,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-show w-100">تسجيل دخول</button>
                                 <div class="form-group text-center">
-                                    <a href="#" class="forget-pass">@lang('app.forget_password')</a>
+                                    <a href="{{ route('password.request') }}" class="forget-pass">@lang('app.forget_password')</a>
                                     <a href="{{ route('register') }}" class="forget-pass">انشاء حساب جديد</a>
                                 </div>
                             </form>

@@ -40,9 +40,4 @@ class PhoneVerifyController extends Controller
             }
         }
     }
-
-    public function test()
-    {
-        return AlrajhiPayment::init(1,123);
-    }
 }

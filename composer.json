@@ -24,7 +24,10 @@
         "spatie/laravel-permission": "^4.0",
         "askedio/laravel-soft-cascade": "^8.1",
         "unisharp/laravel-filemanager": "^2.2",
-        "yajra/laravel-datatables-oracle": "^9.18"
+        "yajra/laravel-datatables-oracle": "^9.18",
+        "ext-openssl": "*",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
