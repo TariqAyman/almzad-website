@@ -1,83 +1,108 @@
 @if ($message = Session::get('success'))
-    <div class="row no-gutters">
-        <div class="col-lg-5 col-md-12">
-            <div class="alert alert-success fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="alert-heading">success</h4>
-                <p>
-                    <strong>{{ $message }}</strong>
-                </p>
+    <div class="modal fade error-modal" id="error" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-box">
+                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                    <div class="modal-body">
+                        <form class="text-center">
+                            <img class="img-fluid mb-3" src="{{ asset('frontend/img/done-re.png') }}">
+                            <h4>success</h4>
+                            <h4><strong>{{ $message }}</strong></h4>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endif
 
 @if ($message = Session::get('error'))
-    <div class="row no-gutters">
-        <div class="col-lg-5 col-md-12">
-            <div class="alert alert-error fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="alert-heading">error</h4>
-                <p>
-                    <strong>{{ $message }}</strong>
-                </p>
+    <div class="modal fade error-modal" id="error" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-box">
+                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                    <div class="modal-body">
+                        <form class="text-center">
+                            <img class="img-fluid mb-3" src="{{ asset('frontend/img/error.png') }}">
+                            <h4>error</h4>
+                            <h4><strong>{{ $message }}</strong></h4>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endif
 
 @if ($message = Session::get('warning'))
-    <div class="row no-gutters">
-        <div class="col-lg-5 col-md-12">
-            <div class="alert alert-warning fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="alert-heading">warning</h4>
-                <p>
-                    <strong>{{ $message }}</strong>
-                </p>
+    <div class="modal fade error-modal" id="error" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-box">
+                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                    <div class="modal-body">
+                        <form class="text-center">
+                            <img class="img-fluid mb-3" src="{{ asset('frontend/img/error.png') }}">
+                            <h4>warning</h4>
+                            <h4><strong>{{ $message }}</strong></h4>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endif
 
 @if ($message = Session::get('info'))
-    <div class="row no-gutters">
-        <div class="col-lg-5 col-md-12">
-            <div class="alert alert-info fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="alert-heading">info</h4>
-                <p>
-                    <strong>{{ $message }}</strong>
-                </p>
+    <div class="modal fade error-modal" id="error" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-box">
+                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                    <div class="modal-body">
+                        <form class="text-center">
+                            <img class="img-fluid mb-3" src="{{ asset('frontend/no-mzad.png') }}">
+                            <h4>info</h4>
+                            <h4><strong>{{ $message }}</strong></h4>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endif
 
 @if ($errors->any())
-    @foreach($errors->getMessages() as $key => $messages)
-        @foreach($messages as $message)
-            <div class="row no-gutters">
-                <div class="col-lg-5 col-md-12">
-                    <div class="alert alert-danger fade show" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="alert-heading">{{ $key }}</h4>
-                        <p>
-                            <strong>{{ $message }}</strong>
-                        </p>
+    <div class="modal fade error-modal" id="error" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-box">
+                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                    <div class="modal-body">
+                        <form class="text-center">
+                            <img class="img-fluid mb-3" src="{{ asset('frontend/img/error.png') }}">
+                            <h4>error</h4>
+                        @foreach($errors->getMessages() as $key => $messages)
+                            @foreach($messages as $message)
+                                    <h4>{{ $message }}</h4>
+                                @endforeach
+                            @endforeach
+                        </form>
                     </div>
                 </div>
             </div>
-        @endforeach
-    @endforeach
+        </div>
+    </div>
 @endif
