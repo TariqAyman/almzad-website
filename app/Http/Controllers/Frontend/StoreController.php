@@ -19,7 +19,27 @@ class StoreController extends Controller
     {
         $store = auth('user')->user()->store;
 
-        $auctions = Auction::query()->where('user_id', auth('user')->user()->id)->paginate(setting('record_per_page'));
+        $auctions = Auction::query();
+
+        if ($request->has('type')) {
+            $auctions = $auctions->where('type_id', $request->type);
+        }
+
+        if ($request->has('category')) {
+            $auctions = $auctions->where('category_id', $request->category);
+        }
+
+        if ($request->has('start_date')) {
+            $auctions = $auctions->where('start_date', '<=', $request->start_date);
+        }
+
+        if ($request->has('end_date')) {
+            $auctions = $auctions->where('end_date', '=>', $request->end_date);
+        }
+
+        $auctions = $auctions->where('user_id', auth('user')->user()->id)
+            ->where('status', 1)
+            ->paginate(setting('record_per_page'));
 
         $types = Type::query()->where('status', 1)->get();
 
