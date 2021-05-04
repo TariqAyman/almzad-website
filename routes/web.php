@@ -14,17 +14,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Frontend'], function () {
-    Route::get('test','PhoneVerifyController@Test');
 
     Auth::routes(['verify' => true]);
+
     Route::get('phone_verify', 'PhoneVerifyController@index')->name('phone_verify');
     Route::post('phone_verify', 'PhoneVerifyController@store')->name('phone_verify.post');
 
     Route::group(['as' => 'frontend.', 'middleware' => 'web'], function () {
+
+        Route::resource('contact-us', 'ContactUsController');
+
+        Route::post('payment/responseURL', 'PaymentController@successCallback')->name('payment.responseURL');
+        Route::post('payment/errorURL', 'PaymentController@errorCallback')->name('payment.errorURL');
+
         Route::get('/', 'HomeController@index');
-        Route::resource('auctions', 'AuctionController')->only(['index', 'show', 'store']);
+        Route::resource('auctions', 'AuctionController')->only(['index', 'show']);
 
         Route::group(['middleware' => ['auth:user','phoneVerify']], function () {
+
+            Route::post('payment/create', 'PaymentController@store')->name('payment.store');
+
             Route::resource('profile', 'ProfileController');
             Route::resource('wallet', 'WalletController');
             Route::get('user/store', 'StoreController@myStore')->name('user.store');
@@ -34,6 +43,9 @@ Route::group(['namespace' => 'Frontend'], function () {
             Route::resource('user/auctions', 'AuctionUserController')->names('user.auctions')->only([
                 'edit', 'store', 'update', 'create'
             ]);
+
+            Route::resource('auctions', 'AuctionController')->only(['store']);
+            Route::post('auctions/buyNow', 'AuctionController@buyNow')->name('auctions.buyNow');
         });
     });
 });
