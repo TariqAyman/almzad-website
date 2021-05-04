@@ -41,6 +41,10 @@ Route::group(['middleware' => ['auth:admin', 'verified'], 'prefix' => 'admin', '
     Route::get('category-getDatatable', 'CategoryController@getDatatable')->name('category.getDatatable');
     Route::post('category/destroy', ['as' => 'category.destroy', 'uses' => 'CategoryController@destroy']);
 
+    Route::resource('type', 'TypeController')->except('show');
+    Route::get('type-getDatatable', 'TypeController@getDatatable')->name('type.getDatatable');
+    Route::post('type/destroy', ['as' => 'type.destroy', 'uses' => 'TypeController@destroy']);
+
     Route::get('/activity-log', 'ActivitylogController@index')->name('activity-log.index');
     Route::get('activity-log-getDatatable', 'ActivitylogController@getDatatable')->name('activity-log.getDatatable');
 

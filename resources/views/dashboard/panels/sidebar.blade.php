@@ -60,7 +60,7 @@
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                         <polyline points="9 22 9 12 15 12 15 22"></polyline>
                     </svg>
-                    <span class="menu-title text-truncate">Dashboard</span>
+                    <span class="menu-title text-truncate">@lang('app.Dashboard')</span>
                 </a>
             </li>
 
@@ -70,13 +70,24 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-                        <span class="menu-title text-truncate">Categories</span>
+                        <span class="menu-title text-truncate">@lang('app.Categories')</span>
+                    </a>
+                </li>
+            @endcan
+
+            @canany(['view-type', 'create-type'])
+                <li class="nav-item {{ Route::is('admin.type.*') ? 'active' : '' }} ">
+                    <a href="{{ route('admin.type.index') }}" class="d-flex align-items-center" target="_self">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span class="menu-title text-truncate">@lang('app.Types')</span>
                     </a>
                 </li>
             @endcan
 
             <li class="navigation-header">
-                <span>Administer</span>
+                <span>@lang('app.Administer')</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal">
                     <circle cx="12" cy="12" r="1"></circle>
                     <circle cx="19" cy="12" r="1"></circle>
@@ -90,7 +101,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-                        <span class="menu-title text-truncate">Admins</span>
+                        <span class="menu-title text-truncate">@lang('app.Admins')</span>
                     </a>
                 </li>
             @endcan
@@ -101,7 +112,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-                        <span class="menu-title text-truncate">Permissions</span>
+                        <span class="menu-title text-truncate">@lang('app.Permissions')</span>
                     </a>
                 </li>
             @endcan
@@ -112,7 +123,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-                        <span class="menu-title text-truncate">Roles</span>
+                        <span class="menu-title text-truncate">@lang('app.Roles')</span>
                     </a>
                 </li>
             @endcan
@@ -123,7 +134,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-                        <span class="menu-title text-truncate">Manage Settings</span>
+                        <span class="menu-title text-truncate">@lang('app.Manage Settings')</span>
                     </a>
                 </li>
             @endcan
@@ -134,7 +145,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-                        <span class="menu-title text-truncate">Activity Log</span>
+                        <span class="menu-title text-truncate">@lang('app.Activity Log')</span>
                     </a>
                 </li>
             @endcan
