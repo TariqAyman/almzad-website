@@ -21,11 +21,12 @@ class CreateWalletsTable extends Migration
             $table->foreign('auction_id')->references('id')->on('auctions')->onDelete('cascade');
             $table->unsignedBigInteger('currency_id')->nullable();
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
-            $table->decimal('in',18);
-            $table->decimal('out',18);
-            $table->decimal('hold',18);
-            $table->decimal('balance',18);
-
+            $table->double('in');
+            $table->double('out');
+            $table->double('hold');
+            $table->double('balance');
+            $table->longText('note')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

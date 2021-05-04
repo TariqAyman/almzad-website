@@ -41,6 +41,12 @@ class CreateAuctionsTable extends Migration
             $table->boolean('shipping')->default(0);
             $table->boolean('shipping_free')->default(0);
             $table->boolean('multi_auction')->default(0);
+            $table->unsignedBigInteger('last_bid')->nullable();
+            $table->foreign('last_bid')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('sold_to')->nullable();
+            $table->foreign('sold_to')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('is_sold')->default(0);
+            $table->double('sale_amount')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
