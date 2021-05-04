@@ -16,95 +16,105 @@
             <div class="add-det aboutme">
                 <p class="det-name px-md-2">{{ auth('user')->user()->name }}</p>
                 <div class="update-store">
-{{--                    @if(auth()->user()->store)--}}
-{{--                        <a class="dept-name" href="{{ route('frontend.user.store.edit') }}">تعديل المتجر</a>--}}
-{{--                    @else--}}
-{{--                        <a class="dept-name" href="{{ route('frontend.user.store.edit') }}">إضافة متجر</a>--}}
-{{--                    @endif--}}
+                    {{--                    @if(auth()->user()->store)--}}
+                    {{--                        <a class="dept-name" href="{{ route('frontend.user.store.edit') }}">تعديل المتجر</a>--}}
+                    {{--                    @else--}}
+                    {{--                        <a class="dept-name" href="{{ route('frontend.user.store.edit') }}">إضافة متجر</a>--}}
+                    {{--                    @endif--}}
                     <a class="dept-name" href="{{ route('frontend.user.auctions.create') }}">اضافة مزاد</a>
                 </div>
             </div>
             <div class="my-detaile mt-2">
-{{--                <div class="row w-100">--}}
-{{--                    <div class="col-md-4">--}}
-{{--                        <div class="my-pic">--}}
-{{--                            <img class="img-fluid" src="{{ asset('frontend/img/my-pic.png') }}">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    @if($store)--}}
-{{--                        <div class="my-contact col-md-8">--}}
-{{--                            <p class="store-n mb-3">{{ $store->name }}</p>--}}
-{{--                            <div class="row">--}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <div class="pub-mzad mt-3">--}}
-{{--                                        <i class="fas fa-phone pub-pic"></i>--}}
-{{--                                        <div class="pub-body">--}}
-{{--                                            <h6>رقم الجوال</h6>--}}
-{{--                                            <p>{{ $store->phone_number }}</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="pub-mzad mt-3">--}}
-{{--                                        <i class="fas fa-envelope-open pub-pic"></i>--}}
-{{--                                        <div class="pub-body">--}}
-{{--                                            <h6>البريد الالكتروني</h6>--}}
-{{--                                            <p class="ub-font">{{ $store->email }}</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <div class="pub-mzad mt-3">--}}
-{{--                                        <i class="far fa-newspaper pub-pic"></i>--}}
-{{--                                        <div class="pub-body">--}}
-{{--                                            <h6>رقم الهوية</h6>--}}
-{{--                                            <p class="ub-font">{{ $store->identity }}</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="pub-mzad mt-3">--}}
-{{--                                        <i class="fas fa-bolt pub-pic"></i>--}}
-{{--                                        <div class="pub-body">--}}
-{{--                                            <h6>الحالة</h6>--}}
-{{--                                            <p class="ub-font">{{ $store->status }}</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                {{--                <div class="row w-100">--}}
+                {{--                    <div class="col-md-4">--}}
+                {{--                        <div class="my-pic">--}}
+                {{--                            <img class="img-fluid" src="{{ asset('frontend/img/my-pic.png') }}">--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                    @if($store)--}}
+                {{--                        <div class="my-contact col-md-8">--}}
+                {{--                            <p class="store-n mb-3">{{ $store->name }}</p>--}}
+                {{--                            <div class="row">--}}
+                {{--                                <div class="col-md-6">--}}
+                {{--                                    <div class="pub-mzad mt-3">--}}
+                {{--                                        <i class="fas fa-phone pub-pic"></i>--}}
+                {{--                                        <div class="pub-body">--}}
+                {{--                                            <h6>رقم الجوال</h6>--}}
+                {{--                                            <p>{{ $store->phone_number }}</p>--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+                {{--                                    <div class="pub-mzad mt-3">--}}
+                {{--                                        <i class="fas fa-envelope-open pub-pic"></i>--}}
+                {{--                                        <div class="pub-body">--}}
+                {{--                                            <h6>البريد الالكتروني</h6>--}}
+                {{--                                            <p class="ub-font">{{ $store->email }}</p>--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+                {{--                                </div>--}}
+                {{--                                <div class="col-md-6">--}}
+                {{--                                    <div class="pub-mzad mt-3">--}}
+                {{--                                        <i class="far fa-newspaper pub-pic"></i>--}}
+                {{--                                        <div class="pub-body">--}}
+                {{--                                            <h6>رقم الهوية</h6>--}}
+                {{--                                            <p class="ub-font">{{ $store->identity }}</p>--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+                {{--                                    <div class="pub-mzad mt-3">--}}
+                {{--                                        <i class="fas fa-bolt pub-pic"></i>--}}
+                {{--                                        <div class="pub-body">--}}
+                {{--                                            <h6>الحالة</h6>--}}
+                {{--                                            <p class="ub-font">{{ $store->status }}</p>--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+                {{--                                </div>--}}
 
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-{{--                </div>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    @endif--}}
+                {{--                </div>--}}
             </div>
         </div>
     </section>
-    <!--EndAboutme-->
-    <section class="my-product">
+
+    <section class="all-product">
         <div class="container">
             <div class="sort-product">
+                {!! Form::open(['route' => 'frontend.auctions.index','method' => 'GET', 'files' => false, 'id' => 'search-form']) !!}
                 <div class="row">
-                    <!--sort-01-->
-                    <div class="col-md d-flex px-0 mt-2">
+                    <div class="col-lg-4 d-flex px-0 mt-2">
                         <select name="type" class="form-control">
+                            <option value="">اختار النوع</option>
                             @foreach($types as $type)
-                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                <option value="{{ $type->id }}" {{ (( old('type') ?? request()->type ) == $type->id ) ? 'selected' : '' }}>{{ $type->name }}</option>
                             @endforeach
                         </select>
-
                         <select name="category" class="form-control">
+                            <option value="">اختار القسم</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ (( old('category') ?? request()->category ) == $category->id ) ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                         <a href="#" class="valid"><i class="fas fa-arrow-left"></i></a>
                     </div>
-                    <!--sort-02-->
-                    <!--sort-03-->
-                    <div class="col-md  d-flex px-0 mt-2 serch-w">
-                        <input type="text" value="" class="form-control" placeholder="البحث">
-                        <a href="#" class="valid"><i class="fas fa-search"></i></a>
-                        <a href="#" class="valid"><i class="fas fa-filter"></i></a>
+                    <div class="col-lg-4 d-flex px-0 mt-2">
+                        <div class="date-f">
+                            <input type="date" class="form-control" name="start_date" placeholder="اتاريخ الوثيقة" value="{{ old('name') ?? request()->start_date ?? date('Y-m-d') }}">
+                        </div>
+                        <div class="date-f">
+                            <input type="date" class="form-control" name="end_date" placeholder="اتاريخ الوثيقة" value="{{ old('name') ?? request()->end_date ?? date('Y-m-d') }}">
+                        </div>
+                        <a href="#" class="valid"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="col-lg-4  d-flex px-0 mt-2 serch-w">
+                        <input type="text" value="{{ old('name') ?? request()->name }}" class="form-control" placeholder="البحث">
+                        <a href="#" class="valid ml-1" onclick="document.getElementById('search-form').submit()"><i class="fas fa-search"></i></a>
                     </div>
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
+    </section>
+    <section class="my-product">
         <div class="container">
             @foreach($auctions as $auction)
                 <div class="new-mzad bord my-3">

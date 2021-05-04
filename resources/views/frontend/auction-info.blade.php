@@ -12,13 +12,18 @@
         <div class="product-details">
             <div class="tab-title">
                 <ul class="nav nav-tabs nav-detail">
-                    <li><a href="#detail" class="tabs__trigger {{ request()->has('page') ? '' : 'active' }}" role="tab" data-toggle="tab"> تفاصيل المزاد </a>
+                    <li>
+                        <a href="#detail" class="tabs__trigger {{ request()->has('page') ? '' : 'active' }}" role="tab" data-toggle="tab"> تفاصيل المزاد </a>
                     </li>
-                    <li><a href="#comment" class="tabs__trigger {{ request()->has('page') ? 'active' : '' }}" role="tab" data-toggle="tab">
-                            التعليقات</a>
+                    <li>
+                        <a href="#comment" class="tabs__trigger {{ request()->has('page') ? 'active' : '' }}" role="tab" data-toggle="tab">
+                            التعليقات
+                        </a>
                     </li>
-                    <li><a href="#date" class="tabs__trigger" role="tab" data-toggle="tab">
-                            تاريخ المزايدة</a>
+                    <li>
+                        <a href="#date" class="tabs__trigger" role="tab" data-toggle="tab">
+                            تاريخ المزايدة
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -77,14 +82,20 @@
                                     <p class="det-name">@lang('app.Lowest bid price')</p>
                                     <p class="det-type"><span class="ub-font">{{ $auction->highest_price }}</span> @lang('app.currency')</p>
                                 </div>
+                                @if($auction->is_sold)
+                                    <div class="add-det">
+                                        <p class="det-name">بيع بملغ</p>
+                                        <p class="det-type"><span class="ub-font">{{ $auction->sale_amount }}</span> @lang('app.currency')</p>
+                                    </div>
+                                @endif
                                 @auth('user')
                                     <div class="add-det ">
                                         <p class="det-name">@lang('app.available balance')</p>
-                                        <p class="det-type"><span class="ub-font">{{ auth('user')->user()->balance }}</span></p>
+                                        <p class="det-type"><span class="ub-font">{{ auth('user')->user()->actual_balance }}</span></p>
                                     </div>
                                 @endif
                             </div><!--detail-name-->
-                            @if(!$auction->isExpired)
+                            @if(!$auction->isExpired && !$auction->is_sold)
                                 @if(auth('user')->check())
                                     <div class="detail-name mt-3">
                                         {!! Form::open(['route' => 'frontend.auctions.store', 'id' => 'bid-form']) !!}
@@ -97,8 +108,24 @@
                                         <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
                                         {!! Form::close() !!}
                                     </div>
+                                    @if($auction->purchase_price)
+                                        <div class="detail-name mt-3">
+                                            {!! Form::open(['route' => 'frontend.auctions.buyNow', 'id' => 'buyNow-form']) !!}
+                                            {!! Form::hidden('auction_id',$auction->id) !!}
+                                            <div class="add-icon">
+                                                <p class="det-name det-icon">+</p>
+                                                <input type="number" name="purchase_price" class="input-num" min="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}" value="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}">
+                                                <p class="det-name det-icon01">-</p>
+                                            </div>
+                                            <button type="submit" class="btn btn-show w-100 mt-3">اشتري الان</button>
+                                            {!! Form::close() !!}
+                                        </div>
+                                    @endif
                                 @else
                                     <button type="submit" class="btn btn-show w-100 mt-3" onclick="location.href='{{ route('login') }}'">@lang('app.Add bid')</button>
+                                    @if($auction->purchase_price)
+                                        <button type="submit" class="btn btn-show w-100 mt-3" onclick="location.href='{{ route('login') }}'">اشتري الان</button>
+                                    @endif
                                 @endif
                             @endif
                         </div>
