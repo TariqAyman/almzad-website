@@ -50,38 +50,41 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable, LogsActivity, ThrottlesLogins;
 
     use HasFactory;
-	use SoftDeletes;
-	protected $table = 'users';
+    use SoftDeletes;
 
-	protected $casts = [
-		'status' => 'bool'
-	];
+    protected $table = 'users';
 
-	protected $dates = [
-		'email_verified_at'
-	];
+    protected $casts = [
+        'status' => 'bool'
+    ];
 
-	protected $hidden = [
-		'password',
-		'remember_token'
-	];
+    protected $dates = [
+        'email_verified_at'
+    ];
 
-	protected $fillable = [
-		'first_name',
-		'last_name',
-		'username',
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
+
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'username',
         'address',
-		'email',
-		'phone_number',
-		'profile_photo',
-		'email_verified_at',
-		'password',
-		'status',
-		'remember_token'
-	];
+        'email',
+        'phone_number',
+        'profile_photo',
+        'email_verified_at',
+        'password',
+        'status',
+        'remember_token'
+    ];
 
-	protected $appends = [
-	    'name'
+    protected $appends = [
+        'name',
+        'available_balance',
+        'actual_balance',
     ];
 
 
@@ -98,32 +101,32 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
-	public function auctions()
-	{
-		return $this->belongsToMany(Auction::class, 'auctions_users')
-					->withPivot('id', 'price', 'deleted_at')
-					->withTimestamps();
-	}
+    public function auctions()
+    {
+        return $this->belongsToMany(Auction::class, 'auctions_users')
+            ->withPivot('id', 'price', 'deleted_at')
+            ->withTimestamps();
+    }
 
-	public function contact_us()
-	{
-		return $this->hasMany(ContactU::class);
-	}
+    public function contact_us()
+    {
+        return $this->hasMany(ContactU::class);
+    }
 
-	public function reviews()
-	{
-		return $this->hasMany(Review::class);
-	}
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
-	public function stores()
-	{
-		return $this->hasMany(Store::class);
-	}
+    public function stores()
+    {
+        return $this->hasMany(Store::class);
+    }
 
-	public function wallets()
-	{
-		return $this->hasMany(Wallet::class);
-	}
+    public function wallets()
+    {
+        return $this->hasMany(Wallet::class);
+    }
 
     public function getNameAttribute()
     {
@@ -138,5 +141,22 @@ class User extends Authenticatable implements MustVerifyEmail
     public function store()
     {
         return $this->hasOne(Store::class);
+    }
+
+    public function getAvailableBalanceAttribute()
+    {
+        $in = $this->wallets()->sum('in');
+        $out = $this->wallets()->sum('out');
+
+        return ($in - $out);
+    }
+
+    public function getActualBalanceAttribute()
+    {
+        $in = $this->wallets()->sum('in');
+        $out = $this->wallets()->sum('out');
+        $hold = $this->wallets()->sum('hold');
+
+        return (($in - $out) - $hold);
     }
 }

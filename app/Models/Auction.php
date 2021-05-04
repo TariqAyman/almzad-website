@@ -58,12 +58,13 @@ class Auction extends Model
     protected $table = 'auctions';
 
     use LogsActivity;
+
     protected static $logFillable = true;
     protected static $logName = 'auctions';
     protected static $logOnlyDirty = true;
 
     protected $casts = [
-//        'currency_id' => 'int',
+        //        'currency_id' => 'int',
         'type_id' => 'int',
         'category_id' => 'int',
         'user_id' => 'int',
@@ -72,7 +73,8 @@ class Auction extends Model
         'purchase_price' => 'int',
         'shipping' => 'bool',
         'shipping_free' => 'bool',
-        'multi_auction' => 'bool'
+        'multi_auction' => 'bool',
+        'sale_amount' => 'float'
     ];
 
     protected $dates = [
@@ -81,7 +83,7 @@ class Auction extends Model
     ];
 
     protected $fillable = [
-//        'currency_id',
+        //        'currency_id',
         'type_id',
         'category_id',
         'user_id',
@@ -101,6 +103,10 @@ class Auction extends Model
         'shipping',
         'shipping_free',
         'multi_auction',
+        'last_bid',
+        'is_sold',
+        'sold_to',
+        'sale_amount'
     ];
 
     protected $appends = [
@@ -142,6 +148,11 @@ class Auction extends Model
     public function auctionsUsers()
     {
         return $this->hasMany(AuctionsUser::class)->latest();
+    }
+
+    public function lastBid()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function users()
@@ -222,6 +233,6 @@ class Auction extends Model
     {
         if ($this->attributes['multi_auction']) return true;
 
-        return !$this->auctionsUsers()->where('user_id',auth('user')->user()->id)->exists();
+        return !$this->auctionsUsers()->where('user_id', auth('user')->user()->id)->exists();
     }
 }

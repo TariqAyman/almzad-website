@@ -34,27 +34,30 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Wallet extends Model
 {
     use HasFactory;
-	protected $table = 'wallets';
 
-	protected $casts = [
-		'user_id' => 'int',
-		'auction_id' => 'int',
-//		'currency_id' => 'int',
-		'in' => 'int',
-		'out' => 'int',
-		'hold' => 'int',
-		'balance' => 'int'
-	];
+    protected $table = 'wallets';
 
-	protected $fillable = [
-		'user_id',
-		'auction_id',
-//		'currency_id',
-		'in',
-		'out',
-		'hold',
-		'balance'
-	];
+    protected $casts = [
+        'user_id' => 'int',
+        'auction_id' => 'int',
+        //		'currency_id' => 'int',
+        'in' => 'float',
+        'out' => 'float',
+        'hold' => 'float',
+        'balance' => 'float',
+    ];
+
+    protected $fillable = [
+        'user_id',
+        'auction_id',
+        //		'currency_id',
+        'in',
+        'out',
+        'hold',
+        'balance',
+        'note',
+        'type'
+    ];
 
 
     use LogsActivity;
@@ -64,17 +67,17 @@ class Wallet extends Model
     protected static $logOnlyDirty = true;
 
     public function auction()
-	{
-		return $this->belongsTo(Auction::class);
-	}
+    {
+        return $this->belongsTo(Auction::class);
+    }
 
 //	public function currency()
 //	{
 //		return $this->belongsTo(Currency::class);
 //	}
 
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
