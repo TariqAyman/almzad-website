@@ -5,45 +5,22 @@
     <section class="mzadhead slider">
         <div id="mzadslider" class="carousel container" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#mzadslider" data-slide-to="0" class="active"><span></span></li>
-                <li data-target="#mzadslider" data-slide-to="1"><span></span></li>
-                <li data-target="#mzadslider" data-slide-to="2"><span></span></li>
+                @foreach($sliders as $key => $slider)
+                    <li data-target="#mzadslider" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : ''}}"><span></span></li>
+                @endforeach
             </ol>
             <div class="carousel-inner">
-                <!--carousel-item-01-->
-                <div class="carousel-item active">
-                    <div class="mzadbox">
-                        <h1 class="animate__animated animate__fadeInDown del-1">هنا عنوان <span>المزاد الخيري </span></h1>
-                        <h2 class="animate__animated animate__fadeInDown del-2">تعريف بسيط عن المزاد</h2>
-                        <h2 class="animate__animated animate__fadeInDown del-3">تعريف بسيط عن المزاد</h2>
-                        <p class="animate__animated animate__fadeInDown del-4">تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد
-                            تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد </p>
-                        <button class="btn btn-login animate__animated animate__fadeInDown del-5">اذهب إلى المزاد</button>
+                @foreach($sliders as $key => $slider)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : ''}}">
+                        <div class="mzadbox">
+                            <h1 class="animate__animated animate__fadeInDown del-1"><span>{{ $slider->title }} </span></h1>
+                            <h2 class="animate__animated animate__fadeInDown del-2">{{ $slider->sub_title }}</h2>
+                            <p class="animate__animated animate__fadeInDown del-4">
+                                {{ $slider->description }}
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <!--carousel-item-02-->
-                <div class="carousel-item">
-                    <div class="mzadbox">
-                        <h1 class="animate__animated animate__fadeInDown del-1">هنا عنوان <span>المزاد الخيري </span></h1>
-                        <h2 class="animate__animated animate__fadeInDown del-2">تعريف بسيط عن المزاد</h2>
-                        <h2 class="animate__animated animate__fadeInDown del-3">تعريف بسيط عن المزاد</h2>
-                        <p class="animate__animated animate__fadeInDown del-4">تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد
-                            تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد </p>
-                        <button class="btn btn-login animate__animated animate__fadeInDown del-5">اذهب إلى المزاد</button>
-                    </div>
-                </div>
-                <!--carousel-item-03-->
-                <div class="carousel-item">
-                    <div class="mzadbox">
-                        <h1 class="animate__animated animate__fadeInDown del-1">هنا عنوان <span>المزاد الخيري </span></h1>
-                        <h2 class="animate__animated animate__fadeInDown del-2">تعريف بسيط عن المزاد</h2>
-                        <h2 class="animate__animated animate__fadeInDown del-3">تعريف بسيط عن المزاد</h2>
-                        <p class="animate__animated animate__fadeInDown del-4">تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد
-                            تعريف بسيط عن المزاد تعريف بسيط عن المزاد تعريف بسيط عن المزاد </p>
-                        <button class="btn btn-login animate__animated animate__fadeInDown del-5">اذهب إلى المزاد</button>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
@@ -120,36 +97,36 @@
     <!--EndnewMzad-->
     <br>
     <!--StartClint-->
-{{--    <section class="clints">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="bigtit">--}}
-{{--                    <div class="tit-box">--}}
-{{--                        <img class="img-fluid" src="{{ asset('frontend/img/clinticon.png') }}" alt="@lang('app.customer_review')">--}}
-{{--                        <h5>@lang('app.customer_review')</h5>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <!--clint-01-->--}}
-{{--                <div class="owl-clints owl-carousel">--}}
-{{--                    @foreach($reviews as $review)--}}
-{{--                        <div class="item">--}}
-{{--                            <div class="clint-box">--}}
-{{--                                <i class="fas fa-quote-right"></i>--}}
-{{--                                <p>--}}
-{{--                                    {{ $review->note }}--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-{{--                            <div class="clint-name">--}}
-{{--                                <div><img class="img-fluid" src="{{ $review->user->profile_photo }}" alt="{{ $review->user->profile_photo }}"></div>--}}
-{{--                                <div class="pub-body">--}}
-{{--                                    <h6>{{ $review->user->name }}</h6>--}}
-{{--                                    <p>مصمم جرافيك </p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+    {{--    <section class="clints">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="row">--}}
+    {{--                <div class="bigtit">--}}
+    {{--                    <div class="tit-box">--}}
+    {{--                        <img class="img-fluid" src="{{ asset('frontend/img/clinticon.png') }}" alt="@lang('app.customer_review')">--}}
+    {{--                        <h5>@lang('app.customer_review')</h5>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--                <!--clint-01-->--}}
+    {{--                <div class="owl-clints owl-carousel">--}}
+    {{--                    @foreach($reviews as $review)--}}
+    {{--                        <div class="item">--}}
+    {{--                            <div class="clint-box">--}}
+    {{--                                <i class="fas fa-quote-right"></i>--}}
+    {{--                                <p>--}}
+    {{--                                    {{ $review->note }}--}}
+    {{--                                </p>--}}
+    {{--                            </div>--}}
+    {{--                            <div class="clint-name">--}}
+    {{--                                <div><img class="img-fluid" src="{{ $review->user->profile_photo }}" alt="{{ $review->user->profile_photo }}"></div>--}}
+    {{--                                <div class="pub-body">--}}
+    {{--                                    <h6>{{ $review->user->name }}</h6>--}}
+    {{--                                    <p>مصمم جرافيك </p>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    @endforeach--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </section>--}}
 @endsection

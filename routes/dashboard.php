@@ -45,6 +45,10 @@ Route::group(['middleware' => ['auth:admin', 'verified'], 'prefix' => 'admin', '
     Route::get('category-getDatatable', 'CategoryController@getDatatable')->name('category.getDatatable');
     Route::post('category/destroy', ['as' => 'category.destroy', 'uses' => 'CategoryController@destroy']);
 
+    Route::resource('slider', 'SliderController')->except('show');
+    Route::get('slider-getDatatable', 'SliderController@getDatatable')->name('slider.getDatatable');
+    Route::post('slider/destroy', ['as' => 'slider.destroy', 'uses' => 'SliderController@destroy']);
+
     Route::resource('type', 'TypeController')->except('show');
     Route::get('type-getDatatable', 'TypeController@getDatatable')->name('type.getDatatable');
     Route::post('type/destroy', ['as' => 'type.destroy', 'uses' => 'TypeController@destroy']);

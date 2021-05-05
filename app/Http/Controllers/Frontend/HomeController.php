@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Auction;
 use App\Models\Review;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,13 +17,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $latest_auctions = Auction::latest()->limit(6)->get();
+        $latest_auctions = Auction::where('status', 1)->latest()->limit(6)->get();
 
         $auctions = Auction::limit(6)->get();
 
         $reviews = Review::query()->where('status', 1)->limit(15)->get();
 
-        return view('frontend.index', compact('latest_auctions', 'auctions', 'reviews'));
+        $sliders = Slider::query()->where('status', 1)->get();
+
+        return view('frontend.index', compact('latest_auctions', 'auctions', 'reviews','sliders'));
     }
 
     /**
