@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.contentLayoutMaster')
 
-@section('page-title', 'Dashboard')
-@section('page-header', 'Dashboard')
+@section('page-title', trans('app.Dashboard'))
+@section('page-header', trans('app.Dashboard'))
 
 @section('content')
 
@@ -12,8 +12,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Total traffic</h5>
-                            <span class="h2 font-weight-bold mb-0">350,897</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.users.new')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['users']['new'] }}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -21,10 +21,6 @@
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-sm">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span class="text-nowrap">Since last month</span>
-                    </p>
                 </div>
             </div>
         </div>
@@ -34,8 +30,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                            <span class="h2 font-weight-bold mb-0">2,356</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.users.active')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['users']['active'] }}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -43,10 +39,6 @@
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-sm">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span class="text-nowrap">Since last month</span>
-                    </p>
                 </div>
             </div>
         </div>
@@ -56,8 +48,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-                            <span class="h2 font-weight-bold mb-0">924</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.users.banned')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['users']['banned'] }}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -65,10 +57,6 @@
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-sm">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span class="text-nowrap">Since last month</span>
-                    </p>
                 </div>
             </div>
         </div>
@@ -78,8 +66,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                            <span class="h2 font-weight-bold mb-0">49,65%</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.auction.new')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['auction']['new'] }}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -87,239 +75,202 @@
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-sm">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span class="text-nowrap">Since last month</span>
-                    </p>
                 </div>
             </div>
         </div>
+
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.auction.active')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['auction']['active'] }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                <i class="ni ni-chart-bar-32"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.auction.banned')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['auction']['banned'] }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                <i class="ni ni-chart-bar-32"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.auction.expired')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['auction']['expired'] }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                <i class="ni ni-chart-bar-32"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.auction.notExpired')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['auction']['notExpired'] }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                <i class="ni ni-chart-bar-32"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.auction.new_bids')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['auction']['new_bids'] }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                <i class="ni ni-chart-bar-32"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">@lang('app.stats.auction.bids')</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $stats['auction']['bids'] }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                <i class="ni ni-chart-bar-32"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-
-
-    {{-- ============= --}}
-
 
     <div class="row">
-        <div class="col-xl-8">
+        <div class="col-xl-12 col-12">
             <div class="card">
-                <div class="card-header border-0">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h3 class="mb-0">Page visits</h3>
-                        </div>
-                        <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                        </div>
+                <div class="card-header d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+                    <div class="header-left">
+                        <h4 class="card-title">@lang('app.users_history')</h4>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Page name</th>
-                            <th scope="col">Visitors</th>
-                            <th scope="col">Unique users</th>
-                            <th scope="col">Bounce rate</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">
-                                /dashboard/
-                            </th>
-                            <td>
-                                4,569
-                            </td>
-                            <td>
-                                340
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                /dashboard/index.html
-                            </th>
-                            <td>
-                                3,985
-                            </td>
-                            <td>
-                                319
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                /dashboard/charts.html
-                            </th>
-                            <td>
-                                3,513
-                            </td>
-                            <td>
-                                294
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                /dashboard/tables.html
-                            </th>
-                            <td>
-                                2,050
-                            </td>
-                            <td>
-                                147
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                /dashboard/profile.html
-                            </th>
-                            <td>
-                                1,795
-                            </td>
-                            <td>
-                                190
-                            </td>
-                            <td>
-                                <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4">
-            <div class="card">
-                <div class="card-header border-0">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h3 class="mb-0">Social traffic</h3>
-                        </div>
-                        <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Referral</th>
-                            <th scope="col">Visitors</th>
-                            <th scope="col"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">
-                                Facebook
-                            </th>
-                            <td>
-                                1,480
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="mr-2">60%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                Facebook
-                            </th>
-                            <td>
-                                5,480
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="mr-2">70%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                Google
-                            </th>
-                            <td>
-                                4,807
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="mr-2">80%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                Instagram
-                            </th>
-                            <td>
-                                3,678
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="mr-2">75%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                twitter
-                            </th>
-                            <td>
-                                2,645
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="mr-2">30%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="card-body">
+                        {!! $userChart->container() !!}
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-xl-12 col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+                    <div class="header-left">
+                        <h4 class="card-title">@lang('app.auction_history')</h4>
+                    </div>
+                </div>
+                <div class="card-body">
 
+                        {!! $auctionsChart->container() !!}
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-xl-12 col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+                    <div class="header-left">
+                        <h4 class="card-title">@lang('app.bid_history')</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    {!! $auctionsUserChart->container() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+                    <div class="header-left">
+                        <h4 class="card-title">@lang('app.transaction_history')</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                        {!! $transactionChart->container() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('vendor-style')
+    <!-- vendor css files -->
+    <link rel="stylesheet" href="{{ asset(mix('dashboard/vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
+@endsection
+
+@section('page-style')
+    <link rel="stylesheet" href="{{ asset(mix('dashboard/css/base/plugins/forms/pickers/form-flat-pickr.css')) }}">
+@endsection
+@section('vendor-script')
+    <!-- vendor files -->
+    <script src="{{ asset(mix('dashboard/vendors/js/charts/chart.min.js')) }}"></script>
+    <script src="{{ asset(mix('dashboard/vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
+@endsection
+@section('page-script')
+    {!! $userChart->script() !!}
+    {!! $auctionsChart->script() !!}
+    {!! $transactionChart->script() !!}
+    {!! $auctionsUserChart->script() !!}
 @endsection

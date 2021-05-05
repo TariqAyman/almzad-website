@@ -86,6 +86,28 @@
                 </li>
             @endcan
 
+            @canany(['view-auction', 'create-auction'])
+                <li class="nav-item {{ Route::is('admin.auction.*') ? 'active' : '' }} ">
+                    <a href="{{ route('admin.auction.index') }}" class="d-flex align-items-center" target="_self">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span class="menu-title text-truncate">@lang('app.auctions')</span>
+                    </a>
+                </li>
+            @endcan
+
+            @canany(['view-user', 'create-user'])
+                <li class="nav-item {{ Route::is('admin.user.*') ? 'active' : '' }} ">
+                    <a href="{{ route('admin.user.index') }}" class="d-flex align-items-center" target="_self">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span class="menu-title text-truncate">@lang('app.users')</span>
+                    </a>
+                </li>
+            @endcan
+
             <li class="navigation-header">
                 <span>@lang('app.Administer')</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal">
