@@ -9,7 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
         "anlutro/l4-settings": "^1.0",
+        "askedio/laravel-soft-cascade": "^8.1",
+        "consoletvs/charts": "^6.5.5",
         "facade/ignition": "^2.3.6",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -22,12 +27,8 @@
         "laravelcollective/html": "^6.2",
         "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-permission": "^4.0",
-        "askedio/laravel-soft-cascade": "^8.1",
         "unisharp/laravel-filemanager": "^2.2",
-        "yajra/laravel-datatables-oracle": "^9.18",
-        "ext-openssl": "*",
-        "ext-curl": "*",
-        "ext-json": "*"
+        "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
