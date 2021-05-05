@@ -27,6 +27,10 @@ Route::group(['middleware' => ['auth:admin', 'verified'], 'prefix' => 'admin', '
     Route::get('admins-getDatatable', 'AdminController@getDatatable')->name('admins.getDatatable');
     Route::post('admins/destroy', ['as' => 'admins.destroy', 'uses' => 'AdminController@destroy']);
 
+    Route::resource('user', 'UserController');
+    Route::get('user-getDatatable', 'UserController@getDatatable')->name('user.getDatatable');
+    Route::post('user/destroy', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
+
     Route::get('/profile', 'ProfileController@profile')->name('profile.edit');
     Route::post('/profile', 'ProfileController@profileUpdate')->name('profile.update');
 
@@ -44,6 +48,12 @@ Route::group(['middleware' => ['auth:admin', 'verified'], 'prefix' => 'admin', '
     Route::resource('type', 'TypeController')->except('show');
     Route::get('type-getDatatable', 'TypeController@getDatatable')->name('type.getDatatable');
     Route::post('type/destroy', ['as' => 'type.destroy', 'uses' => 'TypeController@destroy']);
+
+    Route::resource('auction', 'AuctionController')->except('show');
+    Route::get('auction-getDatatable', 'AuctionController@getDatatable')->name('auction.getDatatable');
+    Route::post('auction/destroy', ['as' => 'auction.destroy', 'uses' => 'AuctionController@destroy']);
+    Route::delete('auction/{id}/remove-image/{imageId}', 'AuctionController@removeImage')->name('auction.remove-image');
+    Route::post('comments/changeStatus', ['as' => 'comments.changeStatus', 'uses' => 'AuctionController@commentChangeStatus']);
 
     Route::get('/activity-log', 'ActivitylogController@index')->name('activity-log.index');
     Route::get('activity-log-getDatatable', 'ActivitylogController@getDatatable')->name('activity-log.getDatatable');
