@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Created by GenCode.
-*/
+ * Created by GenCode.
+ */
 
 namespace App\Http\Requests\Auction;
 
@@ -32,7 +32,7 @@ class AuctionUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-//            'currency_id' => 'required|numeric|integer',
+            //            'currency_id' => 'required|numeric|integer',
             'type_id' => 'required|numeric|integer',
             'category_id' => 'required|numeric|integer',
             'user_id' => 'required|numeric|integer',
@@ -40,15 +40,18 @@ class AuctionUpdateRequest extends FormRequest
             'name_en' => 'required|string',
             'description_ar' => 'required|string',
             'description_en' => 'required|string',
-            'slug_ar' => 'required|string',
-            'slug_en' => 'required|string',
-            'status' => 'required|boolean',
+            'conditions_ar' => 'required|string',
+            'conditions_en' => 'required|string',
+            'shipping_conditions_ar' => 'required|string',
+            'shipping_conditions_en' => 'required|string',
             'start_from' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'shipping' => 'required|boolean',
             'shipping_free' => 'required|boolean',
             'multi_auction' => 'required|boolean',
+            'images' => 'required|array',
+            'images.*' => 'image'
         ];
     }
 
