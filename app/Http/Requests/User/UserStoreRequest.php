@@ -36,13 +36,11 @@ class UserStoreRequest extends FormRequest
             'last_name' => 'required|string',
             'username' => 'required|string',
             'address' =>  'required|string',
-            'email' => 'required|string',
-            'phone_number' => 'required|string',
-            'profile_photo' => 'required|string',
-            'email_verified_at' => 'required|date',
+            'email' => 'required|string|email',
+            'phone_number' => 'required|string|unique:admins,phone_number',
+            'profile_photo' => 'required|image',
             'password' => 'required|string',
             'status' => 'required|boolean',
-            'remember_token' => 'required|string',
         ];
     }
 
