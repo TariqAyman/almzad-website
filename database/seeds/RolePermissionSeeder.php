@@ -21,10 +21,22 @@ class RolePermissionSeeder extends Seeder
         // create permissions
         $permissions = [
             'update-settings',
+
             'view-admin',
             'create-admin',
             'update-admin',
             'destroy-admin',
+
+            'view-user',
+            'create-user',
+            'update-user',
+            'destroy-user',
+
+            'view-type',
+            'create-type',
+            'update-type',
+            'destroy-type',
+
             'view-role',
             'view-permission',
             'create-role',
@@ -33,7 +45,9 @@ class RolePermissionSeeder extends Seeder
             'update-permission',
             'destroy-role',
             'destroy-permission',
+
             'view-activity-log',
+
             'view-category',
             'create-category',
             'update-category',
