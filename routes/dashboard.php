@@ -53,6 +53,15 @@ Route::group(['middleware' => ['auth:admin', 'verified'], 'prefix' => 'admin', '
     Route::get('type-getDatatable', 'TypeController@getDatatable')->name('type.getDatatable');
     Route::post('type/destroy', ['as' => 'type.destroy', 'uses' => 'TypeController@destroy']);
 
+    Route::resource('wallet', 'WalletController')->except('show');
+    Route::get('wallet-getDatatable', 'WalletController@getDatatable')->name('wallet.getDatatable');
+
+    Route::resource('transaction', 'TransactionController')->except('show');
+    Route::get('transaction-getDatatable', 'TransactionController@getDatatable')->name('transaction.getDatatable');
+
+    Route::get('contactus', 'ContactUsController@index')->name('contactus');
+    Route::get('contactus-getDatatable', 'ContactUsController@getDatatable')->name('contactus.getDatatable');
+
     Route::resource('auction', 'AuctionController')->except('show');
     Route::get('auction-getDatatable', 'AuctionController@getDatatable')->name('auction.getDatatable');
     Route::post('auction/destroy', ['as' => 'auction.destroy', 'uses' => 'AuctionController@destroy']);
