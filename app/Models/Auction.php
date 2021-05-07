@@ -93,6 +93,8 @@ class Auction extends Model
         'description_en',
         'conditions_ar',
         'conditions_en',
+        'shipping_conditions_en',
+        'shipping_conditions_ar',
         'slug_ar',
         'slug_en',
         'status',

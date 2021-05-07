@@ -8,7 +8,7 @@
         <div class="col-md-12">
             {{ Form::open(['route' => 'admin.settings.update', 'files'=>true])}}
             <div class="card mb-5">
-                <div class="card-header bg-transparent"><h3 class="mb-0">General Settings</h3></div>
+                <div class="card-header bg-transparent"><h3 class="mb-0">@lang('app.General Settings')</h3></div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-6">
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="card mb-5">
-                <div class="card-header bg-transparent"><h3 class="mb-0">Social Media Settings</h3></div>
+                <div class="card-header bg-transparent"><h3 class="mb-0">@lang('app.Social Media Settings')</h3></div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-6">
@@ -108,31 +108,47 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card mb-5">
+                <div class="card-header bg-transparent"><h3 class="mb-0">اعدادت المزادات</h3></div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('hold_balance_wallet', trans('app.hold_balance_wallet'), ['class' => 'form-control-label'])}}
+                                {{ Form::number('hold_balance_wallet', setting('hold_balance_wallet'), ['class'=>"form-control"])}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <div class="card mb-5">
                 <div class="card-header bg-transparent"><h3 class="mb-0">اكتشف الروابط</h3></div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{Form::label('url_1', 'url_1', ['class' => 'form-control-label'])}}
-                                {{ Form::text('url_1_text', setting('url_1_text'), ['class'=>"form-control"])}}
-                                {{ Form::url('url_1', setting('url_1'), ['class'=>"form-control"])}}
+                                {{Form::label('url_1', trans('app.url_1'), ['class' => 'form-control-label'])}}
+                                {{ Form::text('url_1_text', setting('url_1_text'), ['class'=>"form-control",'placeholder' => trans('app.url_1_text')])}}
+                                {{ Form::url('url_1', setting('url_1'), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{Form::label('url_2', 'url_2', ['class' => 'form-control-label'])}}
-                                {{ Form::text('url_2_text', setting('url_2_text'), ['class'=>"form-control"])}}
-                                {{ Form::url('url_2', setting('url_2'), ['class'=>"form-control"])}}
+                                {{Form::label('url_2', trans('app.url_2'), ['class' => 'form-control-label'])}}
+                                {{ Form::text('url_2_text', setting('url_2_text'), ['class'=>"form-control",'placeholder' => trans('app.url_2_text')])}}
+                                {{ Form::url('url_2', setting('url_2'), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{Form::label('url_3', 'url_3', ['class' => 'form-control-label'])}}
-                                {{ Form::text('url_3_text', setting('url_3_text'), ['class'=>"form-control"])}}
-                                {{ Form::url('url_3', setting('url_3'), ['class'=>"form-control"])}}
+                                {{Form::label('url_3', trans('app.url_3'), ['class' => 'form-control-label'])}}
+                                {{ Form::text('url_3_text', setting('url_3_text'), ['class'=>"form-control",'placeholder' => trans('app.url_3_text')])}}
+                                {{ Form::url('url_3', setting('url_3'), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
                             </div>
                         </div>
                     </div>
@@ -140,7 +156,7 @@
             </div>
 
             <div class="card mb-5">
-                <div class="card-header bg-transparent"><h4 class="mb-0">Display Settings</h4></div>
+                <div class="card-header bg-transparent"><h4 class="mb-0">@lang('app.Display Settings')</h4></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -166,7 +182,7 @@
                 </div>
             </div>
             <div class="card mb-5">
-                <div class="card-header bg-transparent"><h4 class="mb-0">Other Settings</h4></div>
+                <div class="card-header bg-transparent"><h4 class="mb-0">@lang('app.Other Settings')</h4></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">

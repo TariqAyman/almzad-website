@@ -24,7 +24,7 @@ class TypeFactory extends Factory
         return [
             'name_ar' => $this->faker->word,
             'name_en' => $this->faker->word,
-            'status' => $this->faker->boolean
+            'status' => true
         ];
     }
 }

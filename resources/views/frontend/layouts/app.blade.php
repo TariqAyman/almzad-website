@@ -1,4 +1,4 @@
-<html dir="rlt" lang="ar">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -37,24 +37,24 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a href="javascript:void(0)" class="closebtn fas fa-times "></a>
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
+                            <li class="nav-item {{ Route::is('frontend.home') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('/') }}">@lang('app.home') <span class="sr-only">(current)</span></a>
                             </li>
                             {{--                            <li class="nav-item">--}}
                             {{--                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_store')</a>--}}
                             {{--                            </li>--}}
                             @auth('user')
-                                <li class="nav-item">
+                                <li class="nav-item {{ Route::is('frontend.user.store') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_auctions')</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item {{ Route::is('frontend.wallet.index') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('frontend.wallet.index') }}">@lang('app.wallet')</a>
                                 </li>
                             @endif
-                            <li class="nav-item">
+                            <li class="nav-item {{ Route::is('frontend.auctions.index') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('frontend.auctions.index') }}">@lang('app.auctions')</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ Route::is('frontend.contact-us.index') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('frontend.contact-us.index') }}">@lang('app.content_us')</a>
                             </li>
                             <li class="nav-item sid-log">
@@ -229,9 +229,7 @@
 
 <script>
     $(document).ready(function () {
-        $('.error-modal').modal({
-            show: true
-        });
+        $('.error-modal').modal('show');
     });
 </script>
 @yield('page-script')

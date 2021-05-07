@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -63,7 +64,7 @@ class LoginController extends Controller
         return view('frontend.user.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
@@ -73,20 +74,20 @@ class LoginController extends Controller
 
         $credentials = $request->only('phone_number', 'password');
 
-        $user = User::where('phone_number',$request->phone_number)->first();
+        $user = User::where('phone_number', $request->phone_number)->first();
 
         if ($user && Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']], $request->remember)) {
             $userStatus = Auth::guard('user')->user()->status;
 
-//            if ($userStatus == 1) {
+            if ($userStatus == 1) {
                 return redirect()->intended(route('frontend.profile.index'));
-//            } else {
-//                Auth::guard('user')->logout();
-//                return redirect()->route('login')->withInput()->withwarning('You are temporary blocked. please contact to admin');
-//            }
+            } else {
+                Auth::guard('user')->logout();
+                return redirect()->route('login')->withInput()->withwarning(trans('app.You are temporarily blocked. please contact to admin'));
+            }
         } else {
             $this->incrementLoginAttempts($request);
-            return redirect()->route('login')->withInput()->withErrors('Incorrect username or password. Please try again');
+            return redirect()->route('login')->withInput()->withErrors(trans('passwords.Incorrect username or password. Please try again'));
         }
 
     }

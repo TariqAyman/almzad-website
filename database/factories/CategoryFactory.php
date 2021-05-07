@@ -26,7 +26,7 @@ class CategoryFactory extends Factory
             'name_en' => $this->faker->word,
             'slug_ar' => $this->faker->word,
             'slug_en' => $this->faker->word,
-            'status' => $this->faker->boolean,
+            'status' => true,
         ];
     }
 }

@@ -35,11 +35,11 @@ class UserUpdateRequest extends FormRequest
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'username' => 'required|string',
-            'address' =>  'required|string',
+            'address' =>  'nullable|string',
             'email' => 'required|string|email',
-            'phone_number' => 'required|string|unique:admins,phone_number,'. $this->user,
-            'profile_photo' => 'required|image',
-            'password' => 'required|string',
+            'phone_number' => 'required|string|unique:admins,phone_number,'. $this->user->id,
+            'profile_photo' => 'nullable|image',
+            'password' => 'nullable|min:8|confirmed',
             'status' => 'required|boolean',
         ];
     }

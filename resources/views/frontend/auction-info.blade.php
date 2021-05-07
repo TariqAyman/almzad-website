@@ -113,9 +113,7 @@
                                             {!! Form::open(['route' => 'frontend.auctions.buyNow', 'id' => 'buyNow-form']) !!}
                                             {!! Form::hidden('auction_id',$auction->id) !!}
                                             <div class="add-icon">
-                                                <p class="det-name det-icon">+</p>
-                                                <input type="number" name="purchase_price" class="input-num" min="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}" value="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}">
-                                                <p class="det-name det-icon01">-</p>
+                                                <input type="number" readonly name="purchase_price" class="input-num" min="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}" value="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}">
                                             </div>
                                             <button type="submit" class="btn btn-show w-100 mt-3">اشتري الان</button>
                                             {!! Form::close() !!}

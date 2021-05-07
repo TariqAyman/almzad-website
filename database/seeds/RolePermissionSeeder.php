@@ -37,6 +37,15 @@ class RolePermissionSeeder extends Seeder
             'update-type',
             'destroy-type',
 
+            'view-wallet',
+            'create-wallet',
+
+            'view-transaction',
+            'show-transaction',
+
+            'view-contactus',
+            'show-contactus',
+
             'view-role',
             'view-permission',
             'create-role',

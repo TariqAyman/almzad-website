@@ -8,10 +8,12 @@
             <div class="tit"><i class="fas fa-home"></i><a href="{{ url('/') }}">الرئيسية</a> / <span>المحفظة</span></div>
         </div>
     </div>
-    <section class="wellet">
+    <section class="message">
         <div class="container">
             <div class="add-det aboutme">
                 <p class="det-name px-md-2">{{ auth('user')->user()->name }}</p>
+                <p class="det-name px-md-2"> الرصيد المتاح: {{ auth('user')->user()->actual_balance }}</p>
+
                 <div class="update-store">
                     <a class="dept-name" data-toggle="modal" data-target="#addBalance">اضافة رصيد</a>
                 </div>
@@ -21,32 +23,28 @@
                 <table class="table table-striped table-bordered tab-wall">
                     <thead>
                     <tr>
+                        <th scope="col">ملاحظه</th>
                         <th scope="col">التاريخ</th>
                         <th scope="col">ايداع</th>
                         <th scope="col">سحب</th>
                         <th scope="col">رصيد معلق</th>
-                        <th scope="col">الرصيد المتاح</th>
-                        <th scope="col">ملاحظه</th>
                     </tr>
                     </thead>
+                    <tbody>
                     @foreach($wallets as $wallet)
                         <tr>
-                            <td>{{ $wallet->created_at->format('Y/m/d H:s a') }}</td>
-                            <td>{{ $wallet->in }}</td>
-                            <td>{{ $wallet->out }}</td>
-                            <td>{{ $wallet->hold }}</td>
-                            <td>{{ $wallet->balance }}</td>
                             @if($wallet->auction_id)
                                 <td><a href="{{ route('frontend.auctions.show',$wallet->auction_id) }}">{{ $wallet->note }}</a></td>
                             @else
                                 <td>{{ $wallet->note }}</td>
                             @endif
-
-
+                            <td class="ub-font">{{ $wallet->created_at->format('Y/m/d H:s a') }}</td>
+                            <td>{{ $wallet->in }}</td>
+                            <td>{{ $wallet->out }}</td>
+                            <td>{{ $wallet->hold }}</td>
                             {{--                            <td><a href="#" class="valid ml-1"><i class="fas fa-cog"></i></a></td>--}}
                         </tr>
                     @endforeach
-                    <tbody>
                     </tbody>
                 </table>
             </div>

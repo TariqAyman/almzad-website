@@ -78,7 +78,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at',
         'password',
         'status',
-        'remember_token'
+        'remember_token',
+        'sessionInfo',
+        'sessionInfoTime',
+        'recaptchaToken',
+        'recaptchaTokenTime'
     ];
 
     protected $appends = [
@@ -130,7 +134,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getNameAttribute()
     {
-        return $this->attributes['first_name'];
+        return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
 
     public function comments()

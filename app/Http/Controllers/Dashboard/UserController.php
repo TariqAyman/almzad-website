@@ -52,7 +52,7 @@ class UserController extends Controller
                     '<i class="far avatar avatar-sm rounded-circle fa-user"></i>';
             })
             ->addColumn('status', function ($model) {
-                return $model->status ? '<span class="badge badge-pill badge-lg badge-success">Active</span>' : '<span class="badge badge-pill badge-lg badge-danger">Disabled</span>';
+                return $model->status ? '<span class="badge badge-pill badge-lg badge-success">مفعل</span>' : '<span class="badge badge-pill badge-lg badge-danger">معطل</span>';
             })
             ->addColumn('email_verified_at', function ($model) {
                 return $model->email_verified_at ? $model->email_verified_at->diffForHumans() : trans('app.email_verified_at_yet');
@@ -63,7 +63,10 @@ class UserController extends Controller
             ->addColumn('updated_at', function ($model) {
                 return $model->updated_at->diffForHumans();
             })
-            ->rawColumns(['action', 'created_at', 'updated_at', 'status', 'profile_photo'])
+            ->addColumn('balance', function ($model) {
+                return $model->actual_balance;
+            })
+            ->rawColumns(['action', 'created_at', 'updated_at', 'status', 'profile_photo','balance'])
             ->make(true);
     }
 

@@ -78,7 +78,7 @@
                                     <p class="tit">نوع المستخدم</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p class="det">بائع</p>
+                                    <p class="det">مستخدم</p>
                                 </div>
                                 <!--email-->
                                 <div class="col-sm-6">
@@ -95,12 +95,12 @@
                                     <p class="det ub-font">{{ $user->username }}</p>
                                 </div>
                                 <!--address-->
-                                <div class="col-sm-6">
-                                    <p class="tit">@lang('app.address')</p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p class="det">{{ $user->address }}</p>
-                                </div>
+{{--                                <div class="col-sm-6">--}}
+{{--                                    <p class="tit">@lang('app.address')</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-sm-6">--}}
+{{--                                    <p class="det">{{ $user->address }}</p>--}}
+{{--                                </div>--}}
                                 <!--acount-->
                                 <div class="col-sm-6">
                                     <p class="tit">@lang('app.account_status')</p>

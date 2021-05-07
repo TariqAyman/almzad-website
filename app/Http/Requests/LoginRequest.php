@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TypeRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,9 @@ class TypeRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this->request->all());
         return [
-            'name_en' => 'required|max:255',
-            'name_ar' => 'required|max:255',
-            'status' => 'required|boolean'
+            'phone_number' => 'required|string|regex:/^[+](966)(\d{9})$/',
+            'password' => 'required|min:6'
         ];
     }
 }

@@ -21,7 +21,7 @@ class PhoneVerifyMiddleware
             $user = auth('user')->user();
 
 //            if (!$user->phone_verified) {
-//                return redirect()->route('phone_verify');
+//                return redirect()->route('frontend.verifyPhone');
 //            }
 
             return $next($request);

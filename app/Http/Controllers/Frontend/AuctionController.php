@@ -68,11 +68,19 @@ class AuctionController extends Controller
     {
         $auction = Auction::find($request->auction_id);
 
-        if ($request->price >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors('لا تملك رصيد يكفي');
+        $highest_price = $auction->highest_price ?? $auction->start_from ;
 
-        if ($auction->is_sold) return redirect()->back()->withErrors('تم بيع المزاد');
+        if ($highest_price <= $request->price) return redirect()->back()->withErrors(trans('app.It is not possible to bid for less than',['value' => $highest_price]));
 
-        if (!$auction->allowBid()) return redirect()->back()->withErrors('Cant bid in this auction');
+        $hold_balance_wallet = setting('hold_balance_wallet',20);
+
+        $hold_balance_wallet = ($request->price * $hold_balance_wallet ) / 100;
+
+        if ($hold_balance_wallet >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors('لا تملك رصيد يكفي');
+
+        if ($auction->is_sold) return redirect()->back()->withErrors(trans('app.Auction sold'));
+
+        if (!$auction->allowBid()) return redirect()->back()->withErrors(trans('app.Cant bid in this auction'));
 
         AuctionsUser::create([
             'user_id' => auth('user')->user()->id,
@@ -90,8 +98,8 @@ class AuctionController extends Controller
             'user_id' => auth('user')->user()->id,
             'in' => 0,
             'out' => 0,
-            'hold' => (($request->price * 20) / 100),
-            'balance' => auth('user')->user()->available_balance - floatval($request->price),
+            'hold' => $hold_balance_wallet,
+            'balance' => auth('user')->user()->available_balance - $hold_balance_wallet,
             'note' => 'تحصيل 20% من قيمة المزايده للمزاد {$auction->name} لمشاهدة المزارد'
         ]);
 
@@ -106,15 +114,19 @@ class AuctionController extends Controller
     {
         $auction = Auction::find($request->auction_id);
 
-        if ($request->purchase_price >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors('لا تملك رصيد يكفي');
+        $highest_price = $auction->highest_price ?? $auction->start_from ;
+
+        $purchase_price = ($auction->purchase_price >  $highest_price) ? $auction->purchase_price : $highest_price;
+
+        if ($purchase_price >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors('لا تملك رصيد يكفي');
 
         if ($auction->is_sold) return redirect()->back()->withErrors('تم بيع المزاد');
 
-        if (!$auction->allowBid()) return redirect()->back()->withErrors('Cant bid in this auction');
+        if (!$auction->allowBid()) return redirect()->back()->withErrors(trans('app.Cant bid in this auction'));
 
         $auction->update([
             'is_sold' => true,
-            'sale_amount' => $request->purchase_price
+            'sale_amount' => $purchase_price
         ]);
 
         Wallet::query()->create([
@@ -122,9 +134,9 @@ class AuctionController extends Controller
             'auction_id' => $auction->id,
             'user_id' => auth('user')->user()->id,
             'in' => 0,
-            'out' => $request->purchase_price,
+            'out' => $purchase_price,
             'hold' => 0,
-            'balance' => auth('user')->user()->available_balance - floatval($request->price),
+            'balance' => auth('user')->user()->available_balance - floatval($purchase_price),
             'note' => "تحصيل مبلغ الشراء للمزاد {$auction->name} لمشاهدة المزارد "
         ]);
 

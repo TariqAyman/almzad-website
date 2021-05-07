@@ -17,23 +17,23 @@
                             <form class="form-horizontal" action="{{ route('frontend.contact-us.store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" style="direction: ltr;text-align: left;" class="form-control" name="subject" placeholder="@lang('app.subject')" required {{--pattern="[0-9]"--}} value="{{ old('subject') }}" title="@lang('app.subject')">
+                                    <input type="text"  class="form-control" name="subject" placeholder="@lang('app.subject')" required {{--pattern="[0-9]"--}} value="{{ old('subject') }}" title="@lang('app.subject')">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" style="direction: ltr;text-align: left;" class="form-control" name="name" placeholder="@lang('app.name')" required {{--pattern="[0-9]"--}} value="{{ old('name') }}" title="@lang('app.name')">
+                                    <input type="text"  class="form-control" name="name" placeholder="@lang('app.full_name')" required {{--pattern="[0-9]"--}} value="{{ old('name') ?? (auth('user')->check() ? auth('user')->user()->name : null) }}" title="@lang('app.full_name')">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" style="direction: ltr;text-align: left;" class="form-control" name="email" placeholder="@lang('app.email')" required {{--pattern="[0-9]"--}} value="{{ old('email') }}" title="@lang('app.email')">
+                                    <input type="email"  class="form-control" name="email" placeholder="@lang('app.email')" required {{--pattern="[0-9]"--}} value="{{ old('email') ?? (auth('user')->check() ? auth('user')->user()->email : null) }}" title="@lang('app.email')">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="phone" style="direction: ltr;text-align: left;" class="form-control" name="phone" placeholder="@lang('app.phone')" required {{--pattern="[0-9]"--}} value="{{ old('phone') }}" title="@lang('app.phone')">
-                                    <img class="" src="{{ asset('frontend/img/pro.png') }}">
+                                    <input type="phone"  class="form-control" name="phone" placeholder="@lang('app.phone')" required {{--pattern="[0-9]"--}} value="{{ old('phone') ?? (auth('user')->check() ? auth('user')->user()->phone_number : null) }}" title="@lang('app.phone')">
+                                    <img class="" src="{{ asset('frontend/img/phone-icon.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" style="direction: ltr;text-align: left;" class="form-control" name="message" placeholder="@lang('app.message')" required {{--pattern="[0-9]"--}} value="{{ old('message') }}" title="@lang('app.message')">
+                                    <input type="text"  class="form-control" name="message" placeholder="@lang('app.message_contactus')" required {{--pattern="[0-9]"--}} value="{{ old('message') }}" title="@lang('app.message_contactus')">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
 

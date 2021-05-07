@@ -76,11 +76,11 @@ class AuctionController extends Controller
     {
         $edit = false;
 
-        $types = Type::query()->where('status', 1)->pluck('name_ar', 'id');
+        $types = Type::query()->pluck('name_ar', 'id');
 
-        $categories = Category::query()->where('status', 1)->pluck('name_ar', 'id');
+        $categories = Category::query()->pluck('name_ar', 'id');
 
-        $users = User::query()->where('status', 1)->get(['id', 'first_name', 'last_name'])->pluck('name', 'id');
+        $users = User::query()->get(['id', 'first_name', 'last_name'])->pluck('name', 'id');
 
         return view('dashboard.auction.form', compact('edit', 'categories', 'types', 'users'));
     }
@@ -139,11 +139,11 @@ class AuctionController extends Controller
      */
     public function edit(Auction $auction)
     {
-        $types = Type::query()->where('status', 1)->pluck('name_ar', 'id');
+        $types = Type::query()->pluck('name_ar', 'id');
 
-        $categories = Category::query()->where('status', 1)->pluck('name_ar', 'id');
+        $categories = Category::query()->pluck('name_ar', 'id');
 
-        $users = User::query()->where('status', 1)->get(['id', 'first_name', 'last_name'])->pluck('name', 'id');
+        $users = User::query()->get(['id', 'first_name', 'last_name'])->pluck('name', 'id');
 
         $edit = true;
 //        $auction->with('user');

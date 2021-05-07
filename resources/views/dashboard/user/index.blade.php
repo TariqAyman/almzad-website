@@ -25,6 +25,7 @@
                                 <th>#</th>
                                 <th>@lang('app.name')</th>
                                 <th>@lang('app.email')</th>
+                                <th>@lang('app.balance')</th>
                                 <th>@lang('app.status')</th>
                                 <th>@lang('app.verified_at')</th>
                                 <th>@lang('app.photo')</th>
@@ -56,6 +57,7 @@
                     {data: 'DT_RowIndex', orderable: false, searchable: false},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
+                    {data: 'balance', name: 'balance'},
                     {data: 'status', name: 'status'},
                     {data: 'email_verified_at', name: 'email_verified_at'},
                     {data: 'profile_photo', name: 'profile_photo'},

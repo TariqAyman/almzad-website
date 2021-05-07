@@ -85,7 +85,7 @@ class LoginController extends Controller
             }
         } else {
             $this->incrementLoginAttempts($request);
-            return redirect()->route('admin.login')->withInput()->withErrors('Incorrect username or password. Please try again');
+            return redirect()->route('admin.login')->withInput()->withErrors(trans('passwords.Incorrect username or password. Please try again'));
         }
 
     }
