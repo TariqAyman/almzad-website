@@ -21,9 +21,9 @@ class CreateWalletsTable extends Migration
             $table->foreign('auction_id')->references('id')->on('auctions')->onDelete('cascade');
             $table->unsignedBigInteger('currency_id')->nullable();
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
-            $table->double('in');
-            $table->double('out');
-            $table->double('hold');
+            $table->double('in')->default(0);
+            $table->double('out')->default(0);
+            $table->double('hold')->default(0);
             $table->double('balance');
             $table->longText('note')->nullable();
             $table->string('type')->nullable();

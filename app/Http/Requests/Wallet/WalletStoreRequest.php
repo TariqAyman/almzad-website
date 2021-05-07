@@ -32,13 +32,9 @@ class WalletStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|numeric|integer',
-            'auction_id' => 'required|numeric|integer',
-//            'currency_id' => 'required|numeric|integer',
-            'in' => 'required|numeric',
-            'out' => 'required|numeric',
-            'hold' => 'required|numeric',
-            'balance' => 'required|numeric',
+            'user_id' => 'required|numeric|integer|exists:users,id',
+            'type' => 'required|in:in,out,hold',
+            'amount' => 'required|numeric',
         ];
     }
 
