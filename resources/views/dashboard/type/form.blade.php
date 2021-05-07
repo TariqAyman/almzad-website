@@ -42,7 +42,9 @@
                         <div class="pl-lg-4">
                             <div class="col-md-12">
                                 <div class="custom-control custom-checkbox">
-                                    {{ Form::checkbox('status', $edit ? $type->status : 1, 1, ['id'=>"status",'class' => 'custom-control-input']) }}
+                                    {!! Form::hidden('status', 0) !!}
+                                    <input type="checkbox" name="status" value="1" {{ ($edit && $type->status) ? 'checked' : ''}} class="custom-control-input" id="status">
+
                                     {{ Form::label('status', trans('app.status'), ['class' => 'custom-control-label']) }}
                                 </div>
                             </div>

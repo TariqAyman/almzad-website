@@ -47,13 +47,13 @@
                         <div class="col-6">
                             <label class="col-form-label">@lang('app.types')</label>
                             <div class="col-sm-10">
-                                {{ Form::select('type_id', $types, $edit ? $auction->type_id : null, [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select type...']) }}
+                                {{ Form::select('type_id', $types, $edit ? $auction->type_id : old('type_id'), [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select type...']) }}
                             </div>
                         </div>
                         <div class="col-6">
                             <label class="col-form-label">@lang('app.categories')</label>
                             <div class="col-sm-10">
-                                {{ Form::select('category_id', $categories, $edit ? $auction->category_id : null, [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select category...']) }}
+                                {{ Form::select('category_id', $categories, $edit ? $auction->category_id : old('category_id'), [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select category...']) }}
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="col-6">
                             <label class="col-form-label">@lang('app.users')</label>
                             <div class="col-sm-10">
-                                {{ Form::select('user_id', $users, $edit ? $auction->type_id : null, [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select user...']) }}
+                                {{ Form::select('user_id', $users, $edit ? $auction->user_id : old('user_id'), [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select user...']) }}
                             </div>
                         </div>
                     </div>
@@ -144,20 +144,25 @@
                     <div class="form-group row">
                         <div class="col-4">
                             <div class="custom-control custom-checkbox">
-                                {{ Form::checkbox('shipping', $edit ? $auction->shipping : 1, 1, ['id'=>"shipping",'class' => 'custom-control-input']) }}
+                                {!! Form::hidden('shipping', 0) !!}
+                                <input type="checkbox" name="shipping" value="1" {{ ($edit && $auction->shipping) ? 'checked' : ''}} class="custom-control-input" id="shipping">
                                 {{ Form::label('shipping', trans('app.shipping'), ['class' => 'custom-control-label']) }}
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="custom-control custom-checkbox">
-                                {{ Form::checkbox('shipping_free', $edit ? $auction->shipping_free : 1, 1, ['id'=>"shipping_free",'class' => 'custom-control-input']) }}
+                                {!! Form::hidden('shipping_free', 0) !!}
+                                <input type="checkbox" name="shipping_free" value="1" {{ ($edit && $auction->shipping_free) ? 'checked' : ''}} class="custom-control-input" id="shipping_free">
+
                                 {{ Form::label('shipping_free', trans('app.shipping_free'), ['class' => 'custom-control-label']) }}
                             </div>
                         </div>
 
                         <div class="col-4">
                             <div class="custom-control custom-checkbox">
-                                {{ Form::checkbox('multi_auction', $edit ? $auction->multi_auction : 1, 1, ['id'=>"multi_auction",'class' => 'custom-control-input']) }}
+                                {!! Form::hidden('multi_auction', 0) !!}
+                                <input type="checkbox" name="multi_auction" value="1" {{ ($edit && $auction->multi_auction) ? 'checked' : ''}} class="custom-control-input" id="multi_auction">
+
                                 {{ Form::label('multi_auction', trans('app.multi_auction'), ['class' => 'custom-control-label']) }}
                             </div>
                         </div>
@@ -207,7 +212,9 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="custom-control custom-checkbox">
-                                {{ Form::checkbox('status', $edit ? $auction->status : 1, 1, ['id'=>"status",'class' => 'custom-control-input']) }}
+                                {!! Form::hidden('status', 0) !!}
+                                <input type="checkbox" name="status" value="1" {{ ($edit && $auction->status) ? 'checked' : ''}} class="custom-control-input" id="status">
+
                                 {{ Form::label('status', trans('app.status'), ['class' => 'custom-control-label']) }}
                             </div>
                         </div>
