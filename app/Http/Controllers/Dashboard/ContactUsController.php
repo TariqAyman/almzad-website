@@ -32,7 +32,7 @@ class ContactUsController extends Controller
                 return $model->created_at->diffForHumans();
             })
             ->addColumn('full_name', function ($model) {
-                return $model->user->name;
+                return $model->name;
             })
             ->rawColumns(['created_at','full_name'])
             ->make(true);
