@@ -37,7 +37,7 @@ class UserUpdateRequest extends FormRequest
             'username' => 'required|string',
             'address' =>  'nullable|string',
             'email' => 'required|string|email',
-            'phone_number' => 'required|string|unique:admins,phone_number,'. $this->user->id,
+            'phone_number' => 'required|string|unique:users,phone_number,'. $this->user->id,
             'profile_photo' => 'nullable|image',
             'password' => 'nullable|min:8|confirmed',
             'status' => 'required|boolean',

@@ -32,7 +32,6 @@ class ContactUStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|numeric|integer',
             'subject' => 'required|string',
             'email' => 'required|string',
             'phone' => 'required|string',
