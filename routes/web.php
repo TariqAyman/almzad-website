@@ -26,30 +26,32 @@ Route::group(['namespace' => 'Frontend', 'middleware' => 'localization'], functi
         Route::post('verifyPhone/sendOTP', 'VerifyPhoneController@sendOTP')->name('verifyPhone.sendOTP');
         Route::post('verifyPhone/verify', 'VerifyPhoneController@verifyPhoneNumber')->name('verifyPhone.verify');
 
-        Route::resource('contact-us', 'ContactUsController');
-
         Route::post('payment/responseURL', 'PaymentController@successCallback')->name('payment.responseURL');
         Route::post('payment/errorURL', 'PaymentController@errorCallback')->name('payment.errorURL');
 
-        Route::get('/', 'HomeController@index')->name('home');
-        Route::resource('auctions', 'AuctionController')->only(['index', 'show']);
+        Route::group(['middleware' => ['phoneVerify']], function () {
 
-        Route::group(['middleware' => ['auth:user','phoneVerify']], function () {
+            Route::resource('contact-us', 'ContactUsController');
+            Route::get('/', 'HomeController@index')->name('home');
+            Route::resource('auctions', 'AuctionController')->only(['index', 'show']);
 
-            Route::post('payment/create', 'PaymentController@store')->name('payment.store');
+            Route::group(['middleware' => ['auth:user']], function () {
 
-            Route::resource('profile', 'ProfileController');
-            Route::resource('wallet', 'WalletController');
-            Route::get('user/store', 'StoreController@myStore')->name('user.store');
-            Route::get('user/store/edit', 'StoreController@create')->name('user.store.edit');
-            Route::post('user/store/save', 'StoreController@store')->name('user.store.save');
-            Route::post('user/comment', 'CommentController@store')->name('user.comment');
-            Route::resource('user/auctions', 'AuctionUserController')->names('user.auctions')->only([
-                'edit', 'store', 'update', 'create'
-            ]);
+                Route::post('payment/create', 'PaymentController@store')->name('payment.store');
 
-            Route::resource('auctions', 'AuctionController')->only(['store']);
-            Route::post('auctions/buyNow', 'AuctionController@buyNow')->name('auctions.buyNow');
+                Route::resource('profile', 'ProfileController');
+                Route::resource('wallet', 'WalletController');
+                Route::get('user/store', 'StoreController@myStore')->name('user.store');
+                Route::get('user/store/edit', 'StoreController@create')->name('user.store.edit');
+                Route::post('user/store/save', 'StoreController@store')->name('user.store.save');
+                Route::post('user/comment', 'CommentController@store')->name('user.comment');
+                Route::resource('user/auctions', 'AuctionUserController')->names('user.auctions')->only([
+                    'edit', 'store', 'update', 'create'
+                ]);
+
+                Route::resource('auctions', 'AuctionController')->only(['store']);
+                Route::post('auctions/buyNow', 'AuctionController@buyNow')->name('auctions.buyNow');
+            });
         });
     });
 });

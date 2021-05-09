@@ -107,7 +107,7 @@ class PaymentController extends Controller
 
             $alrajhiPayment->update($paymentInfo);
 
-            return redirect()->route('frontend.wallet.index')->with(['url' => $url]);
+            return redirect()->route('frontend.wallet.index')->with(['payUrl' => $url]);
 
         } else {
             $paymentInfo['response_init'] = $result;
