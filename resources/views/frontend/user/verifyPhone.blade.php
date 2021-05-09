@@ -34,7 +34,6 @@
                                     <br>
                                     <button type="button" class="btn btn-info w-100" onclick="verify()">تاكيد الكود</button>
                                 </div>
-                                <button type="submit" class="btn btn-show w-100">تسجيل دخول</button>
                             </form>
                         </div>
                     </div>
