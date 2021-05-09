@@ -49,13 +49,16 @@ class ProfileController extends Controller
         }
 
         if ($request->has('newPassword') && \Hash::check($request->oldPassword,$user->password)){
-            dd(123);
             $userData['password'] = $request->newPassword;
+        }
+
+        if ($request->phone_number != $user->phone_number){
+            $userData['phone_verified']  = false;
         }
 
         $user->update($userData);
 
-        return redirect()->back()->withsuccess('Profile updated successfully!');
+        return redirect()->back()->withsuccess(trans('app.Profile updated successfully!'));
     }
 
     /**

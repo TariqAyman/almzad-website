@@ -30,11 +30,11 @@ class StoreController extends Controller
         }
 
         if ($request->has('start_date')) {
-            $auctions = $auctions->where('start_date', '<=', $request->start_date);
+            $auctions = $auctions->where('start_date', '>=', $request->start_date);
         }
 
         if ($request->has('end_date')) {
-            $auctions = $auctions->where('end_date', '=>', $request->end_date);
+            $auctions = $auctions->where('end_date', '<=', $request->end_date);
         }
 
         $auctions = $auctions->where('user_id', auth('user')->user()->id)

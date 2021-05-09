@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Auction;
 use App\Models\Review;
 use App\Models\Slider;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,9 +18,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $latest_auctions = Auction::where('status', 1)->latest()->limit(6)->get();
+        $latest_auctions = Auction::where('status', 1)->where('end_date', '>=', Carbon::now())->latest()->limit(6)->get();
 
-        $auctions = Auction::limit(6)->get();
+        $auctions = Auction::where('end_date', '>=', Carbon::now())->limit(6)->get();
 
         $reviews = Review::query()->where('status', 1)->limit(15)->get();
 

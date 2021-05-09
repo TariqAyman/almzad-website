@@ -107,7 +107,7 @@ class PaymentController extends Controller
 
             $alrajhiPayment->update($paymentInfo);
 
-            return redirect()->to($url);
+            return redirect()->route('frontend.wallet.index')->with(['url' => $url]);
 
         } else {
             $paymentInfo['response_init'] = $result;
@@ -147,7 +147,7 @@ class PaymentController extends Controller
             $amount = $response['amt'];
             Transaction::query()->create([
                 'user_id' => $alrajhiPayment->user->id,
-                'amount'  => $response['amt'],
+                'amount' => $response['amt'],
                 'note' => "تحصيل قيمة {$amount} من المسنخدم {$name}",
                 'payment_id' => $alrajhiPayment->id
             ]);
@@ -172,7 +172,7 @@ class PaymentController extends Controller
             'status' => $paymentStatus,
         ]);
 
-        return redirect()->route('frontend.profile.index')->with($messageType, $message);
+        return redirect()->route('frontend.wallet.index')->with($messageType, $message);
     }
 
 

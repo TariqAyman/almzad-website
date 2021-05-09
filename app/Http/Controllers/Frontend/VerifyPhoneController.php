@@ -82,11 +82,9 @@ class VerifyPhoneController extends Controller
         curl_close($curl);
         $response = json_decode($response, true);
 
-        dd($response);
-        dd($response->sessionInfo);
-
         auth('user')->user()->update([
-            'sessionInfo' => $response->sessionInfo
+            'sessionInfo' => $response['sessionInfo'],
+            'sessionInfoTime' => Carbon::now()
         ]);
 
     }
@@ -120,6 +118,18 @@ class VerifyPhoneController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
 
-        echo $response;
+        $response = json_decode($response, true);
+
+        if (!empty($response['phoneNumber']) == auth('user')->user()->phone_number) {
+            auth('user')->user()->update([
+                'phone_verified' => true,
+                'phone_verified_at' => Carbon::now(),
+                'firebaseIdToken' => $response['idToken'],
+                'refreshToken' => $response['refreshToken'],
+                'expiresIn' => $response['expiresIn'],
+                'localId' => $response['localId'],
+            ]);
+        }
+
     }
 }

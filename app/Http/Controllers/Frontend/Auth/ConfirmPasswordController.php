@@ -45,8 +45,6 @@ class ConfirmPasswordController extends Controller
      */
     public function showConfirmForm()
     {
-        $pageConfigs = ['blankPage' => true];
-
-        return view('dashboard.auth.passwords.confirm',compact('pageConfigs'));
+        return view('dashboard.auth.passwords.confirm');
     }
 }

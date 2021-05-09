@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactUs\ContactUStoreRequest;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class ContactUsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactUStoreRequest $request)
     {
         $data = [
             'subject' => $request->subject,
@@ -33,6 +34,10 @@ class ContactUsController extends Controller
             'message' => $request->message,
             'name' => $request->name,
         ];
+
+        $data['phone'] = '+966' . $data['phone'];
+
+        if (!preg_match('/^[+](966)(\d{9})$/',$data['phone'])) return redirect()->route('frontend.contact-us.index')->withInput()->withErrors(trans('passwords.invalid phone number'));
 
         if (auth('user')->check()){
             $data['user_id'] = auth('user')->user()->id;

@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone_number' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^[+](966)(\d{9})$/'],
+            'phone_number' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^(\d{9})$/'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'tos' => ['required'],
         ]);
@@ -73,7 +73,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create($data);
+        $data['phone_number'] = '+966' . $data['phone_number'];
+
+        if (!preg_match('/^[+](966)(\d{9})$/',$data['phone_number'])) return redirect()->route('register')->withInput()->withErrors(trans('passwords.invalid phone number'));
+
+        $user = User::create($data + ['status' => 1]);
 
         if (setting('register_notification_email') == true) {
             Mail::to($data['email'])->send(new UserRegistered($user));

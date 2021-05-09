@@ -33,14 +33,14 @@ class AuctionController extends Controller
         }
 
         if ($request->has('start_date')) {
-            $auctions = $auctions->where('start_date', '<=', $request->type);
+            $auctions = $auctions->where('start_date', '>=', $request->start_date);
         }
 
         if ($request->has('end_date')) {
-            $auctions = $auctions->where('end_date', '=>', $request->type);
+            $auctions = $auctions->where('end_date', '<=', $request->end_date);
         }
 
-        $auctions = $auctions->where('status', 1)->paginate(setting('record_per_page'));
+        $auctions = $auctions->where('status', 1)->where('end_date', '>=', Carbon::now())->latest()->paginate(setting('record_per_page'));
 
         $types = Type::query()->where('status', 1)->get();
 
@@ -68,13 +68,13 @@ class AuctionController extends Controller
     {
         $auction = Auction::find($request->auction_id);
 
-        $highest_price = $auction->highest_price ?? $auction->start_from ;
+        $highest_price = $auction->highest_price ?? $auction->start_from;
 
-        if ($highest_price <= $request->price) return redirect()->back()->withErrors(trans('app.It is not possible to bid for less than',['value' => $highest_price]));
+        if ($highest_price >= $request->price) return redirect()->back()->withErrors(trans('app.It is not possible to bid for less than', ['value' => $highest_price]));
 
-        $hold_balance_wallet = setting('hold_balance_wallet',20);
+        $hold_balance_wallet = setting('hold_balance_wallet', 20);
 
-        $hold_balance_wallet = ($request->price * $hold_balance_wallet ) / 100;
+        $hold_balance_wallet = ($request->price * $hold_balance_wallet) / 100;
 
         if ($hold_balance_wallet >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors('لا تملك رصيد يكفي');
 
@@ -100,23 +100,23 @@ class AuctionController extends Controller
             'out' => 0,
             'hold' => $hold_balance_wallet,
             'balance' => auth('user')->user()->available_balance - $hold_balance_wallet,
-            'note' => 'تحصيل 20% من قيمة المزايده للمزاد {$auction->name} لمشاهدة المزارد'
+            'note' => "تحصيل 20% من قيمة المزايده للمزاد {$auction->name} لمشاهدة المزارد"
         ]);
 
         $auction->update([
             'last_bid' => auth('user')->user()->id
         ]);
 
-        return redirect()->back()->withSuccess('Saved Bid For this Auction');
+        return redirect()->back()->withSuccess(trans('app.Saved Bid For this Auction'));
     }
 
     public function buyNow(Request $request)
     {
         $auction = Auction::find($request->auction_id);
 
-        $highest_price = $auction->highest_price ?? $auction->start_from ;
+        $highest_price = $auction->highest_price ?? $auction->start_from;
 
-        $purchase_price = ($auction->purchase_price >  $highest_price) ? $auction->purchase_price : $highest_price;
+        $purchase_price = ($auction->purchase_price > $highest_price) ? $auction->purchase_price : $highest_price;
 
         if ($purchase_price >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors('لا تملك رصيد يكفي');
 

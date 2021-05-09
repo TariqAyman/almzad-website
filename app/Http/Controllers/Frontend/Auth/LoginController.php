@@ -74,7 +74,11 @@ class LoginController extends Controller
 
         $credentials = $request->only('phone_number', 'password');
 
-        $user = User::where('phone_number', $request->phone_number)->first();
+        $credentials['phone_number'] = '+966' . $request->phone_number;
+
+        if (!preg_match('/^[+](966)(\d{9})$/',$credentials['phone_number'])) return redirect()->route('login')->withInput()->withErrors(trans('passwords.invalid phone number'));
+
+        $user = User::where('phone_number', $credentials['phone_number'])->first();
 
         if ($user && Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']], $request->remember)) {
             $userStatus = Auth::guard('user')->user()->status;

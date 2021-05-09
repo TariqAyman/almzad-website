@@ -27,8 +27,6 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        $pageConfigs = ['blankPage' => true];
-
         return view('dashboard.auth.passwords.email',compact('pageConfigs'));
     }
 }

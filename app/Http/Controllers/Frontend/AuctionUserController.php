@@ -71,7 +71,7 @@ class AuctionUserController extends Controller
         }
 
 
-        return redirect()->route('frontend.user.store')->withSuccess('Successfully Create Auction');
+        return redirect()->route('frontend.user.store')->withSuccess(trans('app.Successfully Create Auction'));
     }
 
     /**
