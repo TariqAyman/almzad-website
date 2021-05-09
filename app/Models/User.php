@@ -55,7 +55,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $table = 'users';
 
     protected $casts = [
-        'status' => 'bool'
+        'status' => 'bool',
+        'phone_verified' => 'bool'
     ];
 
     protected $dates = [
@@ -82,7 +83,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'sessionInfo',
         'sessionInfoTime',
         'recaptchaToken',
-        'recaptchaTokenTime'
+        'recaptchaTokenTime',
+        'type',
+        'phone_verified',
+        'firebaseIdToken',
+        'refreshToken',
+        'expiresIn',
+        'localId',
     ];
 
     protected $appends = [
@@ -99,7 +106,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setPasswordAttribute($password)
     {
-        if (Hash::needsRehash($password)) {
+        if (!empty($password) && Hash::needsRehash($password)) {
             $password = Hash::make($password);
             $this->attributes['password'] = $password;
         }
