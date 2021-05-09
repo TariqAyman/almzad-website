@@ -36,8 +36,6 @@ Route::group(['namespace' => 'Frontend', 'middleware' => 'localization'], functi
 
         Route::group(['middleware' => ['auth:user','phoneVerify']], function () {
 
-            Route::get('/', 'HomeController@index')->name('home');
-
             Route::post('payment/create', 'PaymentController@store')->name('payment.store');
 
             Route::resource('profile', 'ProfileController');
