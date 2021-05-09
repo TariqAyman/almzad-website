@@ -1,0 +1,121 @@
+body
+{
+    text-align: left;
+    direction: ltr;
+ font-family: "Ubuntu-Bold";
+}
+ h5 {
+    font-size: 1.0rem;
+}
+h1, .btn, footer h4, footer .footer-link a, .contact-info, footer .pub-body, .new-mzad h3, .box-detail p.price, .smalltex, .work-box h4, .clint-name .pub-body h6, .tit-box h6, .page-header, .nav-detail a, .start-with, .start-price, .end-in, .store-pro, .offer-start, .add-mzad h4, table, .user-acount .det-name h4, .user-acount .tab-pane p.tit, .forget-pass, .form-body, .modal-body h6, .comment-tit, .no-comment, .add-tit, .com-name, .comment p
+{
+     font-family: "Ubuntu-Bold";
+}
+.user-name i {
+    margin-right: 5px;
+    margin-left: 0px;
+}
+.user-name {
+    font-size: 16px;
+}
+.dept-name
+{
+    width: 135px;
+    font-size: 14px;
+}
+.new-mzad .new-name
+{
+    align-items: center;
+}
+.owl-carousel .owl-nav .owl-prev {
+    left: 10px;
+    right: 65px;
+}
+.owl-clints.owl-carousel .owl-nav .owl-next {
+    right: 10px;
+}
+.owl-clints .clint-name
+{
+    flex-direction: row-reverse;
+}
+.owl-clints .pub-body
+{
+    margin-left: 10px;
+}
+footer h4 {
+    font-size: 20px;
+}
+li.sub-social {
+    padding: 0px;
+}
+.footer-link .pl-1, .footer-link .px-1 {
+    padding-left: 0rem!important;
+    padding-right: 0.25rem;
+}
+footer .footer-link a {
+    font-size: 14px;
+}
+.pub-mzad .pub-pic {
+    margin-left: 0px;
+    margin-right: 10px;
+}
+.footer-contact .pr-2, .footer-contact .px-2 {
+    padding-right: 0rem!important;
+    padding-left: .5rem!important;
+}
+.page-header i {
+    margin-left: 0px;
+    margin-right: 5px;
+}
+select {
+    background-position-x: 97%;
+}
+.upload-pic {
+   margin-right: 15px;
+    margin-left: 0px;
+}
+.sid-log .nav {
+    padding-left: 18px;
+}
+a.note span.num 
+{
+    left: -9px;
+}
+.form-body img {
+    right: auto;
+    left: 5px;
+}
+.form-body .form-control {
+    padding-left: 35px;
+    padding-right: 0px;
+    text-align: left;
+}
+.new-box .date-name {
+   margin-left: 10px;
+    margin-right: 0px;
+}
+.det-icon01 {
+    border-radius: 0px 8px 8px 0px;
+}
+.det-icon {
+    border-radius: 8px 0px 0px 8px;
+}
+.nav-detail a
+{
+    margin-left: 0px;
+    margin-right: 10px;
+    font-size: 18px;
+}
+.offer-s, .offer-st {
+    border-radius: 8px 0px 0px 8px;
+}
+.offer-e {
+    border-radius: 0px 8px 8px 0px;
+}
+@media (max-width: 991px)
+    {
+.button-opener {
+    right: 20px;
+    left:auto;
+}
+}
