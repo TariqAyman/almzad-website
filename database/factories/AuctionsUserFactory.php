@@ -24,7 +24,7 @@ class AuctionsUserFactory extends Factory
         return [
             'user_id' => \App\Models\User::inRandomOrder()->first()->id,
             'auction_id' => \App\Models\Auction::inRandomOrder()->first()->id,
-            'price' => $this->faker->randomFloat(3,100,100000),
+            'price' => $this->faker->numberBetween(10,1000),
         ];
     }
 }
