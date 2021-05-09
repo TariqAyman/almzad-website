@@ -20,10 +20,10 @@ class CreateSlidersTable extends Migration
             $table->string('title_ar', 255);
             $table->string('title_en', 255);
 
-            $table->string('sub_title_ar', 255)->nullable();
-            $table->string('sub_title_en', 255)->nullable();
-            $table->string('description_ar', 255);
-            $table->string('description_en', 255);
+            $table->text('sub_title_ar')->nullable();
+            $table->text('sub_title_en')->nullable();
+            $table->longText('description_ar');
+            $table->longText('description_en');
 
             $table->boolean('status')->default(0);
             $table->softDeletes();
