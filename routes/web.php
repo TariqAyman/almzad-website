@@ -13,16 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'Frontend'], function () {
+
+Route::group(['namespace' => 'Frontend', 'middleware' => 'localization'], function () {
+
+    Route::get('set-locale/{locale}', 'LocalizationController@switchLang')->name('lang.switch');
 
     Auth::routes(['verify' => true]);
-
 
     Route::group(['as' => 'frontend.', 'middleware' => 'web'], function () {
 
         Route::get('verifyPhone', 'VerifyPhoneController@index')->name('verifyPhone');
         Route::post('verifyPhone/sendOTP', 'VerifyPhoneController@sendOTP')->name('verifyPhone.sendOTP');
-        Route::post('verifyPhone/verify', 'VerifyPhoneController@store')->name('verifyPhone.verify');
+        Route::post('verifyPhone/verify', 'VerifyPhoneController@verifyPhoneNumber')->name('verifyPhone.verify');
 
         Route::resource('contact-us', 'ContactUsController');
 
@@ -33,6 +35,8 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::resource('auctions', 'AuctionController')->only(['index', 'show']);
 
         Route::group(['middleware' => ['auth:user','phoneVerify']], function () {
+
+            Route::get('/', 'HomeController@index')->name('home');
 
             Route::post('payment/create', 'PaymentController@store')->name('payment.store');
 
