@@ -8,40 +8,43 @@
                     <div class="form-login">
                         <div class="form-title">
                             <a href="{{ url('/') }}">
-                                <img src="{{ asset('frontend/img/black-logo.png') }}" alt="مزاد الخير" class="img-fluid">
+                                <img src="{{ asset('frontend/img/black-logo.png') }}" alt="{{ setting('company_name') }}" class="img-fluid">
                             </a>
                         </div>
                         <div class="form-body">
                             <form class="form-horizontal" action="{{ route('register') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" name="first_name" class="form-control" placeholder="الاسم الأول" required value="{{ old('first_name') }}">
+                                    <input type="text" name="first_name" class="form-control" placeholder="@lang('app.first_name')" required value="{{ old('first_name') }}">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="last_name" class="form-control" placeholder="الاسم الأخير" required value="{{ old('last_name') }}">
+                                    <input type="text" name="last_name" class="form-control" placeholder="@lang('app.last_name')" required value="{{ old('last_name') }}">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control" placeholder="اسم المستخدم" required value="{{ old('username') }}">
+                                    <input type="text" name="username" class="form-control" placeholder="@lang('app.username')" required value="{{ old('username') }}">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
 
-                                <div class="form-group">
-                                    <input type="tel" style="direction: ltr;text-align: left;" name="phone_number" value="{{ old('phone_number') ?? '+966' }}" class="form-control" placeholder="رقم الجوال" required id="phone_number">
+                                <div class="input-group input-group-merge mb-2" style="direction: {{ Session::get('appLocale') == 'ar' ? 'ltr' : 'rtl' }};">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon5">+966</span>
+                                    </div>
+                                    <input type="tel" style="direction: {{ Session::get('appLocale') == 'ar' ? 'ltr' : 'rtl' }};text-align: {{ Session::get('appLocale') == 'ar' ? 'left' : 'right' }};" class="form-control" placeholder="@lang('app.phone_number')" aria-label="phone_number" aria-describedby="basic-addon5" name="phone_number" required value="{{ old('phone_number') }}" title="@lang('app.phone_number')" autocomplete="false">
                                     <img class="" src="{{ asset('frontend/img/phone-icon.png') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control" placeholder="البريد الالكتروني" required value="{{ old('email') }}">
+                                    <input type="email" name="email" class="form-control" placeholder="@lang('app.email')" required value="{{ old('email') }}">
                                     <img class="" src="{{ asset('frontend/img/password-icon.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
+                                    <input type="password" name="password" class="form-control" placeholder="@lang('app.password')" required>
                                     <img class="" src="{{ asset('frontend/img/password-icon.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password_confirmation" class="form-control" placeholder="تأكيد كلمة المرور" required>
+                                    <input type="password" name="password_confirmation" class="form-control" placeholder="@lang('app.password_confirmation')" required>
                                     <img class="" src="{{ asset('frontend/img/password-icon.png') }}">
                                 </div>
                                 <div class="form-group">
@@ -69,7 +72,7 @@
                 <div class="modal-box">
                     <div class="modal-body">
                         <form class="text-center">
-                            <h4>الشروط والاحكام</h4>
+                            <h4>@lang('app.tos')</h4>
                             <h4>{{ setting('tos_text') }}</h4>
                         </form>
                     </div>

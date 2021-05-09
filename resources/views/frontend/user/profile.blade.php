@@ -54,7 +54,7 @@
 {{--                            <li><a href="#idactive" class="tabs__trigger" role="tab" data-toggle="tab">--}}
 {{--                                    تفعيل الهوية</a>--}}
 {{--                            </li>--}}
-                            <li><a href="#updatefile" class="tabs__trigger" role="tab" data-toggle="tab">
+                            <li><a href="#updateProfile" class="tabs__trigger" role="tab" data-toggle="tab">
                                     تعديل الملف</a>
                             </li>
                         </ul>
@@ -78,7 +78,7 @@
                                     <p class="tit">نوع المستخدم</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p class="det">مستخدم</p>
+                                    <p class="det">{{ ($user->type == 'user' ) ? 'مستخدم' : 'بائع' }}</p>
                                 </div>
                                 <!--email-->
                                 <div class="col-sm-6">
@@ -245,7 +245,21 @@
                         <div class="tab-pane" role="tabpanel" id="idactive">
                         </div>
                         <!--Startupdatefile-->
-                        <div class="tab-pane" role="tabpanel" id="updatefile">
+                        <div class="tab-pane" role="tabpanel" id="updateProfile">
+                            {!! Form::open(['route' => ['frontend.profile.store'], 'files' => false]) !!}
+                            <div class="row">
+                                <input type="text" name="first_name" class="form-control" value="{{ old('first_name') ?? $user->first_name  }}" placeholder="@lang('app.first_name')">
+                                <input type="text" name="last_name" class="form-control" value="{{ old('last_name') ?? $user->last_name  }}" placeholder="@lang('app.last_name')">
+                                <input type="text" name="username" class="form-control" value="{{ old('username') ?? $user->username  }}" placeholder="@lang('app.username')">
+                                <input type="text" name="email" class="form-control" value="{{ old('email') ?? $user->email  }}" placeholder="@lang('app.email')">
+                                <input type="text" name="phone_number" class="form-control" value="{{ old('phone_number') ?? $user->phone_number  }}" placeholder="@lang('app.phone_number')">
+                                <input type="text" name="address" class="form-control" value="{{ old('address') ?? $user->address  }}" placeholder="@lang('app.address')">
+                                <span id='message'></span>
+                                <div class="b-left w-100">
+                                    <button class="btn btn-show" type="submit">تأكيد التعديل</button>
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
                         </div>
                     </div><!--tab-content-->
                 </div>

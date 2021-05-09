@@ -9,7 +9,7 @@
                     <div class="modal-body">
                         <form class="text-center">
                             <img class="img-fluid mb-3" src="{{ asset('frontend/img/done-re.png') }}">
-                            <h4>نجاح!</h4>
+                            <h4>@lang('app.success')</h4>
                             <h4><strong>{{ $message }}</strong></h4>
                         </form>
                     </div>
@@ -30,7 +30,7 @@
                     <div class="modal-body">
                         <form class="text-center">
                             <img class="img-fluid mb-3" src="{{ asset('frontend/img/error.png') }}">
-                            <h4>خطأ!</h4>
+                            <h4>@lang('app.error')</h4>
                             <h4><strong>{{ $message }}</strong></h4>
                         </form>
                     </div>
@@ -52,7 +52,7 @@
                     <div class="modal-body">
                         <form class="text-center">
                             <img class="img-fluid mb-3" src="{{ asset('frontend/img/error.png') }}">
-                            <h4>خطأ!</h4>
+                            <h4>@lang('app.error')</h4>
                             <h4><strong>{{ $message }}</strong></h4>
                         </form>
                     </div>
@@ -73,7 +73,7 @@
                     <div class="modal-body">
                         <form class="text-center">
                             <img class="img-fluid mb-3" src="{{ asset('frontend/no-mzad.png') }}">
-                            <h4>خطأ!</h4>
+                            <h4>@lang('app.error')</h4>
                             <h4><strong>{{ $message }}</strong></h4>
                         </form>
                     </div>
@@ -94,7 +94,7 @@
                     <div class="modal-body">
                         <form class="text-center">
                             <img class="img-fluid mb-3" src="{{ asset('frontend/img/error.png') }}">
-                            <h4>خطأ!</h4>
+                            <h4>@lang('app.error')</h4>
                         @foreach($errors->getMessages() as $key => $messages)
                             @foreach($messages as $message)
                                     <h4>{{ $message }}</h4>

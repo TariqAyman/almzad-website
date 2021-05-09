@@ -15,7 +15,7 @@
                             <form class="form-horizontal" action="{{ route('frontend.verifyPhone') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="tel" style="direction: ltr;text-align: left;" class="form-control" name="phone_number" id="phone_number" placeholder="@lang('app.phone_number')" required
+                                    <input type="tel" style="direction: {{ Session::get('appLocale') == 'ar' ? 'ltr' : 'rtl' }};text-align: {{ Session::get('appLocale') == 'ar' ? 'left' : 'right' }};" class="form-control" name="phone_number" id="phone_number" placeholder="@lang('app.phone_number')" required
                                            readonly value="{{ old('phone_number') ?? auth('user')->user()->phone_number }}" title="@lang('app.phone_number')">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
@@ -54,24 +54,13 @@
 
     <script>
         var firebaseConfig = {
-            @if(env('firebase_1'))
-            apiKey: "AIzaSyBUkibXUBAbz00a1H8YVmtuFb5m9fnY5oE",
-            authDomain: "mdrastk-com.firebaseapp.com",
-            databaseURL: "https://mdrastk-com.firebaseio.com",
-            projectId: "mdrastk-com",
-            storageBucket: "mdrastk-com.appspot.com",
-            messagingSenderId: "371911299365",
-            appId: "1:371911299365:web:f685130953260182ec4acc",
-            measurementId: "G-8G26F1H21J"
-            @else
-            apiKey: "AIzaSyAyYXme504DzexY0ir_Mewtqzw89XmcqXs",
-            authDomain: "testing-87bbf.firebaseapp.com",
-            projectId: "testing-87bbf",
-            storageBucket: "testing-87bbf.appspot.com",
-            messagingSenderId: "396051797882",
-            appId: "1:396051797882:web:d9b8f763acf1692cc4a8c3",
-            measurementId: "G-VWX333P7GZ"
-            @endif
+            apiKey: "{{ env('FIREBASE_API_KEY') }}",
+            authDomain:  "{{ env('FIREBASE_API_AUTH_DOMAIN') }}",
+            projectId:  "{{ env('FIREBASE_API_PROJECT_ID') }}",
+            storageBucket:  "{{ env('FIREBASE_API_STORAGE_BUCKET') }}",
+            messagingSenderId:  "{{ env('FIREBASE_API_MESSAGING_SENDER_ID') }}",
+            appId:  "{{ env('FIREBASE_API_APP_ID') }}",
+            measurementId:  "{{ env('FIREBASE_API_MEASUREMENT_ID') }}"
         };
         firebase.initializeApp(firebaseConfig);
 
@@ -125,32 +114,19 @@
 
         function verify() {
             var code = $("#verification").val();
-            var number = $("#phone_number").val();
 
-            coderesult.confirm(code).then(function (result) {
-                var user = result.user;
-                window.fireBaseUser = user;
-                console.log(user);
-                $("#successOtpAuth").text("Auth is successful");
-                $("#successOtpAuth").show();
-            }).catch(function (error) {
-                $("#successOtpAuth").text(error.message);
-                $("#successOtpAuth").show();
-            });
-            console.log(window.fireBaseUser);
-        }
-
-        function test(phoneNumber) {
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: "POST",
                 url: "{{ route('frontend.verifyPhone.verify') }}",
-                data: {phoneNumber: phoneNumber},
+                data: {code: code},
                 success: function (data) {
                     console.log(data);
+                    window.location.href = '{{ route('frontend.home') }}'
                 }
             });
         }
+
     </script>
 
 @endsection

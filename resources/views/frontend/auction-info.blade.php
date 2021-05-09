@@ -102,7 +102,7 @@
                                         {!! Form::hidden('auction_id',$auction->id) !!}
                                         <div class="add-icon">
                                             <p class="det-name det-icon">+</p>
-                                            <input type="number" name="price" class="input-num" min="{{ $auction->highest_price  }}" value="{{ $auction->highest_price ?? $auction->start_from  }}">
+                                            <input type="number" name="price" class="input-num" value="{{ $auction->highest_price ?? $auction->start_from  }}">
                                             <p class="det-name det-icon01">-</p>
                                         </div>
                                         <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>

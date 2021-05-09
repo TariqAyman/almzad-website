@@ -33,7 +33,7 @@
                     <img class="img-fluid" src="{{ asset('frontend/img/newmzad.png') }}" alt="">
                     <h5>@lang('app.latest_auctions')</h5>
                 </div>
-                <a class="btn btn-show" href="{{ route('frontend.auctions.index') }}">@lang('app.see_all')</a>
+                <button class="btn btn-show" onclick="window.location.href='{{ route('frontend.auctions.index') }}'">@lang('app.see_all')</button>
             </div>
             <div class="row">
                 @foreach($latest_auctions as $auction)
@@ -85,7 +85,7 @@
                     <img class="img-fluid" src="{{ asset('frontend/img/newmzad.png') }}">
                     <h5>@lang('app.public auctions')</h5>
                 </div>
-                <button class="btn btn-show">@lang('app.see_all')</button>
+                <button class="btn btn-show" onclick="window.location.href='{{ route('frontend.auctions.index') }}'">@lang('app.see_all')</button>
             </div>
             <div class="row">
                 @foreach($auctions as $auction)
