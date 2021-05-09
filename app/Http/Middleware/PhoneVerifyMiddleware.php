@@ -20,13 +20,13 @@ class PhoneVerifyMiddleware
 
             $user = auth('user')->user();
 
-//            if (!$user->phone_verified) {
-//                return redirect()->route('frontend.verifyPhone');
-//            }
+            if (!$user->phone_verified) {
+                return redirect()->route('frontend.verifyPhone');
+            }
 
             return $next($request);
         }
 
-        return redirect()->route('login');
+        return $next($request);
     }
 }
