@@ -30,6 +30,6 @@ class ProfileController extends Controller
 
         $admin->update($userData);
 
-        return redirect()->back()->withsuccess('Profile updated successfully!');
+        return redirect()->back()->withsuccess(trans('app.Profile updated successfully!'));
     }
 }
