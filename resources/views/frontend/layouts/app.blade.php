@@ -7,7 +7,7 @@
     @if(session()->get('appLocale') == 'en' )
         <link rel="stylesheet" href="{{ asset('frontend/css/style-ltr.css') }}">
     @endif
-    <!--Icon Website-->
+<!--Icon Website-->
     <link rel="shortcut icon" href="{{ asset('frontend/img/icon.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--FontWesome-->
@@ -201,13 +201,15 @@
                 <ul class="nav footer-link">
                     @foreach($auctionsLayout as $auction)
                         <li class="pub-mzad">
-                            <div class="pub-pic">
-                                <img alt="{{ $auction->name }}" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}" class="img-fluid" style="max-height: 37px; max-width: 57px">
-                            </div>
-                            <div class="pub-body">
-                                <h6>{{ $auction->name }}</h6>
-                                <p>{{ $auction->created_at->diffForHumans() }} </p>
-                            </div>
+                            <a href="{{ route('frontend.auctions.show',$auction->slug) }}">
+                                <div class="pub-pic">
+                                    <img alt="{{ $auction->name }}" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}" class="img-fluid" style="max-height: 37px; max-width: 57px">
+                                </div>
+                                <div class="pub-body">
+                                    <h6>{{ $auction->name }}</h6>
+                                    <p>{{ $auction->created_at->diffForHumans() }} </p>
+                                </div>
+                            </a>
                         </li>
                     @endforeach
                 </ul>

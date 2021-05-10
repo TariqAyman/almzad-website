@@ -18,11 +18,11 @@
                     <li>
                         <a href="#detail" class="tabs__trigger {{ request()->has('page') ? '' : 'active' }}" role="tab" data-toggle="tab"> @lang('app.Auction details') </a>
                     </li>
-                    <li>
-                        <a href="#comment" class="tabs__trigger {{ request()->has('page') ? 'active' : '' }}" role="tab" data-toggle="tab">
-                            @lang('app.Comments')
-                        </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="#comment" class="tabs__trigger {{ request()->has('page') ? 'active' : '' }}" role="tab" data-toggle="tab">--}}
+{{--                            @lang('app.Comments')--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <li>
                         <a href="#date" class="tabs__trigger" role="tab" data-toggle="tab">
                             @lang('app.Bid history')
@@ -87,7 +87,7 @@
                                 </div>
                                 @if($auction->is_sold)
                                     <div class="add-det">
-                                        <p class="det-name">بيع بملغ</p>
+                                        <p class="det-name">@lang('app.sale_amount')</p>
                                         <p class="det-type"><span class="ub-font">{{ $auction->sale_amount }}</span> @lang('app.currency')</p>
                                     </div>
                                 @endif
@@ -189,58 +189,58 @@
                 </div><!--End detail-->
                 <div class="clear"></div>
                 <!--StartComment-->
-                <div class="tab-pane mt-4 {{ request()->has('page') ?  'active' : '' }}" role="tabpanel" id="comment">
+{{--                <div class="tab-pane mt-4 {{ request()->has('page') ?  'active' : '' }}" role="tabpanel" id="comment">--}}
 
-                    @if(!$comments->count())
-                        <div class="bord">
-                            <div class="row">
-                                <!--noComment-->
-                                <h3 class="comment-tit w-100">@lang('app.Comments')</h3>
-                                <p class="no-comment">@lang('app.no comments')</p>
-                            </div>
-                        </div>
-                    @else
-                        <div class="comment">
-                            <!--Comment-->
-                            <div class="row">
-                                <h3 class="my-4 end-in">@lang('app.Comments')</h3>
-                                @foreach($comments as $comment)
-                                    <div class="col-12">
-                                        <div class="comment-box">
-                                            <div class="new-name">
-                                                <div class="com-name">
-                                                    <i class="fas fa-user"></i>{{ $comment->user->name }}
-                                                </div>
-                                            </div>
-                                            <div class="sort-product">
-                                                <p>
-                                                    {{ $comment->comment }}
-                                                </p>
-                                                <p class="float-left pb-3">{{ $comment->created_at->diffForHumans() }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                                {{ $comments->links('frontend.layouts.paginator') }}
-                            </div><!--comment-->
-                        </div>
-                    @endif
+{{--                    @if(!$comments->count())--}}
+{{--                        <div class="bord">--}}
+{{--                            <div class="row">--}}
+{{--                                <!--noComment-->--}}
+{{--                                <h3 class="comment-tit w-100">@lang('app.Comments')</h3>--}}
+{{--                                <p class="no-comment">@lang('app.no comments')</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        <div class="comment">--}}
+{{--                            <!--Comment-->--}}
+{{--                            <div class="row">--}}
+{{--                                <h3 class="my-4 end-in">@lang('app.Comments')</h3>--}}
+{{--                                @foreach($comments as $comment)--}}
+{{--                                    <div class="col-12">--}}
+{{--                                        <div class="comment-box">--}}
+{{--                                            <div class="new-name">--}}
+{{--                                                <div class="com-name">--}}
+{{--                                                    <i class="fas fa-user"></i>{{ $comment->user->name }}--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="sort-product">--}}
+{{--                                                <p>--}}
+{{--                                                    {{ $comment->comment }}--}}
+{{--                                                </p>--}}
+{{--                                                <p class="float-left pb-3">{{ $comment->created_at->diffForHumans() }}</p>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                @endforeach--}}
+{{--                                {{ $comments->links('frontend.layouts.paginator') }}--}}
+{{--                            </div><!--comment-->--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
-                    @auth('user')
-                        <div class="add-comment">
-                            {!! Form::open(['route' => 'frontend.user.comment', 'id' => 'review-form']) !!}
-                            {!! Form::hidden('auction_id',$auction->id) !!}
-                            <div class="row">
-                                <h3 class="my-4 end-in">@lang('app.Add a comment')</h3>
-                                <textarea class="form-control" rows="7" id="comment" name="comment" placeholder="اضف تعليق"></textarea>
-                                <div class="b-left w-100 my-4">
-                                    <button class="btn btn-show" type="submit">@lang('app.Add a comment')</button>
-                                </div>
-                            </div>
-                            {!! Form::close() !!}
-                        </div>
-                    @endauth
-                </div>
+{{--                    @auth('user')--}}
+{{--                        <div class="add-comment">--}}
+{{--                            {!! Form::open(['route' => 'frontend.user.comment', 'id' => 'review-form']) !!}--}}
+{{--                            {!! Form::hidden('auction_id',$auction->id) !!}--}}
+{{--                            <div class="row">--}}
+{{--                                <h3 class="my-4 end-in">@lang('app.Add a comment')</h3>--}}
+{{--                                <textarea class="form-control" rows="7" id="comment" name="comment" placeholder="اضف تعليق"></textarea>--}}
+{{--                                <div class="b-left w-100 my-4">--}}
+{{--                                    <button class="btn btn-show" type="submit">@lang('app.Add a comment')</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            {!! Form::close() !!}--}}
+{{--                        </div>--}}
+{{--                    @endauth--}}
+{{--                </div>--}}
                 <div class="tab-pane mt-4" role="tabpanel" id="date">
                     <div class="row">
                         @if(!$auction->auctionsUsers()->count())

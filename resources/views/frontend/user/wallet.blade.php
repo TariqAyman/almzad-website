@@ -77,11 +77,11 @@
                         </div>
                         <div class="form-group my-3">
                             <h6>@lang('app.email')</h6>
-                            <input type="email" name="email" value="{{ auth('user')->user()->email }}" class="form-control" placeholder="@lang('app.email')" autocomplete="false">
+                            <input type="email" name="email" value="{{ auth('user')->user()->email }}" class="form-control" placeholder="@lang('app.email')" autocomplete="false" required>
                         </div>
                         <div class="form-group my-3">
                             <h6>الكمية</h6>
-                            <input type="number" class="form-control" placeholder="@lang('app.Example: 1234 riyals')" name="amount" autocomplete="false">
+                            <input type="number" class="form-control" placeholder="@lang('app.Example: 1234 riyals')" name="amount" autocomplete="false" required>
                         </div>
                     </div>
                     <div class="modal-footer">
