@@ -26,7 +26,7 @@
             <!--logo-->
             <div class="col-lg-3 col-6">
                 <a href="{{ url('/') }}">
-                    <img class="img-fluid" src="{{ asset(setting('company_logo')) ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 210px; max-height: 74px">
+                    <img class="img-fluid" src="{{ setting('company_logo') ? asset(setting('company_logo')) : asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 210px; max-height: 74px">
                 </a>
             </div>
             <div class=" menu col-6">
@@ -157,7 +157,7 @@
         <div class="row">
             <div class="col-lg col-sm-12">
                 <a href="{{ url('/') }}">
-                    <img class="img-fluid" src="{{ asset(setting('company_logo')) ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 198px;max-height:  70px">
+                    <img class="img-fluid" src="{{ setting('company_logo') ? asset(setting('company_logo')) : asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 198px;max-height:  70px">
                 </a>
                 <div class="col-12 social-bg">
                     <ul class="nav socail-media mt-4">

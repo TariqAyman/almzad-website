@@ -8,7 +8,7 @@
                     <div class="form-login">
                         <div class="form-title">
                             <a href="{{ url('/') }}">
-                                <img src="{{ asset(setting('company_logo')) ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" class="img-fluid">
+                                <img src="{{ setting('company_logo') ? asset(setting('company_logo')) : asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" class="img-fluid">
                             </a>
                         </div>
                         <div class="form-body">
