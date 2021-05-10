@@ -28,7 +28,17 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
 
     /**
      * Display the password reset view for the given token.
@@ -42,12 +52,9 @@ class ResetPasswordController extends Controller
     {
         $token = $request->route()->parameter('token');
 
-        $pageConfigs = ['blankPage' => true];
-
-        return view('dashboard.auth.passwords.reset')->with([
+        return view('frontend.user.reset-password')->with([
             'token' => $token,
             'email' => $request->email,
-            'pageConfigs' => $pageConfigs
         ]);
     }
 
@@ -59,5 +66,19 @@ class ResetPasswordController extends Controller
     protected function guard()
     {
         return Auth::guard();
+    }
+
+    /**
+     * Get the password reset validation rules.
+     *
+     * @return array
+     */
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:6',
+        ];
     }
 }

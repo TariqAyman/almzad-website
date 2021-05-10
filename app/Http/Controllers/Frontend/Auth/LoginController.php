@@ -74,9 +74,9 @@ class LoginController extends Controller
 
         $credentials = $request->only('phone_number', 'password');
 
-        $credentials['phone_number'] = '+966' . $request->phone_number;
-
-        if (!preg_match('/^[+](966)(\d{9})$/',$credentials['phone_number'])) return redirect()->route('login')->withInput()->withErrors(trans('passwords.invalid phone number'));
+//        $credentials['phone_number'] = '+966' . $request->phone_number;
+//
+//        if (!preg_match('/^[+](966)(\d{9})$/',$credentials['phone_number'])) return redirect()->route('login')->withInput()->withErrors(trans('passwords.invalid phone number'));
 
         $user = User::where('phone_number', $credentials['phone_number'])->first();
 
@@ -91,7 +91,7 @@ class LoginController extends Controller
             }
         } else {
             $this->incrementLoginAttempts($request);
-            return redirect()->route('login')->withInput()->withErrors(trans('passwords.Incorrect username or password. Please try again'));
+            return redirect()->route('login')->withInput()->withErrors(trans('passwords.Incorrect Mobile or password. Please try again'));
         }
 
     }
