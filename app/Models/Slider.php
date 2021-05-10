@@ -47,21 +47,44 @@ class Slider extends Model
 
     public function getNameAttribute()
     {
-        return $this->attributes['name_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['name_ar'];
+
+        } else {
+            return $this->attributes['name_en'];
+        }
     }
 
     public function getTitleAttribute()
     {
-        return $this->attributes['title_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['title_ar'];
+
+        } else {
+            return $this->attributes['title_en'];
+        }
+
     }
 
     public function getSubTitleAttribute()
     {
-        return $this->attributes['sub_title_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['sub_title_ar'];
+
+        } else {
+            return $this->attributes['sub_title_en'];
+        }
+
     }
 
     public function getDescriptionAttribute()
     {
-        return $this->attributes['description_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['description_ar'];
+
+        } else {
+            return $this->attributes['description_en'];
+        }
+
     }
 }

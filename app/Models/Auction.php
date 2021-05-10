@@ -119,7 +119,8 @@ class Auction extends Model
         'expired_in',
         'description',
         'conditions',
-        'highest_price'
+        'highest_price',
+        'shipping_conditions'
     ];
 
     public function category()
@@ -144,7 +145,7 @@ class Auction extends Model
 
     public function soldTo()
     {
-        return $this->belongsTo(User::class,'sold_to');
+        return $this->belongsTo(User::class, 'sold_to');
     }
 
     public function auctionsImages()
@@ -179,22 +180,54 @@ class Auction extends Model
 
     public function getNameAttribute()
     {
-        return $this->attributes['name_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['name_ar'];
+
+        } else {
+            return $this->attributes['name_en'];
+        }
     }
 
     public function getSlugAttribute()
     {
-        return $this->attributes['slug_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['slug_ar'];
+
+        } else {
+            return $this->attributes['slug_en'];
+        }
     }
 
     public function getDescriptionAttribute()
     {
-        return $this->attributes['description_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['description_ar'];
+
+        } else {
+            return $this->attributes['description_en'];
+
+        }
     }
 
     public function getConditionsAttribute()
     {
-        return $this->attributes['conditions_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['conditions_ar'];
+
+        } else {
+            return $this->attributes['conditions_en'];
+
+        }
+    }
+
+    public function getShippingConditionsAttribute()
+    {
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['shipping_conditions_en'];
+
+        } else {
+            return $this->attributes['shipping_conditions_ar'];
+        }
     }
 
     public function getIsExpiredAttribute()

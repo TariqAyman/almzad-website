@@ -121,7 +121,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function contact_us()
     {
-        return $this->hasMany(ContactU::class);
+        return $this->hasMany(ContactUs::class);
     }
 
     public function reviews()

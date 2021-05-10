@@ -77,11 +77,21 @@ class Store extends Model
 
     public function getNameAttribute()
     {
-        return $this->attributes['name_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['name_ar'];
+
+        } else {
+            return $this->attributes['name_en'];
+        }
     }
 
     public function getSlugAttribute()
     {
-        return $this->attributes['slug_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['slug_ar'];
+
+        } else {
+            return $this->attributes['slug_en'];
+        }
     }
 }

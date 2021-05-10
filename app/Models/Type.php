@@ -62,6 +62,11 @@ class Type extends Model
 
     public function getNameAttribute()
     {
-        return $this->attributes['name_ar'];
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['name_ar'];
+
+        } else {
+            return $this->attributes['name_en'];
+        }
     }
 }
