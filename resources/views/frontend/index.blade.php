@@ -1,5 +1,8 @@
 @extends('frontend.layouts.app')
 
+@section('page-title' , trans('app.home'))
+
+
 @section('content')
     <!--StartMzadhaed-->
     <section class="mzadhead slider">

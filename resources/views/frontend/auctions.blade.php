@@ -1,5 +1,8 @@
 @extends('frontend.layouts.app')
 
+@section('page-title' , trans('app.auctions') )
+
+
 @section('content')
     <!--End-Header-->
     <div class="page-header">

@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('page-title' , trans('app.auction') . ": {$auction->name}" )
+
 @section('content')
     <div class="page-header">
         <div class="container">

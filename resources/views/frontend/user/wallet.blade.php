@@ -1,5 +1,8 @@
 @extends('frontend.layouts.app')
 
+@section('page-title' , trans('app.wallets'))
+
+
 @section('content')
 
     <div class="page-header">

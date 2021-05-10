@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('page-title' , trans('app.Verification code'))
+
 @section('content')
     <section>
         <div class="container pt-5">
