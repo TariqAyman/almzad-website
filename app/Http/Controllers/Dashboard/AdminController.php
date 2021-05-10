@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\UploadFile;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ADminStoreRequest;
+use App\Http\Requests\AdminStoreRequest;
 use App\Http\Requests\AdminUpdateRequest;
 use App\Models\Admin;
 use DataTables;
@@ -80,7 +80,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ADminStoreRequest $request
+     * @param AdminStoreRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(AdminStoreRequest $request)
