@@ -36,24 +36,29 @@ class ProfileController extends Controller
      * Store a newly created resource in storage.
      *
      * @param UserUpdateRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserUpdateRequest $request)
     {
         $user = \Auth::guard('user')->user();
 
-        $userData = $request->except('profile_photo','oldPassword','newPassword');
+        $userData = $request->except('profile_photo', 'oldPassword', 'newPassword');
 
         if ($request->profile_photo) {
             $userData['profile_photo'] = $this->uploadFile($request, 'profile_photo', 'users');
         }
 
-        if ($request->has('newPassword') && \Hash::check($request->oldPassword,$user->password)){
-            $userData['password'] = $request->newPassword;
+        if ($request->has('newPassword')) {
+
+            if (\Hash::check($request->oldPassword, $user->password)) {
+                $userData['password'] = $request->newPassword;
+            } else {
+                return redirect()->back()->withErrors(trans('app.The current password is incorrect'));
+            }
         }
 
-        if ($request->phone_number != $user->phone_number){
-            $userData['phone_verified']  = false;
+        if ($request->has('phone_number') && $request->phone_number != $user->phone_number) {
+            $userData['phone_verified'] = false;
         }
 
         $user->update($userData);
