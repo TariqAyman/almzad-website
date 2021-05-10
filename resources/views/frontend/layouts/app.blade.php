@@ -1,4 +1,7 @@
-<html lang="@if( session()->has('appLocale') ){{ session()->get('appLocale') }}@else{{ 'ar' }}@endif" data-textdirection="{{ session()->get('appLocale') == 'ar' ? 'rtl' : 'ltr' }}" dir="{{ session()->get('appLocale') == 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="@if( session()->has('appLocale') ){{ session()->get('appLocale') }}@else{{ 'ar' }}@endif"
+      data-textdirection="{{ session()->get('appLocale') == 'ar' ? 'rtl' : 'ltr' }}"
+      dir="{{ session()->get('appLocale') == 'ar' ? 'rtl' : 'ltr' }}"
+      >
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -15,7 +18,7 @@
     @yield('style')
     <title>@yield('page-title') | {{ setting('company_name') }}</title>
 </head>
-<body>
+<body data-countdowncount="{{ setting('record_per_page') }}">
 <div id="myBtn" class="top">
     <a class="scroll" href="#top"><span class="fa fa-chevron-up"></span></a>
 </div>

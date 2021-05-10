@@ -226,13 +226,11 @@ function Countdown(node) {
 }
 
 // Let's go !
-new Countdown($($('.countdown')[0])).init();
-new Countdown($($('.countdown')[1])).init();
-new Countdown($($('.countdown')[2])).init();
-new Countdown($($('.countdown')[3])).init();
-new Countdown($($('.countdown')[4])).init();
-new Countdown($($('.countdown')[5])).init();
-new Countdown($($('.countdown')[6])).init();
+$total = $('body').attr('data-countdowncount');
+
+for ($count = 0; $count <= $total; $count++){
+    new Countdown($($('.countdown')[$count])).init();
+}
 
 //this code for upload pic
 $('document').ready(function () {

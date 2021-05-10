@@ -5,7 +5,7 @@
                 <img class="img-fluid" alt="{{ $auction->name }}" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}">
             </a>
         </figure>
-        <p class="top-offer">{{ $auction->highest_price }}</p>
+        <p class="top-offer"><span class="ub-font">{{ $auction->highest_price }}</span> @lang('app.currency')</p>
         <div class="new-box">
             <a href="{{ route('frontend.auctions.show',$auction->slug) }}">
                 <h3>{{ $auction->name }}</h3>
