@@ -26,7 +26,7 @@
             <!--logo-->
             <div class="col-lg-3 col-6">
                 <a href="{{ url('/') }}">
-                    <img class="img-fluid" src="{{ setting('company_logo') ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 210px; max-height: 74px">
+                    <img class="img-fluid" src="{{ asset(setting('company_logo')) ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 210px; max-height: 74px">
                 </a>
             </div>
             <div class=" menu col-6">
@@ -157,20 +157,21 @@
         <div class="row">
             <div class="col-lg col-sm-12">
                 <a href="{{ url('/') }}">
-                    <img class="img-fluid" src="{{ setting('company_logo') ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 198px;max-height:  70px"></a>
+                    <img class="img-fluid" src="{{ asset(setting('company_logo')) ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 198px;max-height:  70px">
+                </a>
                 <div class="col-12 social-bg">
                     <ul class="nav socail-media mt-4">
-                        @if( setting('youtube_url') )
+                        @if( setting('instagram_url') )
                             <li class="sub-social">
                                 <a href="{{ setting('instagram_url') }}"><i class="fab fa-instagram"></i></a>
                             </li>
                         @endif
-                        @if( setting('youtube_url') )
+                        @if( setting('twitter_url') )
                             <li class="sub-social">
                                 <a href="{{ setting('twitter_url') }}"><i class="fab fa-twitter"></i></a>
                             </li>
                         @endif
-                        @if( setting('youtube_url') )
+                        @if( setting('facebook_url') )
                             <li class="sub-social">
                                 <a href="{{ setting('facebook_url') }}"><i class="fab fa-facebook-square"></i></a>
                             </li>
@@ -184,7 +185,7 @@
                 </div>
             </div>
             <div class="col-lg col-sm-6">
-                <h4>الأقسام الشائعة</h4>
+                <h4>@lang('app.Common category')</h4>
                 <div class="foot-dept">
                     @foreach($categoriesLayout->splitIn(2) as $categories)
                         <ul class="nav footer-link">
@@ -196,7 +197,7 @@
                 </div>
             </div>
             <div class="col-lg col-sm-6">
-                <h4>المزادات الشائعة</h4>
+                <h4>@lang('app.Popular Auctions')</h4>
                 <ul class="nav footer-link">
                     @foreach($auctionsLayout as $auction)
                         <li class="pub-mzad">
@@ -212,7 +213,7 @@
                 </ul>
             </div>
             <div class="col-lg col-sm-6">
-                <h4>تواصل معانا</h4>
+                <h4>@lang('app.Connect with us')</h4>
                 <div class="footer-contact">
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="contact-info pr-2">{{ setting('company_city') }} - {{ setting('company_address') }}</div>
@@ -227,7 +228,7 @@
                 </div>
             </div>
             <div class="col-lg col-sm-6">
-                <h4>اكتشف الروابط</h4>
+                <h4>@lang('app.Find out the links')</h4>
                 <ul class="nav footer-link">
                     @if(setting('url_1') &&  setting('url_1_text'))
                         <li><a href="{{ setting('url_1') }}">{{ setting('url_1_text') }}</a></li>

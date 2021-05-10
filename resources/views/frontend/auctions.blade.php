@@ -16,13 +16,13 @@
                 <div class="row">
                     <div class="col-lg-4 d-flex px-0 mt-2">
                         <select name="type" class="form-control">
-                            <option value="">اختار النوع</option>
+                            <option value="">@lang('app.Chose to type')</option>
                             @foreach($types as $type)
                                 <option value="{{ $type->id }}" {{ (( old('type') ?? request()->type ) == $type->id ) ? 'selected' : '' }}>{{ $type->name }}</option>
                             @endforeach
                         </select>
                         <select name="category" class="form-control">
-                            <option value="">اختار القسم</option>
+                            <option value="">@lang('app.Choose a section')</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ (( old('category') ?? request()->category ) == $category->id ) ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
@@ -31,15 +31,15 @@
                     </div>
                     <div class="col-lg-4 d-flex px-0 mt-2">
                         <div class="date-f">
-                            <input type="date" class="form-control" name="start_date" placeholder="اتاريخ الوثيقة" value="{{ old('name') ?? request()->start_date ?? date('Y-m-d') }}">
+                            <input type="date" class="form-control" name="start_date" placeholder="@lang('app.start_date')" value="{{ old('name') ?? request()->start_date ?? date('Y-m-d') }}">
                         </div>
                         <div class="date-f">
-                            <input type="date" class="form-control" name="end_date" placeholder="اتاريخ الوثيقة" value="{{ old('name') ?? request()->end_date ?? date('Y-m-d') }}">
+                            <input type="date" class="form-control" name="end_date" placeholder="@lang('app.end_date')" value="{{ old('name') ?? request()->end_date ?? date('Y-m-d') }}">
                         </div>
                         <a href="#" class="valid"><i class="fas fa-arrow-left"></i></a>
                     </div>
                     <div class="col-lg-4  d-flex px-0 mt-2 serch-w">
-                        <input type="text" value="{{ old('name') ?? request()->name }}" class="form-control" placeholder="البحث">
+                        <input type="text" value="{{ old('name') ?? request()->name }}" class="form-control" placeholder="@lang('app.search')">
                         <a href="#" class="valid ml-1" onclick="document.getElementById('search-form').submit()"><i class="fas fa-search"></i></a>
                     </div>
                 </div>

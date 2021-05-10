@@ -4,18 +4,21 @@
 
     <div class="page-header">
         <div class="container">
-            <h2>حسابي</h2>
-            <div class="tit"><i class="fas fa-home"></i><a href="{{ url('/') }}">الرئيسية</a> / <span>المحفظة</span></div>
+            <h2>@lang('app.my account')</h2>
+            <div class="tit"><i class="fas fa-home"></i>
+                <a href="{{ url('/') }}">@lang('app.hone')</a>
+                / <span>@lang('app.wallet')</span>
+            </div>
         </div>
     </div>
     <section class="message">
         <div class="container">
             <div class="add-det aboutme">
                 <p class="det-name px-md-2">{{ auth('user')->user()->name }}</p>
-                <p class="det-name px-md-2"> الرصيد المتاح: {{ auth('user')->user()->actual_balance }}</p>
+                <p class="det-name px-md-2"> @lang('app.Available balance:') {{ auth('user')->user()->actual_balance }}</p>
 
                 <div class="update-store">
-                    <a class="dept-name" data-toggle="modal" data-target="#addBalance">اضافة رصيد</a>
+                    <a class="dept-name" data-toggle="modal" data-target="#addBalance">@lang('app.Add credit')</a>
                 </div>
             </div>
             <hr>
@@ -23,18 +26,18 @@
                 <table class="table table-striped table-bordered tab-wall">
                     <thead>
                     <tr>
-                        <th scope="col">ملاحظه</th>
-                        <th scope="col">التاريخ</th>
-                        <th scope="col">ايداع</th>
-                        <th scope="col">سحب</th>
-                        <th scope="col">رصيد معلق</th>
+                        <th scope="col">@lang('app.Note')</th>
+                        <th scope="col">@lang('app.dates')</th>
+                        <th scope="col">@lang('app.in_wallet')</th>
+                        <th scope="col">@lang('app.out')</th>
+                        <th scope="col">@lang('app.hold')</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($wallets as $wallet)
                         <tr>
                             @if($wallet->auction_id)
-                                <td><a href="{{ route('frontend.auctions.show',$wallet->auction_id) }}">{{ $wallet->note }}</a></td>
+                                <td><a href="{{ route('frontend.auctions.show',$wallet->auction->slug) }}">{{ $wallet->note }}</a></td>
                             @else
                                 <td>{{ $wallet->note }}</td>
                             @endif
@@ -61,28 +64,28 @@
                     </button>
                     <div class="modal-header text-center mx-auto">
                         <div class="modal-title  blue-color">
-                            <h4 id="addPriceLabel">اضافة رصيد</h4>
+                            <h4 id="addPriceLabel">@lang('app.Add credit')</h4>
                         </div>
                     </div>
                     {!! Form::open(['route' => 'frontend.payment.store', 'id' => 'payment-form']) !!}
                     <div class="modal-body">
                         <div class="form-group my-3">
-                            <h6>إختر طريقة الإضافة</h6>
+                            <h6>@lang('app.Choose a payment method')</h6>
                             <select class="form-control">
                                 <option value="visa">VISA</option>
                             </select>
                         </div>
                         <div class="form-group my-3">
-                            <h6>البريد الالكتروني</h6>
-                            <input type="email" name="email" value="{{ auth('user')->user()->email }}" class="form-control" placeholder="البريد الالكتروني" autocomplete="false">
+                            <h6>@lang('app.email')</h6>
+                            <input type="email" name="email" value="{{ auth('user')->user()->email }}" class="form-control" placeholder="@lang('app.email')" autocomplete="false">
                         </div>
                         <div class="form-group my-3">
                             <h6>الكمية</h6>
-                            <input type="number" class="form-control" placeholder="مثال : ١٢٣٤ ريال" name="amount" autocomplete="false">
+                            <input type="number" class="form-control" placeholder="@lang('app.Example: 1234 riyals')" name="amount" autocomplete="false">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-show" data-toggle="modal" type="submit">إضافة رصيد</button>
+                        <button class="btn btn-show" data-toggle="modal" type="submit">@lang('app.Add credit')</button>
                     </div>
                     {!! Form::close() !!}
                 </div>

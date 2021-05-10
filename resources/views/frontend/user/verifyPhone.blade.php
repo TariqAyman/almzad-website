@@ -8,14 +8,14 @@
                     <div class="form-login">
                         <div class="form-title">
                             <a href="{{ url('/') }}">
-                                <img src="{{ asset('frontend/img/black-logo.png') }}" alt="مزاد الخير" class="img-fluid">
+                                <img src="{{ asset(setting('company_logo')) ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" class="img-fluid">
                             </a>
                         </div>
                         <div class="form-body">
                             <form class="form-horizontal" action="{{ route('frontend.verifyPhone') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="tel" style="direction: {{ Session::get('appLocale') == 'ar' ? 'ltr' : 'rtl' }};text-align: {{ Session::get('appLocale') == 'ar' ? 'left' : 'right' }};" class="form-control" name="phone_number" id="phone_number" placeholder="@lang('app.phone_number')" required
+                                    <input type="tel" style="direction: {{ App::getLocale() == 'ar' ? 'ltr' : 'rtl' }};text-align: {{ App::getLocale() == 'ar' ? 'left' : 'right' }};" class="form-control" name="phone_number" id="phone_number" placeholder="@lang('app.phone_number')" required
                                            readonly value="{{ old('phone_number') ?? auth('user')->user()->phone_number }}" title="@lang('app.phone_number')">
                                     <img class="" src="{{ asset('frontend/img/pro.png') }}">
                                 </div>
@@ -32,7 +32,7 @@
                                     <input type="text" id="verification" class="form-control" placeholder="@lang('app.Verification code')">
                                     <img class="" src="{{ asset('frontend/img/phone-icon.png') }}">
                                     <br>
-                                    <button type="button" class="btn btn-info w-100" onclick="verify()">تاكيد الكود</button>
+                                    <button type="button" class="btn btn-info w-100" onclick="verify()">@lang('app.Confirm the code')</button>
                                 </div>
                             </form>
                         </div>
@@ -64,8 +64,6 @@
         firebase.initializeApp(firebaseConfig);
 
         window.onload = function () {
-
-
             render();
         };
 

@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('page-title' , trans('app.notification'))
+
 @section('content')
     <div class="page-header">
         <div class="container">

@@ -8,7 +8,7 @@
                 <a class="navbar-brand" href="{{route('admin.dashboard')}}">
                     <span class="brand-logo">
                         @if (setting('company_logo'))
-                            <img alt="{{ setting('company_name') }}" height="45" class="navbar-brand-img" src="{{ asset(setting('company_logo')) }}">
+                            <img alt="{{ setting('company_name') }}" height="45" class="navbar-brand-img" src="{{ asset(setting('company_logo')) ?? asset('frontend/img/logo.png') }}">
                         @else
                             <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
                                       <defs>

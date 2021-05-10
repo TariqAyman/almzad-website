@@ -5,8 +5,11 @@
 @section('content')
     <div class="page-header">
         <div class="container">
-            <h2>حسابي</h2>
-            <div class="tit"><i class="fas fa-home"></i><a href="{{ url('/') }}">الرئيسية</a> / <span>حسابي</span></div>
+            <h2>@lang('app.my account')</h2>
+            <div class="tit"><i class="fas fa-home"></i>
+                <a href="{{ url('/') }}">@lang('app.home')</a>
+                / <span>@lang('app.my account')</span>
+            </div>
         </div>
     </div>
     <section class="user-acount">
@@ -32,7 +35,7 @@
                         {!! Form::open(['route' => ['frontend.profile.store'], 'files' => true]) !!}
                         <div class="upload-pic">
                             <input type="file" name="profile_photo" id="file-5" class="inputfile inputfile-1 form-control" accept="image/*">
-                            <label for="file-5" class="btn btn-show">تغير الصورة</label>
+                            <label for="file-5" class="btn btn-show">@lang('app.change photo')</label>
                             <button type="submit" class="btn btn-show">@lang('app.Edit image')</button>
                         </div>
                         {!! Form::close() !!}
@@ -46,7 +49,7 @@
                             <li><a href="#info" class="tabs__trigger active" role="tab" data-toggle="tab"> @lang('app.Personal Info') </a>
                             </li>
                             <li><a href="#password" class="tabs__trigger" role="tab" data-toggle="tab">
-                                    تغيير كلمة المرور</a>
+                                    @lang('app.change Password')</a>
                             </li>
 {{--                            <li><a href="#address" class="tabs__trigger" role="tab" data-toggle="tab">--}}
 {{--                                    عناويني</a>--}}
@@ -55,7 +58,7 @@
 {{--                                    تفعيل الهوية</a>--}}
 {{--                            </li>--}}
                             <li><a href="#updateProfile" class="tabs__trigger" role="tab" data-toggle="tab">
-                                    تعديل الملف</a>
+                                @lang('app.Edit account information')</a>
                             </li>
                         </ul>
                     </div><!--tabTite-->
@@ -75,7 +78,7 @@
                                 </div>
                                 <!--taype-->
                                 <div class="col-sm-6">
-                                    <p class="tit">نوع المستخدم</p>
+                                    <p class="tit">@lang('app.User type')</p>
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="det">{{ ($user->type == 'user' ) ? 'مستخدم' : 'بائع' }}</p>
@@ -109,31 +112,31 @@
                                     <p class="det">{{ $user->status ? trans('app.active') : trans('app.disable') }}</p>
                                 </div>
                                 <!--aboutE-->
-                                <div class="col-sm-6">
-                                    <p class="tit">الحالة الاقتصادية</p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p class="det">مفعل</p>
-                                </div>
-                                <!--aboutD-->
-                                <div class="col-sm-6">
-                                    <p class="tit">حالة الدعم والوصول</p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p class="det">مفعل</p>
-                                </div>
+{{--                                <div class="col-sm-6">--}}
+{{--                                    <p class="tit">الحالة الاقتصادية</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-sm-6">--}}
+{{--                                    <p class="det">مفعل</p>--}}
+{{--                                </div>--}}
+{{--                                <!--aboutD-->--}}
+{{--                                <div class="col-sm-6">--}}
+{{--                                    <p class="tit">حالة الدعم والوصول</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-sm-6">--}}
+{{--                                    <p class="det">مفعل</p>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                         <!--Startpassword-->
                         <div class="tab-pane" role="tabpanel" id="password">
                             {!! Form::open(['route' => ['frontend.profile.store'], 'files' => false]) !!}
                             <div class="row">
-                                <input type="password" name="oldPassword" class="form-control" placeholder="كلمة المرور الحالية">
-                                <input id="newPassword" type="password" name="password" class="form-control" placeholder="كلمة المرور الجديدة">
-                                <input name="password_confirmation" id="confirm_password" type="password" class="form-control" placeholder="تأكيد كلمة المرور الجديدة">
+                                <input type="password" name="oldPassword" class="form-control" placeholder="@lang('app.Current Password')">
+                                <input id="newPassword" type="password" name="password" class="form-control" placeholder="@lang('app.new password')">
+                                <input name="password_confirmation" id="confirm_password" type="password" class="form-control" placeholder="@lang('app.Confirm the new password')">
                                 <span id='message'></span>
                                 <div class="b-left w-100">
-                                    <button class="btn btn-show" type="submit">تأكيد التعديل</button>
+                                    <button class="btn btn-show" type="submit">@lang('app.Edit Account')</button>
                                 </div>
                             </div>
                             {!! Form::close() !!}
@@ -167,7 +170,7 @@
                                 <div class="col-12 green-bg">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p class="tit">رقم الجوال</p>
+                                            <p class="tit">@lang('app.mobile')</p>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="det ub-font">{{ $user->phone_number }}</p>
@@ -178,7 +181,7 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p class="tit">كود البريد</p>
+                                            <p class="tit">@lang('app.Postal Code')</p>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="det ub-font">{{ $user->postcode }}</p>
@@ -189,7 +192,7 @@
                                 <div class="col-12 green-bg">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p class="tit">حالة الحساب</p>
+                                            <p class="tit">@lang('app.Account status')</p>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="det">{{ $user->status }}</p>
@@ -256,7 +259,7 @@
                                 <input type="text" name="address" class="form-control" value="{{ old('address') ?? $user->address  }}" placeholder="@lang('app.address')">
                                 <span id='message'></span>
                                 <div class="b-left w-100">
-                                    <button class="btn btn-show" type="submit">تأكيد التعديل</button>
+                                    <button class="btn btn-show" type="submit">@lang('app.Edit Account')</button>
                                 </div>
                             </div>
                             {!! Form::close() !!}

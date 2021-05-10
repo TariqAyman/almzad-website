@@ -49,29 +49,29 @@
             <div class="bigtit">
                 <div class="tit-box">
                     <img class="img-fluid" src="{{ asset('frontend/img/howwork.png') }}">
-                    <h5>كيف يعمل</h5>
+                    <h5>@lang('app.How it works')</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 work-box">
-                    <img class="img-fluid" src="{{ asset('frontend/img/how-01.png') }}" alt="سجل مزاد خيري">
-                    <h4>سجل معانا</h4>
-                    <p>تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط</p>
+                    <img class="img-fluid" src="{{ asset('frontend/img/how-01.png') }}" alt="@lang('app.Register with us')">
+                    <h4>@lang('app.Register with us')</h4>
+                    <p>@lang('app.A simple definition here a simple definition here a simple definition here a simple definition here a simple definition')</p>
                 </div>
                 <div class="col-md-3 work-box">
-                    <img class="img-fluid" src="{{ asset('frontend/img/how-02.png') }}" alt="اشتري او زايد">
-                    <h4>اشتري او زايد</h4>
-                    <p>تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط</p>
+                    <img class="img-fluid" src="{{ asset('frontend/img/how-02.png') }}" alt="@lang('app.Buy or Bid')">
+                    <h4>@lang('app.Buy or Bid')</h4>
+                    <p>@lang('app.A simple definition here a simple definition here a simple definition here a simple definition here a simple definition')</p>
                 </div>
                 <div class="col-md-3 work-box">
-                    <img class="img-fluid" src="{{ asset('frontend/img/how-03.png') }}" alt="قدم مزايده">
-                    <h4>قدم مزايده</h4>
-                    <p>تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط</p>
+                    <img class="img-fluid" src="{{ asset('frontend/img/how-03.png') }}" alt="@lang('app.Submit his bid')">
+                    <h4>@lang('app.Submit his bid')</h4>
+                    <p>@lang('app.A simple definition here a simple definition here a simple definition here a simple definition here a simple definition')</p>
                 </div>
                 <div class="col-md-3 work-box">
-                    <img class="img-fluid" src="{{ asset('frontend/img/how-04.png') }}" alt="اربح المزاد">
-                    <h4>اربح المزاد</h4>
-                    <p>تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط هنا تعريف بسيط</p>
+                    <img class="img-fluid" src="{{ asset('frontend/img/how-04.png') }}" alt="@lang('app.Win the auction')">
+                    <h4>@lang('app.Win the auction')</h4>
+                    <p>@lang('app.A simple definition here a simple definition here a simple definition here a simple definition here a simple definition')</p>
                 </div>
             </div>
         </div>

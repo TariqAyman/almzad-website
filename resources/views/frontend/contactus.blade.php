@@ -10,7 +10,7 @@
                     <div class="form-login">
                         <div class="form-title">
                             <a href="{{ url('/') }}">
-                                <img src="{{ asset('frontend/img/black-logo.png') }}" alt="مزاد الخير" class="img-fluid">
+                                <img src="{{ asset(setting('company_logo')) ?? asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" class="img-fluid">
                             </a>
                         </div>
                         <div class="form-body">
@@ -30,21 +30,21 @@
                                            title="@lang('app.email')">
                                     <img class="" src="{{ asset('frontend/img/email.png') }}">
                                 </div>
-                                <div class="input-group input-group-merge mb-2" style="direction: {{ Session::get('appLocale') == 'ar' ? 'ltr' : 'rtl' }};">
+                                <div class="input-group input-group-merge mb-2" style="direction: ltr;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon5">+966</span>
+                                        <span class="input-group-text" style="padding-left: 29px" id="basic-addon5">+966</span>
                                     </div>
-                                    <input type="tel" style="direction: {{ Session::get('appLocale') == 'ar' ? 'ltr' : 'rtl' }};text-align: {{ Session::get('appLocale') == 'ar' ? 'left' : 'right' }};" class="form-control" placeholder="@lang('app.phone_number')" aria-label="phone_number" aria-describedby="basic-addon5" name="phone" required
+                                    <input type="tel" style="direction: {{ App::getLocale() == 'ar' ? 'ltr' : 'rtl' }};text-align:left ;" class="form-control" placeholder="@lang('app.phone_number')" aria-label="phone_number" aria-describedby="basic-addon5" name="phone" required
                                            value="{{ old('phone') ?? (auth('user')->check() ? \Illuminate\Support\Str::replaceFirst('+966','',auth('user')->user()->phone_number) : null) }}" title="@lang('app.phone_number')" autocomplete="false">
                                     <img class="" src="{{ asset('frontend/img/phone-icon.png') }}">
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="message" id="message" class="form-control" placeholder="@lang('app.message_contactus')" cols="40" rows="15" style="margin-top: 0px; margin-bottom: 0px; height: 96px;"
+                                    <textarea name="message" id="message" class="form-control" placeholder="@lang('app.message_contactus')" cols="40" rows="15" style="margin-top: 0px; margin-bottom: 0px; height: 96px;" required
                                               title="@lang('app.message_contactus')">{{ old('message') }}</textarea>
                                     <img class="" src="{{ asset('frontend/img/message2.png') }}">
                                 </div>
 
-                                <button type="submit" class="btn btn-show w-100">ارسال</button>
+                                <button type="submit" class="btn btn-show w-100">@lang('app.send')</button>
                             </form>
                         </div>
                     </div>

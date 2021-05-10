@@ -3,8 +3,11 @@
 @section('content')
     <div class="page-header">
         <div class="container">
-            <h2>كل المزادات</h2>
-            <div class="tit"><i class="fas fa-home"></i><a href="{{ url('/') }}">الرئيسية</a> / <span>المزادات</span> / <span>{{ $auction->name }}</span></div>
+            <h2>@lang('app.All auctions')</h2>
+            <div class="tit"><i class="fas fa-home"></i>
+                <a href="{{ url('/') }}">@lang('app.home')</a>
+                / <span>@lang('app.auctions')</span>
+                / <span>{{ $auction->name }}</span></div>
         </div>
     </div>
     <!--MzadDetials-->
@@ -13,16 +16,16 @@
             <div class="tab-title">
                 <ul class="nav nav-tabs nav-detail">
                     <li>
-                        <a href="#detail" class="tabs__trigger {{ request()->has('page') ? '' : 'active' }}" role="tab" data-toggle="tab"> تفاصيل المزاد </a>
+                        <a href="#detail" class="tabs__trigger {{ request()->has('page') ? '' : 'active' }}" role="tab" data-toggle="tab"> @lang('app.Auction details') </a>
                     </li>
                     <li>
                         <a href="#comment" class="tabs__trigger {{ request()->has('page') ? 'active' : '' }}" role="tab" data-toggle="tab">
-                            التعليقات
+                            @lang('app.Comments')
                         </a>
                     </li>
                     <li>
                         <a href="#date" class="tabs__trigger" role="tab" data-toggle="tab">
-                            تاريخ المزايدة
+                            @lang('app.Bid history')
                         </a>
                     </li>
                 </ul>
@@ -76,7 +79,7 @@
                                 </div>
                                 <div class="add-det">
                                     <p class="det-name">@lang('app.Auction Fees')</p>
-                                    <p class="det-type">لا يوجد</p>
+                                    <p class="det-type">@lang('app.no')</p>
                                 </div>
                                 <div class="add-det">
                                     <p class="det-name">@lang('app.Lowest bid price')</p>
@@ -113,16 +116,18 @@
                                             {!! Form::open(['route' => 'frontend.auctions.buyNow', 'id' => 'buyNow-form']) !!}
                                             {!! Form::hidden('auction_id',$auction->id) !!}
                                             <div class="add-icon">
-                                                <input type="number" readonly name="purchase_price" class="input-num" min="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}" value="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}">
+                                                <input type="number" readonly name="purchase_price" class="input-num"
+                                                       min="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}"
+                                                       value="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}">
                                             </div>
-                                            <button type="submit" class="btn btn-show w-100 mt-3">اشتري الان</button>
+                                            <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Buy now')</button>
                                             {!! Form::close() !!}
                                         </div>
                                     @endif
                                 @else
                                     <button type="submit" class="btn btn-show w-100 mt-3" onclick="location.href='{{ route('login') }}'">@lang('app.Add bid')</button>
                                     @if($auction->purchase_price)
-                                        <button type="submit" class="btn btn-show w-100 mt-3" onclick="location.href='{{ route('login') }}'">اشتري الان</button>
+                                        <button type="submit" class="btn btn-show w-100 mt-3" onclick="location.href='{{ route('login') }}'">@lang('app.Buy now')</button>
                                     @endif
                                 @endif
                             @endif
@@ -146,13 +151,14 @@
                                 <p class="det-name">@lang('app.Share this auction')</p>
                                 <ul class="nav socail-media det-type">
                                     <li class="sub-social">
-                                        <a href="#"><i class="fab fa-instagram"></i></a></li>
+                                        <a href="https://twitter.com/intent/tweet?text={{ route('frontend.auctions.show',$auction->slug) }}"><i class="fab fa-twitter"></i></a>
+                                    </li>
                                     <li class="sub-social">
-                                        <a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('frontend.auctions.show',$auction->slug) }}" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                                    </li>
                                     <li class="sub-social">
-                                        <a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                                    <li class="sub-social">
-                                        <a href="#"><i class="fab fa-youtube"></i></a></li>
+                                        <a href="https://api.whatsapp.com/send?text={{ route('frontend.auctions.show',$auction->slug) }}"><i class="fab fa-whatsapp"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -225,10 +231,10 @@
                             {!! Form::open(['route' => 'frontend.user.comment', 'id' => 'review-form']) !!}
                             {!! Form::hidden('auction_id',$auction->id) !!}
                             <div class="row">
-                                <h3 class="my-4 end-in">أضف تعليق</h3>
+                                <h3 class="my-4 end-in">@lang('app.Add a comment')</h3>
                                 <textarea class="form-control" rows="7" id="comment" name="comment" placeholder="اضف تعليق"></textarea>
                                 <div class="b-left w-100 my-4">
-                                    <button class="btn btn-show" type="submit">إضلفة تعليق</button>
+                                    <button class="btn btn-show" type="submit">@lang('app.Add a comment')</button>
                                 </div>
                             </div>
                             {!! Form::close() !!}
@@ -238,7 +244,7 @@
                 <div class="tab-pane mt-4" role="tabpanel" id="date">
                     <div class="row">
                         @if(!$auction->auctionsUsers()->count())
-                            <p class="date-not">لا يوجد معلومات متاحة</p>
+                            <p class="date-not">@lang('app.No information available')</p>
                         @else
                             <table class="table table-striped rounded">
                                 <thead>
