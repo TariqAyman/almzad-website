@@ -24,8 +24,8 @@ class CategoryFactory extends Factory
         return [
             'name_ar' => $this->faker->word,
             'name_en' => $this->faker->word,
-            'slug_ar' => $this->faker->word,
-            'slug_en' => $this->faker->word,
+            'slug_ar' => $this->faker->slug,
+            'slug_en' => $this->faker->slug,
             'status' => true,
         ];
     }
