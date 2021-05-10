@@ -32,10 +32,6 @@ class VerifyPhoneController extends Controller
      */
     public function store(Request $request)
     {
-
-        dd($request->all());
-
-
         if ($request->has('phoneNumber')) {
             $user = User::where('phone_number', $request->phoneNumber)->first();
 

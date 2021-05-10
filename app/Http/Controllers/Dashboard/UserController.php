@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\UploadFile;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ADminStoreRequest;
 use App\Http\Requests\AdminUpdateRequest;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
@@ -85,7 +84,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ADminStoreRequest $request
+     * @param UserStoreRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserStoreRequest $request)
