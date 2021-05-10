@@ -45,7 +45,7 @@ class AdminController extends Controller
             })
             ->addColumn('profile_photo', function ($model) {
                 $profile_photo = asset($model->profile_photo);
-                return $model->profile_photo ? "<img alt='Image placeholder' class='avatar avatar-sm rounded-circle' data-toggle='tooltip' data-original-title='{$model->name}' src='{$profile_photo}'>" :
+                return $model->profile_photo ? "<img style='max-width: 100px;max-height: 100px' alt='Image placeholder' class='avatar avatar-sm rounded-circle' data-toggle='tooltip' data-original-title='{$model->name}' src='{$profile_photo}'>" :
                     '<i class="far avatar avatar-sm rounded-circle fa-user"></i>';
             })
             ->addColumn('status', function ($model) {
