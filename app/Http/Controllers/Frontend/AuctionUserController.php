@@ -48,6 +48,7 @@ class AuctionUserController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = auth('user')->user()->id;
+
         $data['slug_ar'] = Str::slug($request->name_ar, '-', 'ar');
         $data['slug_en'] = Str::slug($request->name_en, '-', 'en');
 

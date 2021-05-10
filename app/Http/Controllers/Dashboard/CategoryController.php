@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\SlugMe;
 use App\Http\Controllers\Controller;
+use App\Models\Auction;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
@@ -74,8 +76,8 @@ class CategoryController extends Controller
     {
         $data = $request->all();
 
-        $data['slug_ar'] = Str::slug($request->name_ar,'-','ar');
-        $data['slug_en'] = Str::slug($request->name_en,'-','en');
+        $data['slug_ar'] = SlugMe::make($request->name_ar, Category::class, 'slug_ar', 'ar');
+        $data['slug_en'] = SlugMe::make($request->name_en, Category::class, 'slug_en', 'en');
 
         Category::create($data);
 
@@ -115,7 +117,12 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($request->all());
+        $data = $request->all();
+
+        $data['slug_ar'] = SlugMe::make($request->name_ar, Category::class, 'slug_ar', 'ar', $category->id);
+        $data['slug_en'] = SlugMe::make($request->name_en, Category::class, 'slug_en', 'en', $category->id);
+
+        $category->update($data);
         return redirect()->back()->withSuccess('Category updated successfully!');
     }
 

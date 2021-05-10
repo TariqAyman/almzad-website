@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\SlugMe;
 use App\Helpers\UploadFile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auction\AuctionStoreRequest;
@@ -95,8 +96,8 @@ class AuctionController extends Controller
     {
         $data = $request->all();
 
-        $data['slug_ar'] = Str::slug($request->name_ar, '-', 'ar');
-        $data['slug_en'] = Str::slug($request->name_en, '-', 'en');
+        $data['slug_ar'] = SlugMe::make($request->name_ar, Auction::class, 'slug_ar', 'ar');
+        $data['slug_en'] = SlugMe::make($request->name_en, Auction::class, 'slug_en', 'en');
 
         $auction = Auction::create($data);
 
@@ -159,7 +160,12 @@ class AuctionController extends Controller
      */
     public function update(AuctionUserUpdateRequest $request, Auction $auction)
     {
-        $auction->update($request->all());
+        $data = $request->all();
+
+        $data['slug_ar'] = SlugMe::make($request->name_ar, Auction::class, 'slug_ar', 'ar', $auction->id);
+        $data['slug_en'] = SlugMe::make($request->name_en, Auction::class, 'slug_en', 'en', $auction->id);
+
+        $auction->update($data);
 
         if ($request->has('images')) {
             foreach ($request->images as $key => $image) {
