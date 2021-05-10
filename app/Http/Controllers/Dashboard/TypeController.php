@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\SlugMe;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\TypeRequest;

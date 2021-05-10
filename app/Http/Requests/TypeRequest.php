@@ -23,7 +23,6 @@ class TypeRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this->request->all());
         return [
             'name_en' => 'required|max:255',
             'name_ar' => 'required|max:255',
