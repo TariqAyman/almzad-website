@@ -1,7 +1,7 @@
 <html lang="@if( session()->has('appLocale') ){{ session()->get('appLocale') }}@else{{ 'ar' }}@endif"
       data-textdirection="{{ session()->get('appLocale') == 'ar' ? 'rtl' : 'ltr' }}"
       dir="{{ session()->get('appLocale') == 'ar' ? 'rtl' : 'ltr' }}"
-      >
+>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -77,8 +77,8 @@
                                 <div class="sid-log">
                                     <ul class="nav fav">
                                         <li class="note-icon sid-log">
-                                            <a href="#" class="note">
-                                                <span class="num">3</span>
+                                            <a href="{{ route('frontend.notifications.index') }}" class="note">
+                                                <span class="num">{{ auth('user')->user()->unreadNotifications->count()  }}</span>
                                                 <img src="{{ asset('frontend/img/note.png') }}" alt="{{ setting('company_name') }}">
                                             </a>
                                         </li>
@@ -129,8 +129,8 @@
                 @auth('user')
                     <ul class="nav fav">
                         <li class="note-icon">
-                            <a href="#" class="note">
-                                <span class="num">3</span>
+                            <a href="{{ route('frontend.notifications.index') }}" class="note">
+                                <span class="num">{{ auth('user')->user()->unreadNotifications->count()  }}</span>
                                 <img src="{{ asset('frontend/img/note.png') }}" alt="{{ setting('company_name') }}">
                             </a>
                         </li>
@@ -204,15 +204,18 @@
                 <ul class="nav footer-link">
                     @foreach($auctionsLayout as $auction)
                         <li class="pub-mzad">
-                            <a href="{{ route('frontend.auctions.show',$auction->slug) }}">
-                                <div class="pub-pic">
-                                    <img alt="{{ $auction->name }}" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}" class="img-fluid" style="max-height: 37px; max-width: 57px">
-                                </div>
-                                <div class="pub-body">
-                                    <h6>{{ $auction->name }}</h6>
-                                    <p>{{ $auction->created_at->diffForHumans() }} </p>
-                                </div>
-                            </a>
+                            <div class="pub-pic">
+                                <img onclick="location.href='{{ route('frontend.auctions.show',$auction->slug) }}'" alt="{{ $auction->name }}" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}"
+                                     class="img-fluid" style="max-height: 37px; max-width: 57px">
+                            </div>
+                            <div class="pub-body">
+                                <h6>
+                                    <a href="{{ route('frontend.auctions.show',$auction->slug) }}">
+                                        {{ $auction->name }}
+                                    </a>
+                                </h6>
+                                <p>{{ $auction->created_at->diffForHumans() }} </p>
+                            </div>
                         </li>
                     @endforeach
                 </ul>

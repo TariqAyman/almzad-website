@@ -9,7 +9,7 @@
         <div class="container">
             <h2>@lang('app.my account')</h2>
             <div class="tit"><i class="fas fa-home"></i>
-                <a href="{{ url('/') }}">@lang('app.hone')</a>
+                <a href="{{ url('/') }}">@lang('app.home')</a>
                 / <span>@lang('app.wallet')</span>
             </div>
         </div>
