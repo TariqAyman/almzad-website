@@ -27,6 +27,21 @@ class RolePermissionSeeder extends Seeder
             'update-admin',
             'destroy-admin',
 
+            'view-auction',
+            'create-auction',
+            'update-auction',
+            'destroy-auction',
+
+            'view-category',
+            'create-category',
+            'update-category',
+            'destroy-category',
+
+            'view-slider',
+            'create-slider',
+            'update-slider',
+            'destroy-slider',
+
             'view-user',
             'create-user',
             'update-user',
@@ -57,10 +72,7 @@ class RolePermissionSeeder extends Seeder
 
             'view-activity-log',
 
-            'view-category',
-            'create-category',
-            'update-category',
-            'destroy-category',
+
         ];
 
         foreach ($permissions as $permission) {

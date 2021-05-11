@@ -14,10 +14,10 @@ class TypeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:type-category');
-        $this->middleware('permission:type-category', ['only' => ['create', 'store']]);
-        $this->middleware('permission:type-category', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:type-category', ['only' => ['destroy']]);
+        $this->middleware('permission:type-type');
+        $this->middleware('permission:type-type', ['only' => ['create', 'store']]);
+        $this->middleware('permission:type-type', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:type-type', ['only' => ['destroy']]);
     }
 
     /**
