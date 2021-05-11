@@ -84,7 +84,7 @@ class LoginController extends Controller
             $userStatus = Auth::guard('user')->user()->status;
 
             if ($userStatus == 1) {
-                return redirect()->intended(route('frontend.profile.index'));
+                return redirect()->intended(route('frontend.home'));
             } else {
                 Auth::guard('user')->logout();
                 return redirect()->route('login')->withInput()->withwarning(trans('app.You are temporarily blocked. please contact to admin'));

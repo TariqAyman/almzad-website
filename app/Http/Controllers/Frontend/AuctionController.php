@@ -10,8 +10,11 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Type;
 use App\Models\Wallet;
+use App\Notifications\NewBidNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Notification;
 
 class AuctionController extends Controller
 {
@@ -81,6 +84,14 @@ class AuctionController extends Controller
         if ($auction->is_sold) return redirect()->back()->withErrors(trans('app.Auction sold'));
 
         if (!$auction->allowBid()) return redirect()->back()->withErrors(trans('app.Cant bid in this auction'));
+
+        $details = [
+            'auction' => $auction,
+            'auction_url' => route('frontend.auctions.show', $auction->slug),
+            'auction_id' => 101
+        ];
+
+        Notification::locale(App::getLocale())->send(auth('user')->user(), new NewBidNotification($details));
 
         AuctionsUser::create([
             'user_id' => auth('user')->user()->id,
