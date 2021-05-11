@@ -39,6 +39,8 @@ Route::group(['namespace' => 'Frontend', 'middleware' => 'localization'], functi
 
                 Route::post('payment/create', 'PaymentController@store')->name('payment.store');
 
+                Route::resource('notifications', 'NotificationController');
+
                 Route::resource('profile', 'ProfileController');
                 Route::resource('wallet', 'WalletController');
                 Route::get('user/store', 'StoreController@myStore')->name('user.store');
