@@ -282,11 +282,11 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
                                 <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
-                                    <i class="mr-50" data-feather="user"></i> Profile
+                                    <i class="mr-50" data-feather="user"></i> @lang('app.profile')
                                 </a>
-                                @can('settings.update')
+                                @can('update-settings')
                                     <a class="dropdown-item" href="{{ route('admin.settings.index') }}">
-                                        <i class="mr-50" data-feather="mail"></i> Settings
+                                        <i class="mr-50" data-feather="mail"></i> @lang('app.settings')
                                     </a>
                                 @endcan
 {{--                                <a class="dropdown-item" href="{{url('app/todo')}}">--}}
@@ -306,7 +306,7 @@
 {{--                                    <i class="mr-50" data-feather="help-circle"></i> FAQ--}}
 {{--                                </a>--}}
                                 <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="mr-50" data-feather="power"></i> Logout
+                                    <i class="mr-50" data-feather="power"></i> @lang('app.logout')
                                 </a>
                                 <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                                     @csrf

@@ -40,6 +40,7 @@ Route::group(['namespace' => 'Frontend', 'middleware' => 'localization'], functi
                 Route::post('payment/create', 'PaymentController@store')->name('payment.store');
 
                 Route::resource('notifications', 'NotificationController');
+                Route::post('/mark-as-read', 'NotificationController@markAsRead')->name('notifications.markAsRead');
 
                 Route::resource('profile', 'ProfileController');
                 Route::resource('wallet', 'WalletController');

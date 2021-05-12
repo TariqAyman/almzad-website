@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Auth::routes(['verify' => true]);
+    Auth::routes([
+        'verify' => true,
+        'register' => false
+    ]);
 });
 
 Route::group(['middleware' => ['auth:admin', 'verified'], 'prefix' => 'admin', 'as' => 'admin.'], function () {

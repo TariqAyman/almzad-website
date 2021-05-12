@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Type;
 use App\Models\Wallet;
+use App\Notifications\BuyAuctionNotification;
 use App\Notifications\NewBidNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -79,7 +80,7 @@ class AuctionController extends Controller
 
         $hold_balance_wallet = ($request->price * $hold_balance_wallet) / 100;
 
-        if ($hold_balance_wallet >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors('لا تملك رصيد يكفي');
+        if ($hold_balance_wallet >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors(trans('app.You don\'t have enough credit'));
 
         if ($auction->is_sold) return redirect()->back()->withErrors(trans('app.Auction sold'));
 
@@ -87,8 +88,9 @@ class AuctionController extends Controller
 
         $details = [
             'auction' => $auction,
-            'auction_url' => route('frontend.auctions.show', $auction->slug),
-            'auction_id' => 101
+            'url' => route('frontend.auctions.show', $auction->slug),
+            'auction_id' => $auction->id,
+            'amount' => $request->price
         ];
 
         Notification::locale(App::getLocale())->send(auth('user')->user(), new NewBidNotification($details));
@@ -129,16 +131,23 @@ class AuctionController extends Controller
 
         $purchase_price = ($auction->purchase_price > $highest_price) ? $auction->purchase_price : $highest_price;
 
-        if ($purchase_price >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors('لا تملك رصيد يكفي');
+        if ($purchase_price >= auth('user')->user()->actual_balance) return redirect()->back()->withErrors(trans('app.You don\'t have enough credit'));
 
-        if ($auction->is_sold) return redirect()->back()->withErrors('تم بيع المزاد');
-
-        if (!$auction->allowBid()) return redirect()->back()->withErrors(trans('app.Cant bid in this auction'));
+        if ($auction->is_sold) return redirect()->back()->withErrors(trans('app.Auction sold'));
 
         $auction->update([
             'is_sold' => true,
             'sale_amount' => $purchase_price
         ]);
+
+        $details = [
+            'auction' => $auction,
+            'url' => route('frontend.auctions.show', $auction->slug),
+            'auction_id' => $auction->id,
+            'amount' => $purchase_price
+        ];
+
+        Notification::locale(App::getLocale())->send(auth('user')->user(), new BuyAuctionNotification($details));
 
         Wallet::query()->create([
             'type' => 'shopping',

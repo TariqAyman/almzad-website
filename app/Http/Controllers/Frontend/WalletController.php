@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AlrajhiPayment;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,20 @@ class WalletController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $wallets = Wallet::query()->where('user_id', auth('user')->user()->id)->paginate(setting('record_per_page'));
+
+        if ($request->has('paymentId')) {
+            $payment = AlrajhiPayment::where('payment_id', $request->paymentId)->first();
+
+            $messageType = 'error';
+
+            if ($payment->status == PaymentController::CAPTURED_STATUS) $messageType = 'success';
+
+            session()->flash($messageType, trans("payment.{$payment->status}"));
+        }
+
         return view('frontend.user.wallet', compact('wallets'));
     }
 

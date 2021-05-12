@@ -82,13 +82,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('instagram_url', 'instagram', ['class' => 'form-control-label'])}}
-                                {{ Form::url('instagram_url', setting('instagram_url'), ['class'=>"form-control"])}}
+                                {{ Form::url('instagram_url', setting('instagram_url') ?? 'https://www.instagram.com/', ['class'=>"form-control"])}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('twitter_url', 'twitter', ['class' => 'form-control-label'])}}
-                                {{ Form::url('twitter_url', setting('twitter_url'), ['class'=>"form-control"])}}
+                                {{ Form::url('twitter_url', setting('twitter_url') ?? 'https://www.twitter.com/', ['class'=>"form-control"])}}
                             </div>
                         </div>
                     </div>
@@ -96,13 +96,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('facebook_url', 'facebook', ['class' => 'form-control-label'])}}
-                                {{ Form::url('facebook_url', setting('facebook_url'), ['class'=>"form-control"])}}
+                                {{ Form::url('facebook_url', setting('facebook_url') ?? 'https://www.facebook.com/', ['class'=>"form-control"])}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{Form::label('youtube_url', 'youtube_url', ['class' => 'form-control-label'])}}
-                                {{ Form::url('youtube_url', setting('youtube_url'), ['class'=>"form-control"])}}
+                                {{Form::label('youtube_url', 'youtube', ['class' => 'form-control-label'])}}
+                                {{ Form::url('youtube_url', setting('youtube_url') ?? 'https://www.youtube.com/', ['class'=>"form-control"])}}
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('hold_balance_wallet', trans('app.hold_balance_wallet'), ['class' => 'form-control-label'])}}
-                                {{ Form::number('hold_balance_wallet', setting('hold_balance_wallet'), ['class'=>"form-control"])}}
+                                {{ Form::number('hold_balance_wallet', setting('hold_balance_wallet') ?? 20, ['class'=>"form-control"])}}
                             </div>
                         </div>
 
@@ -131,15 +131,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('url_1', trans('app.url_1'), ['class' => 'form-control-label'])}}
-                                {{ Form::text('url_1_text', setting('url_1_text'), ['class'=>"form-control",'placeholder' => trans('app.url_1_text')])}}
-                                {{ Form::url('url_1', setting('url_1'), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
+                                {{ Form::text('url_1_text', setting('url_1_text') ?? 'url', ['class'=>"form-control",'placeholder' => trans('app.url_1_text')])}}
+                                {{ Form::url('url_1', setting('url_1') ?? url(''), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('url_2', trans('app.url_2'), ['class' => 'form-control-label'])}}
-                                {{ Form::text('url_2_text', setting('url_2_text'), ['class'=>"form-control",'placeholder' => trans('app.url_2_text')])}}
-                                {{ Form::url('url_2', setting('url_2'), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
+                                {{ Form::text('url_2_text', setting('url_2_text') ?? 'url', ['class'=>"form-control",'placeholder' => trans('app.url_2_text')])}}
+                                {{ Form::url('url_2', setting('url_2') ?? url(''), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
                             </div>
                         </div>
                     </div>
@@ -147,8 +147,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('url_3', trans('app.url_3'), ['class' => 'form-control-label'])}}
-                                {{ Form::text('url_3_text', setting('url_3_text'), ['class'=>"form-control",'placeholder' => trans('app.url_3_text')])}}
-                                {{ Form::url('url_3', setting('url_3'), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
+                                {{ Form::text('url_3_text', setting('url_3_text') ?? 'url', ['class'=>"form-control",'placeholder' => trans('app.url_3_text')])}}
+                                {{ Form::url('url_3', setting('url_3') ?? url(''), ['class'=>"form-control",'placeholder' => trans('app.url')])}}
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('record_per_page', 'عدد الاصناف في الصفحه', ['class' => 'form-control-label'])}}
-                                {{ Form::text('record_per_page', setting('record_per_page'), ['class'=>"form-control"])}}
+                                {{ Form::text('record_per_page', setting('record_per_page') ?? 15, ['class'=>"form-control"])}}
                             </div>
                         </div>
 
@@ -204,14 +204,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('max_login_attempts', "الحد الأقصى لمحاولات تسجيل الدخول غير الصالحة", ['class' => 'form-control-label'])}}
-                                {{ Form::text('max_login_attempts', setting('max_login_attempts'), ['class'=>"form-control"])}}
+                                {{ Form::text('max_login_attempts', setting('max_login_attempts') ?? 3, ['class'=>"form-control"])}}
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{Form::label('lockout_delay', 'مدة حظر تسجيل الدخول ( دقائق)', ['class' => 'form-control-label'])}}
-                                {{ Form::text('lockout_delay', setting('lockout_delay'), ['class'=>"form-control"])}}
+                                {{ Form::text('lockout_delay', setting('lockout_delay') ?? 3, ['class'=>"form-control"])}}
                             </div>
                         </div>
                         <div class="col-md-12 mt-4">

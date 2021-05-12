@@ -112,7 +112,14 @@
                                     <div class="custom-control custom-checkbox">
                                         {!! Form::hidden('status', 0) !!}
                                         <input type="checkbox" name="status" value="1" {{ ($edit && $user->status) ? 'checked' : ''}} class="custom-control-input" id="status">
-                                        {{ Form::label('status', 'Status', ['class' => 'custom-control-label']) }}
+                                        {{ Form::label('status', trans('app.status'), ['class' => 'custom-control-label']) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="custom-control custom-checkbox">
+                                        {!! Form::hidden('phone_verified', 0) !!}
+                                        <input type="checkbox" name="phone_verified" value="1" {{ ($edit && $user->phone_verified) ? 'checked' : ''}} class="custom-control-input" id="phone_verified">
+                                        {{ Form::label('phone_verified', trans('app.phone_verified'), ['class' => 'custom-control-label']) }}
                                     </div>
                                 </div>
                                 @can('update-user')

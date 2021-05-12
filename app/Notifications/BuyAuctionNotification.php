@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewBidNotification extends Notification
+class BuyAuctionNotification extends Notification
 {
     use Queueable;
 
@@ -26,7 +26,7 @@ class NewBidNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -37,13 +37,13 @@ class NewBidNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(trans('app.thank_you_for_bid'))
+            ->subject(trans('app.thank_you_for_buy_auction'))
             ->greeting(trans('app.welcome'))
             ->line(trans('app.name') . ": {$this->details['auction']['name']}")
             ->line(trans('app.description') . ": {$this->details['auction']['description']}")
@@ -51,6 +51,7 @@ class NewBidNotification extends Notification
             ->line(trans('app.shipping_conditions') . ": {$this->details['auction']['shipping_conditions']}")
             ->line(trans('app.start_from') . ": {$this->details['auction']['start_from']}")
             ->line(trans('app.purchase_price') . ": {$this->details['auction']['purchase_price']}")
+            ->line(trans('app.sale_amount') . ": {$this->details['auction']['sale_amount']}")
             ->line(trans('app.start_date') . ": {$this->details['auction']['start_date']->format('Y/m/d H:s a')}")
             ->line(trans('app.end_date') . ": {$this->details['auction']['end_date']->format('Y/m/d H:s a')}")
             ->line(trans('app.Is shipping available?') . ': ' . ($this->details['auction']['shipping'] ? trans('app.yes') : trans('app.no')))
@@ -63,7 +64,7 @@ class NewBidNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

@@ -61,12 +61,12 @@
             <!-- Login-->
             <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                    <h4 class="card-title mb-1">Welcome to {{ setting('company_name') }}</h4>
-                    <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
+                    <h4 class="card-title mb-1">@lang('app.Welcome to') {{ setting('company_name') }}</h4>
+                    <p class="card-text mb-2">@lang('app.Please sign-in to your account and start the adventure')</p>
                     <form role="form" action="{{ route('admin.login') }}" method="POST" id="login-form" autocomplete="off" class="auth-login-form mt-2">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label class="form-label" for="login-email">Email</label>
+                            <label class="form-label" for="login-email">@lang('app.email')</label>
                             <input class="form-control" id="login-email" type="text" name="email" placeholder="john@example.com" aria-describedby="login-email" autofocus=""
                                    tabindex="1" {{ (env('APP_ENV') === 'dev') ? "value=admin@email.com" : old('email') }} />
                             @error('email')
@@ -77,9 +77,9 @@
                         </div>
                         <div class="form-group">
                             <div class="d-flex justify-content-between">
-                                <label for="login-password">Password</label>
+                                <label for="login-password">@lang('app.password')</label>
                                 <a href="{{ route('admin.password.request') }}">
-                                    <small>Forgot Password?</small>
+                                    <small>@lang('app.Forgot Password?')</small>
                                 </a>
                             </div>
                             <div class="input-group input-group-merge form-password-toggle">
@@ -97,24 +97,17 @@
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input class="custom-control-input" id="remember-me" name="remember" {{ old('remember') ? 'checked' : '' }} type="checkbox" tabindex="3"/>
-                                <label class="custom-control-label" for="remember-me">Remember Me</label>
+                                <label class="custom-control-label" for="remember-me">@lang('app.Remember Me')</label>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
+                        <button class="btn btn-primary btn-block" tabindex="4">@lang('app.Sign in')</button>
                     </form>
 
                     <div class="row mt-3">
                         <div class="col-6">
                             @if (Route::has('admin.password.request'))
                                 <a class="text-gray" href="{{ route('admin.password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            @endif
-                        </div>
-                        <div class="col-6 text-right">
-                            @if (Route::has('register'))
-                                <a class="text-gray" href="{{ route('admin.register') }}">
-                                    Create new account
+                                    @lang('app.Forgot Your Password?')
                                 </a>
                             @endif
                         </div>

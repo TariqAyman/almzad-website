@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Helpers\AlrajhiPaymentEncryption;
-use App\Helpers\AlrajhiPaymentGateway;
 use App\Http\Controllers\Controller;
 use App\Models\AlrajhiPayment;
 use App\Models\Transaction;
 use App\Models\Wallet;
+use App\Notifications\WalletActionNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class PaymentController extends Controller
@@ -56,6 +59,11 @@ class PaymentController extends Controller
             "trackId" => (env('APP_ENV') == 'dev') ? "{$paymentTransactionId}{$random}" : "{$paymentTransactionId}",
             "responseURL" => route('frontend.payment.responseURL'),
             "errorURL" => route('frontend.payment.errorURL'),
+            //conditional if Merchant opted for Faster Checkout.
+            //            "custid" => auth('user')->user()->id,
+            //            "cust_cardHolderName" => auth('user')->user()->name,
+            //            "cust_mobile_number" => auth('user')->user()->phone_number,
+            //            "cust_emailId" => auth('user')->user()->emial
         ];
 
         $TranDataJsonEncode = json_encode($data);
@@ -107,7 +115,9 @@ class PaymentController extends Controller
 
             $alrajhiPayment->update($paymentInfo);
 
-            return redirect()->route('frontend.wallet.index')->with(['payUrl' => $url]);
+//            return  redirect()->to($url);
+
+            return redirect()->route('frontend.wallet.index')->with(['payUrl' => $url, 'paymentId' => $payment_id]);
 
         } else {
             $paymentInfo['response_init'] = $result;
@@ -135,7 +145,7 @@ class PaymentController extends Controller
         $response = $dataArr[0];
 
         $message = trans('app.error_payment');
-        $messageType = 'errors';
+        $messageType = 'error';
 
         $alrajhiPayment = AlrajhiPayment::query()->where('payment_id', $response['paymentId'])->first();
 
@@ -152,7 +162,7 @@ class PaymentController extends Controller
                 'payment_id' => $alrajhiPayment->id
             ]);
 
-            Wallet::query()->create([
+            $wallet = Wallet::query()->create([
                 'type' => 'balance',
                 'user_id' => $alrajhiPayment->user->id,
                 'in' => $response['amt'],
@@ -161,6 +171,15 @@ class PaymentController extends Controller
                 'balance' => floatval($amount) + $alrajhiPayment->user->available_balance,
                 'note' => "تم اضافة رصيد {$amount} الي حسابك عن طريق الدفع الالكتروني",
             ]);
+
+            $details = [
+                'wallet' => $wallet,
+                'url' => route('frontend.wallet.index'),
+                'wallet_id' => $wallet->id,
+                'amount' => $response['amt']
+            ];
+
+            Notification::locale(App::getLocale())->send($alrajhiPayment->user, new WalletActionNotification($details));
 
             $messageType = 'success';
             $message = trans('app.success_payment');
@@ -172,7 +191,10 @@ class PaymentController extends Controller
             'status' => $paymentStatus,
         ]);
 
-        return redirect()->route('frontend.wallet.index')->with($messageType, $message);
+//        Session::flash($messageType, $message);
+//        Session::put($messageType, $message);
+
+//        return redirect()->route('frontend.wallet.index')->with($messageType, $message);
     }
 
 
