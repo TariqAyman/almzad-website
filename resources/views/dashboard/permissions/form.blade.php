@@ -29,7 +29,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-sm-2 text-sm-right">@lang('app.name')</label>
                             <div class="col-sm-10">
-                                {!! Form::text('name',$edit ? $permission->name : old('name'),['class' => 'form-control','placeholder' => trans('app.name')]) !!}
+                                {!! Form::text('name',$edit ? $permission->name : old('name'),['class' => 'form-control','placeholder' => trans('app.name') , 'readonly']) !!}
                             </div>
                         </div>
                         <div class="form-group row">
