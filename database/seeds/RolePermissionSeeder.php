@@ -1,8 +1,10 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
@@ -16,6 +18,16 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
+        $tableNames = config('permission.table_names');
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table($tableNames['role_has_permissions'])->truncate();
+        DB::table($tableNames['model_has_roles'])->truncate();
+        DB::table($tableNames['model_has_permissions'])->truncate();
+        DB::table($tableNames['roles'])->truncate();
+        DB::table($tableNames['permissions'])->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
         // create permissions
@@ -83,9 +95,10 @@ class RolePermissionSeeder extends Seeder
         $admin = Role::create(['name' => 'super-admin', 'display_name' => 'super-admin', 'guard_name' => 'admin']);
         $admin->syncPermissions($permissions);
 
-        $usr = Admin::create([
+        $usr = Admin::query()->firstOrCreate([
             'name' => 'Admin',
-            'email' => 'admin@email.com',
+            'email' => 'admin@email.com'
+        ], [
             'password' => '123456789',
             'status' => true,
             'phone_number' => '+201003003200',
@@ -101,9 +114,10 @@ class RolePermissionSeeder extends Seeder
         $role->givePermissionTo('update-settings');
         $role->givePermissionTo('view-admin');
 
-        $user = Admin::create([
+        $user = Admin::query()->firstOrCreate([
             'name' => 'User',
             'email' => 'user@email.com',
+        ], [
             'password' => '123456789',
             'status' => true,
             'phone_number' => '+201003003201',
