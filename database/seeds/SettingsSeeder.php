@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -22,6 +23,12 @@ class SettingsSeeder extends Seeder
         Setting::set('default_role', 2);
         Setting::set('max_login_attempts', 3);
         Setting::set('lockout_delay', 2);
+        Setting::set('instagram_url', "https://instagram.com/");
+        Setting::set('twitter_url', "https://twitter.com/");
+        Setting::set('facebook_url', "https://facebook.com/");
+        Setting::set('youtube_url', "https://youtube.com/");
+        Setting::set('register_notification_email', 2);
+
         Setting::save();
     }
 }
