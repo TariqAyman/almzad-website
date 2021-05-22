@@ -34,10 +34,10 @@ class UserUpdateRequest extends FormRequest
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'username' => 'required|string',
+            'username' => 'required|string|unique:users,phone_number,'. $this->user->id .',id,deleted_at,NULL',
             'address' =>  'nullable|string',
-            'email' => 'required|string|email',
-            'phone_number' => 'required|string|unique:users,phone_number,'. $this->user->id,
+            'email' => 'required|string|email|unique:users,phone_number,'. $this->user->id .',id,deleted_at,NULL',
+            'phone_number' => 'required|string|unique:users,phone_number,'. $this->user->id .',id,deleted_at,NULL',
             'profile_photo' => 'nullable|image',
             'password' => 'nullable|min:8|confirmed',
             'status' => 'required|boolean',

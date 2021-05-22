@@ -84,7 +84,7 @@
                         </div>
                         <div class="form-group my-3">
                             <h6>الكمية</h6>
-                            <input type="number" class="form-control" placeholder="@lang('app.Example: 1234 riyals')" name="amount" autocomplete="false" required>
+                            <input type="number" id="amount" class="form-control" placeholder="@lang('app.Example: 1234 riyals')" name="amount" autocomplete="false" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -96,57 +96,18 @@
         </div>
     </div>
 
-    {{--    <div class="modal fade" id="addBalance2" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">--}}
-    {{--        <div class="modal-dialog" role="document">--}}
-    {{--            <div class="modal-content blue-color">--}}
-    {{--                <div class="modal-box upZindex">--}}
-    {{--                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">--}}
-    {{--                        <span aria-hidden="true"><i class="fas fa-times"></i></span>--}}
-    {{--                    </button>--}}
-    {{--                    <div class="modal-header text-center mx-auto">--}}
-    {{--                        <div class="modal-title  blue-color">--}}
-    {{--                            <h4 id="addPriceLabel">اضافة رصيد</h4>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <div class="modal-body">--}}
-    {{--                        <form>--}}
-    {{--                            <div class="form-group my-3">--}}
-    {{--                                <h6>رقم الكرت</h6>--}}
-    {{--                                <input type="text" class="form-control" placeholder="رقم الكرت">--}}
-    {{--                            </div>--}}
-    {{--                            <div class="form-group my-3">--}}
-    {{--                                <h6>الاسم المدون على الكرت</h6>--}}
-    {{--                                <input type="text" class="form-control" placeholder="الاسم المدون على الكرت">--}}
-    {{--                            </div>--}}
-    {{--                            <div class="form-group my-3 date-box">--}}
-    {{--                                <div>--}}
-    {{--                                    <h6>تاريح الانتهاء</h6>--}}
-    {{--                                    <div class="date-a flex-fill ml-lg-2">--}}
-    {{--                                        <input type="date" class="form-control">--}}
-    {{--                                        <i class="fas fa-calendar-alt"></i>--}}
-    {{--                                    </div>--}}
-    {{--                                </div>--}}
-    {{--                                <div class="date-a flex-fill">--}}
-    {{--                                    <p class="ub-font">CVV</p>--}}
-    {{--                                    <input type="text" class="form-control" placeholder="أرقام توجد خلف الكرت">--}}
-    {{--                                </div>--}}
-    {{--                            </div><!--dateBox-->--}}
-    {{--                        </form>--}}
-    {{--                    </div>--}}
-    {{--                    <div class="modal-footer">--}}
-    {{--                        <button class="btn btn-show">إضافة رصيد</button>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-
     @if(session()->has('payUrl'))
         <div id="divPayFrame"></div>
     @endif
 @endsection
 
 @section('page-script')
+    <script>
+        @if(request()->has('credit'))
+        $('#addBalance').modal('show');
+        $('#amount').val({{ ceil(request()->get('credit')) }});
+        @endif
+    </script>
     @if(session()->has('payUrl'))
         <script>
             if (window.parent.document.getElementById("divPayFrame") != null) {

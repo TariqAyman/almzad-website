@@ -159,7 +159,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $in = $this->wallets()->sum('in');
         $out = $this->wallets()->sum('out');
 
-        return ($in - $out);
+        return round(($in - $out));
     }
 
     public function getActualBalanceAttribute()
@@ -168,6 +168,6 @@ class User extends Authenticatable implements MustVerifyEmail
         $out = $this->wallets()->sum('out');
         $hold = $this->wallets()->sum('hold');
 
-        return (($in - $out) - $hold);
+        return round((($in - $out) - $hold));
     }
 }

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class PermissionController extends Controller
 {
@@ -129,7 +132,16 @@ class PermissionController extends Controller
             $permissions = \Arr::get($roles, $roleId, []);
             $role = Role::find($roleId);
             $role->syncPermissions($permissions);
+
+            $admins = Admin::role($roleId)->get();
+
+            foreach ($admins as $admin){
+                $admin->syncPermissions($permissions);
+            }
         }
+        Artisan::call('permission:cache-reset');
+
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
         Cache::flush();
         return redirect()->route('admin.permissions.index')->withSuccess(trans('app.success_update'));
     }

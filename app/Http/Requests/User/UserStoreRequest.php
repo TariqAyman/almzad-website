@@ -34,10 +34,10 @@ class UserStoreRequest extends FormRequest
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'username' => 'required|string',
+            'username' => 'required|string|unique:admins,username,NULL,id,deleted_at,NULL',
             'address' =>  'required|string',
-            'email' => 'required|string|email',
-            'phone_number' => 'required|string|unique:admins,phone_number',
+            'email' => 'required|string|email|unique:admins,email,NULL,id,deleted_at,NULL',
+            'phone_number' => 'required|string|unique:admins,phone_number,NULL,id,deleted_at,NULL',
             'profile_photo' => 'required|image',
             'password' => 'required|string',
             'status' => 'required|boolean',

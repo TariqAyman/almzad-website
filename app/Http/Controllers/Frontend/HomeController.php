@@ -20,7 +20,7 @@ class HomeController extends Controller
     {
         $latest_auctions = Auction::where('status', 1)->where('end_date', '>=', Carbon::now())->latest()->limit(6)->get();
 
-        $auctions = Auction::where('end_date', '>=', Carbon::now())->limit(6)->get();
+        $auctions = Auction::where('status', 1)->where('end_date', '>=', Carbon::now())->limit(6)->get();
 
         $reviews = Review::query()->where('status', 1)->limit(15)->get();
 

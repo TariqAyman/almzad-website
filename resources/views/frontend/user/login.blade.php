@@ -20,7 +20,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" style="padding-left: 29px"  id="basic-addon5">+966</span>
                                     </div>
-                                    <input type="tel" style="direction: {{ App::getLocale() == 'ar' ? 'ltr' : 'rtl' }};text-align: left }};" class="form-control" placeholder="@lang('app.phone_number')"
+                                    <input type="tel" style="direction: {{ App::getLocale() == 'ar' ? 'ltr' : 'rtl' }};text-align: left;" class="form-control" placeholder="@lang('app.phone_number')"
                                            aria-label="phone_number" aria-describedby="basic-addon5" name="phone_number" required value="{{ old('phone_number') }}" title="@lang('app.phone_number')" autocomplete="false">
                                     <img class="" src="{{ asset('frontend/img/phone-icon.png') }}">
                                 </div>

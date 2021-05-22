@@ -120,7 +120,9 @@ class Auction extends Model
         'description',
         'conditions',
         'highest_price',
-        'shipping_conditions'
+        'shipping_conditions',
+        'hold_balance_wallet',
+        'highest_purchase_price'
     ];
 
     public function category()
@@ -274,5 +276,21 @@ class Auction extends Model
         if ($this->attributes['multi_auction']) return true;
 
         return !$this->auctionsUsers()->where('user_id', auth('user')->user()->id)->exists();
+    }
+
+    public function getHoldBalanceWalletAttribute()
+    {
+        $hold_balance_wallet = setting('hold_balance_wallet', 20);
+
+        return (($this->highest_price * $hold_balance_wallet) / 100);
+    }
+
+
+    public function getHighestPurchasePriceAttribute()
+    {
+        if ($this->purchase_price){
+            return (($auction->highest_price ?? $this->start_from) > $this->purchase_price ? ($this->highest_price ?? $this->start_from) : $this->purchase_price);
+        }
+        return  0;
     }
 }

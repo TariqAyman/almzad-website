@@ -14,17 +14,31 @@
     </div>
     <!--MzadDetials-->
     <div class="container mt-5">
+        @if(auth('user')->check() && (auth('user')->user()->actual_balance <= 0 || auth('user')->user()->actual_balance <= $auction->hold_balance_wallet) )
+            <div class="alert alert-danger" role="alert">
+                @lang('app.you_not_have_balance_to_bid',['value' => ($auction->hold_balance_wallet)])
+                <a href="{{ route('frontend.wallet.index',['credit' => $auction->hold_balance_wallet]) }}"> @lang('app.add_credit_here')</a>
+            </div>
+
+            @if($auction->purchase_price)
+                <div class="alert alert-danger" role="alert">
+                    @lang('app.you_not_have_balance_to_buy',['value' => ($auction->highest_purchase_price)])
+                    <a href="{{ route('frontend.wallet.index',['credit' => $auction->highest_purchase_price]) }}"> @lang('app.add_credit_here')</a>
+                </div>
+            @endif
+
+        @endif
         <div class="product-details">
             <div class="tab-title">
                 <ul class="nav nav-tabs nav-detail">
                     <li>
                         <a href="#detail" class="tabs__trigger {{ request()->has('page') ? '' : 'active' }}" role="tab" data-toggle="tab"> @lang('app.Auction details') </a>
                     </li>
-{{--                    <li>--}}
-{{--                        <a href="#comment" class="tabs__trigger {{ request()->has('page') ? 'active' : '' }}" role="tab" data-toggle="tab">--}}
-{{--                            @lang('app.Comments')--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    {{--                    <li>--}}
+                    {{--                        <a href="#comment" class="tabs__trigger {{ request()->has('page') ? 'active' : '' }}" role="tab" data-toggle="tab">--}}
+                    {{--                            @lang('app.Comments')--}}
+                    {{--                        </a>--}}
+                    {{--                    </li>--}}
                     <li>
                         <a href="#date" class="tabs__trigger" role="tab" data-toggle="tab">
                             @lang('app.Bid history')
@@ -106,9 +120,9 @@
                                         {!! Form::open(['route' => 'frontend.auctions.store', 'id' => 'bid-form']) !!}
                                         {!! Form::hidden('auction_id',$auction->id) !!}
                                         <div class="add-icon">
-                                            <p class="det-name det-icon">+</p>
-                                            <input type="number" name="price" class="input-num" value="{{ $auction->highest_price ?? $auction->start_from  }}">
-                                            <p class="det-name det-icon01">-</p>
+                                            <a class="det-name det-icon" id="incrementPrice" onclick="incrementValue('price')">+</a>
+                                            <input type="number" name="price" id="price" class="input-num" value="{{ $auction->highest_price ?? $auction->start_from  }}">
+                                            <a class="det-name det-icon01" id="decrementPrice" onclick="decrementValue('price')">-</a>
                                         </div>
                                         <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
                                         {!! Form::close() !!}
@@ -118,9 +132,7 @@
                                             {!! Form::open(['route' => 'frontend.auctions.buyNow', 'id' => 'buyNow-form']) !!}
                                             {!! Form::hidden('auction_id',$auction->id) !!}
                                             <div class="add-icon">
-                                                <input type="number" readonly name="purchase_price" class="input-num"
-                                                       min="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}"
-                                                       value="{{ ($auction->highest_price ?? $auction->start_from ) > $auction->purchase_price ?  ($auction->highest_price ?? $auction->start_from ) : $auction->purchase_price }}">
+                                                <input type="number" readonly name="purchase_price" class="input-num" min="{{ $auction->highest_purchase_price }}" value="{{ $auction->highest_purchase_price }}">
                                             </div>
                                             <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Buy now')</button>
                                             {!! Form::close() !!}
@@ -191,58 +203,58 @@
                 </div><!--End detail-->
                 <div class="clear"></div>
                 <!--StartComment-->
-{{--                <div class="tab-pane mt-4 {{ request()->has('page') ?  'active' : '' }}" role="tabpanel" id="comment">--}}
+                {{--                <div class="tab-pane mt-4 {{ request()->has('page') ?  'active' : '' }}" role="tabpanel" id="comment">--}}
 
-{{--                    @if(!$comments->count())--}}
-{{--                        <div class="bord">--}}
-{{--                            <div class="row">--}}
-{{--                                <!--noComment-->--}}
-{{--                                <h3 class="comment-tit w-100">@lang('app.Comments')</h3>--}}
-{{--                                <p class="no-comment">@lang('app.no comments')</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        <div class="comment">--}}
-{{--                            <!--Comment-->--}}
-{{--                            <div class="row">--}}
-{{--                                <h3 class="my-4 end-in">@lang('app.Comments')</h3>--}}
-{{--                                @foreach($comments as $comment)--}}
-{{--                                    <div class="col-12">--}}
-{{--                                        <div class="comment-box">--}}
-{{--                                            <div class="new-name">--}}
-{{--                                                <div class="com-name">--}}
-{{--                                                    <i class="fas fa-user"></i>{{ $comment->user->name }}--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="sort-product">--}}
-{{--                                                <p>--}}
-{{--                                                    {{ $comment->comment }}--}}
-{{--                                                </p>--}}
-{{--                                                <p class="float-left pb-3">{{ $comment->created_at->diffForHumans() }}</p>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                @endforeach--}}
-{{--                                {{ $comments->links('frontend.layouts.paginator') }}--}}
-{{--                            </div><!--comment-->--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
+                {{--                    @if(!$comments->count())--}}
+                {{--                        <div class="bord">--}}
+                {{--                            <div class="row">--}}
+                {{--                                <!--noComment-->--}}
+                {{--                                <h3 class="comment-tit w-100">@lang('app.Comments')</h3>--}}
+                {{--                                <p class="no-comment">@lang('app.no comments')</p>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    @else--}}
+                {{--                        <div class="comment">--}}
+                {{--                            <!--Comment-->--}}
+                {{--                            <div class="row">--}}
+                {{--                                <h3 class="my-4 end-in">@lang('app.Comments')</h3>--}}
+                {{--                                @foreach($comments as $comment)--}}
+                {{--                                    <div class="col-12">--}}
+                {{--                                        <div class="comment-box">--}}
+                {{--                                            <div class="new-name">--}}
+                {{--                                                <div class="com-name">--}}
+                {{--                                                    <i class="fas fa-user"></i>{{ $comment->user->name }}--}}
+                {{--                                                </div>--}}
+                {{--                                            </div>--}}
+                {{--                                            <div class="sort-product">--}}
+                {{--                                                <p>--}}
+                {{--                                                    {{ $comment->comment }}--}}
+                {{--                                                </p>--}}
+                {{--                                                <p class="float-left pb-3">{{ $comment->created_at->diffForHumans() }}</p>--}}
+                {{--                                            </div>--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+                {{--                                @endforeach--}}
+                {{--                                {{ $comments->links('frontend.layouts.paginator') }}--}}
+                {{--                            </div><!--comment-->--}}
+                {{--                        </div>--}}
+                {{--                    @endif--}}
 
-{{--                    @auth('user')--}}
-{{--                        <div class="add-comment">--}}
-{{--                            {!! Form::open(['route' => 'frontend.user.comment', 'id' => 'review-form']) !!}--}}
-{{--                            {!! Form::hidden('auction_id',$auction->id) !!}--}}
-{{--                            <div class="row">--}}
-{{--                                <h3 class="my-4 end-in">@lang('app.Add a comment')</h3>--}}
-{{--                                <textarea class="form-control" rows="7" id="comment" name="comment" placeholder="اضف تعليق"></textarea>--}}
-{{--                                <div class="b-left w-100 my-4">--}}
-{{--                                    <button class="btn btn-show" type="submit">@lang('app.Add a comment')</button>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            {!! Form::close() !!}--}}
-{{--                        </div>--}}
-{{--                    @endauth--}}
-{{--                </div>--}}
+                {{--                    @auth('user')--}}
+                {{--                        <div class="add-comment">--}}
+                {{--                            {!! Form::open(['route' => 'frontend.user.comment', 'id' => 'review-form']) !!}--}}
+                {{--                            {!! Form::hidden('auction_id',$auction->id) !!}--}}
+                {{--                            <div class="row">--}}
+                {{--                                <h3 class="my-4 end-in">@lang('app.Add a comment')</h3>--}}
+                {{--                                <textarea class="form-control" rows="7" id="comment" name="comment" placeholder="اضف تعليق"></textarea>--}}
+                {{--                                <div class="b-left w-100 my-4">--}}
+                {{--                                    <button class="btn btn-show" type="submit">@lang('app.Add a comment')</button>--}}
+                {{--                                </div>--}}
+                {{--                            </div>--}}
+                {{--                            {!! Form::close() !!}--}}
+                {{--                        </div>--}}
+                {{--                    @endauth--}}
+                {{--                </div>--}}
                 <div class="tab-pane mt-4" role="tabpanel" id="date">
                     <div class="row">
                         @if(!$auction->auctionsUsers()->count())
