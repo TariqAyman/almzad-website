@@ -363,6 +363,7 @@ h1,.btn,footer h4,footer .footer-link a,.contact-info,footer .pub-body,.new-mzad
 .all-product .new-mzad img,.new-product .new-mzad img
 {
     border-radius: 18px 18px 0px 0px;
+    height: 245px;
 }
 .new-mzad img
 {

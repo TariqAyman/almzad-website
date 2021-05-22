@@ -141,7 +141,7 @@ function Countdown(node) {
 
                 // Update DOM values
                 // Hours
-                that.checkHour(that.values.days, $days_1, $days_2,$days_3);
+                that.checkHour(that.values.days, $days_1, $days_2, $days_3);
                 // Hours
                 that.checkHour(that.values.hours, $hour_1, $hour_2);
 
@@ -192,7 +192,7 @@ function Countdown(node) {
             clearProps: 'all'
         });
     };
-    this.checkHour = function (value, $el_1, $el_2,$el_3) {
+    this.checkHour = function (value, $el_1, $el_2, $el_3) {
 
         var val_1 = value.toString().charAt(0),
             val_2 = value.toString().charAt(1),
@@ -200,7 +200,7 @@ function Countdown(node) {
             fig_1_value = $el_1.find('.top').html(),
             fig_2_value = $el_2.find('.top').html();
 
-        if ($el_3){
+        if ($el_3) {
             fig_3_value = $el_3.find('.top').html();
         }
 
@@ -210,8 +210,7 @@ function Countdown(node) {
             if (fig_1_value !== val_1) this.animateFigure($el_1, val_1);
             if (fig_2_value !== val_2) this.animateFigure($el_2, val_2);
             if (fig_3_value !== val_3) this.animateFigure($el_3, val_3);
-        }
-        else if (value >= 10) {
+        } else if (value >= 10) {
 
             // Animate only if the figure has changed
             if (fig_1_value !== val_1) this.animateFigure($el_1, val_1);
@@ -228,7 +227,7 @@ function Countdown(node) {
 // Let's go !
 $total = $('body').attr('data-countdowncount');
 
-for ($count = 0; $count <= $total; $count++){
+for ($count = 0; $count <= $total; $count++) {
     new Countdown($($('.countdown')[$count])).init();
 }
 
@@ -279,4 +278,18 @@ window.onload = function () {
     } else {
         console.log("Your browser does not support File API");
     }
+}
+
+function incrementValue(element) {
+    var value = parseInt(document.getElementById(element).value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById(element).value = value;
+}
+
+function decrementValue(element) {
+    var value = parseInt(document.getElementById(element).value, 10);
+    value = isNaN(value) ? 0 : value;
+    value--;
+    document.getElementById(element).value = value;
 }

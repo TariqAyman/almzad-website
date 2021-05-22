@@ -98,7 +98,7 @@
                         </select>
                         <a href="#" class="valid"><i class="fas fa-arrow-left"></i></a>
                     </div>
-                    <div class="col-lg-4 d-flex px-0 mt-2">
+                    <div class="col-lg-5 d-flex px-0 mt-2">
                         <div class="date-f">
                             <input type="date" class="form-control" name="start_date" placeholder="@lang('app.start_date')" value="{{ old('name') ?? request()->start_date ?? date('Y-m-d') }}">
                         </div>
@@ -107,7 +107,7 @@
                         </div>
                         <a href="#" class="valid"><i class="fas fa-arrow-left"></i></a>
                     </div>
-                    <div class="col-lg-4  d-flex px-0 mt-2 serch-w">
+                    <div class="col-lg-3  d-flex px-0 mt-2 serch-w">
                         <input type="text" value="{{ old('name') ?? request()->name }}" class="form-control" placeholder="@lang('app.search')">
                         <a href="#" class="valid ml-1" onclick="document.getElementById('search-form').submit()"><i class="fas fa-search"></i></a>
                     </div>
