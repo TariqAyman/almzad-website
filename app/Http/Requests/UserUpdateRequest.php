@@ -25,9 +25,9 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'nullable',
-            'email' => 'nullable|email|unique:users,email,' . (!empty($this->user) ? $this->user->id : auth()->user()->id),
-            'phone_number' => 'nullable|unique:users,phone_number,' . (!empty($this->user) ? $this->user->id : auth()->user()->id),
-            'username' => 'nullable|unique:users,username,' . (!empty($this->user) ? $this->user->id : auth()->user()->id),
+            'email' => 'nullable|email|unique:users,email,' . (!empty($this->user) ? $this->user->id : auth()->user()->id).',id,deleted_at,NULL',
+            'phone_number' => 'nullable|unique:users,phone_number,' . (!empty($this->user) ? $this->user->id : auth()->user()->id).',id,deleted_at,NULL',
+            'username' => 'nullable|unique:users,username,' . (!empty($this->user) ? $this->user->id : auth()->user()->id).',id,deleted_at,NULL',
             'password' => 'nullable|confirmed|min:6'
         ];
     }

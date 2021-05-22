@@ -25,7 +25,7 @@ class AdminUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email|unique:admins,email,' . (!empty($this->admin) ? $this->admin->id : auth()->user()->id),
+            'email' => 'required|email|unique:admins,email,' . (!empty($this->admin) ? $this->admin->id : auth()->user()->id).',id,deleted_at,NULL',
             'password' => 'nullable|confirmed|min:6'
         ];
     }
