@@ -2,7 +2,7 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            {{ config('app.name') }}
+            {{ setting('company_name') }}
         @endcomponent
     @endslot
 
@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} {{ config('app.name') }}. @lang('app.all_rights_reserved')
+            © {{ date('Y') }} {{ setting('company_name') }}. @lang('app.all_rights_reserved')
         @endcomponent
     @endslot
 @endcomponent

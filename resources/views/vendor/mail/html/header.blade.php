@@ -1,7 +1,7 @@
 <tr>
     <td class="header">
         @if(setting('company_name'))
-            <a href="{{ env('APP_URL') }}" style="display: inline-block;">
+            <a href="{{ url('/') }}" style="display: inline-block;">
                 <img src="{{ setting('company_logo') ? asset(setting('company_logo')) : asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" class="logo">
             </a>
         @else

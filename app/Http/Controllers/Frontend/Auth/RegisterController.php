@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use App\Models\Admin;
+use App\Notifications\UserRegisteredNotification;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 
 use App\Mail\UserRegistered;
@@ -57,9 +56,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone_number' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^(\d{9})$/'],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,NULL,id,deleted_at,NULL'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,NULL,id,deleted_at,NULL'],
+            'phone_number' => ['required', 'string', 'max:255', 'unique:users,phone_number,NULL,id,deleted_at,NULL', 'regex:/^(\d{9})$/'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'tos' => ['required'],
         ]);
@@ -80,7 +79,7 @@ class RegisterController extends Controller
         $user = User::create($data + ['status' => 1]);
 
         if (setting('register_notification_email') == true) {
-            Mail::to($data['email'])->send(new UserRegistered($user));
+            Notification::locale(App::getLocale())->send($user, new UserRegisteredNotification($user));
         }
 
         return $user;
