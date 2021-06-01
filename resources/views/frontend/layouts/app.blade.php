@@ -64,7 +64,7 @@
                             <li class="nav-item {{ Route::is('frontend.contact-us.index') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('frontend.contact-us.index') }}">@lang('app.content_us')</a>
                             </li>
-                            @if(session()->get('locale') == 'en' )
+                            @if(session()->get('appLocale') == 'en' )
                                 <li class="nav-item sid-log">
                                     <a class="nav-link" href="{{ route('lang.switch','ar') }}"><span class="ub-font">@lang('app.arabic')</span></a>
                                 </li>
@@ -97,7 +97,7 @@
                                     </ul>
                                 </div>
                             @else
-                                <button class="btn btn-login sid-log mr-2">@lang('app.register_now')</button>
+                                <button class="btn btn-login sid-log mr-2" onclick="location.href='{{ route('login') }}'">@lang('app.login')</button>
                             @endif
                         </ul>
                     </nav><!--navbar-->
@@ -105,27 +105,16 @@
             </div><!--menu-->
             <!--buttonLogin-->
             <div class="col-md-3 header-log">
-                <div class="dropdown">
-                    @if(session()->get('appLocale') == 'en')
-                        <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @lang('app.english')
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{ route('lang.switch','ar') }}">
-                                <span class="ub-font">@lang('app.arabic')</span>
-                            </a>
-                        </div>
-                    @else
-                        <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @lang('app.arabic')
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{ route('lang.switch','en') }}">
-                                <span class="ub-font">@lang('app.english')</span>
-                            </a>
-                        </div>
-                    @endif
-                </div>
+
+                @if(session()->get('appLocale') == 'en')
+                    <a href="{{ route('lang.switch','ar') }}">
+                        <span class="ub-font">@lang('app.arabic')</span>
+                    </a>
+                @else
+                    <a href="{{ route('lang.switch','en') }}">
+                        <span class="ub-font">@lang('app.english')</span>
+                    </a>
+                @endif
                 @auth('user')
                     <ul class="nav fav">
                         <li class="note-icon">
@@ -148,7 +137,7 @@
                         </li>
                     </ul>
                 @else
-                    <button class="btn btn-login" onclick="location.href='{{ route('register') }}'">@lang('app.register_now')</button>
+                    <button class="btn btn-login" onclick="location.href='{{ route('login') }}'">@lang('app.login')</button>
                 @endif
             </div>
         </div>
@@ -162,6 +151,11 @@
                 <a href="{{ url('/') }}">
                     <img class="img-fluid" src="{{ setting('company_logo') ? asset(setting('company_logo')) : asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 198px;max-height:  70px">
                 </a>
+                @if(setting('company_logo_2'))
+                    <a href="{{ url('/') }}">
+                        <img class="img-fluid" src="{{ setting('company_logo') ? asset(setting('company_logo_2')) : asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" style="max-width: 198px;max-height:  70px">
+                    </a>
+                @endif
                 <div class="col-12 social-bg">
                     <ul class="nav socail-media mt-4">
                         @if( setting('instagram_url') )
@@ -205,7 +199,8 @@
                     @foreach($auctionsLayout as $auction)
                         <li class="pub-mzad">
                             <div class="pub-pic">
-                                <img onclick="location.href='{{ route('frontend.auctions.show',$auction->slug) }}'" alt="{{ $auction->name }}" src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}"
+                                <img onclick="location.href='{{ route('frontend.auctions.show',$auction->slug) }}'" alt="{{ $auction->name }}"
+                                     src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}"
                                      class="img-fluid" style="max-height: 37px; max-width: 57px">
                             </div>
                             <div class="pub-body">

@@ -65,7 +65,7 @@
                             </div><!--end detail-name-->
                             <div class="col-sm-3">
                                 <p class="start-with">@lang('app.start_from')</p>
-                                <p class="start-price"><span class="ub-font">{{ $auction->start_from }}</span> @lang('app.currency')</p>
+                                <p class="start-price"><span class="ub-font">{{ $auction->highest_price }}</span> @lang('app.currency')</p>
                                 @if($auction->isExpired)
                                     <p class="dept-end">@lang('app.expired')</p>
                                 @else

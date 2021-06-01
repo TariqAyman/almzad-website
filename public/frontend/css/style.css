@@ -496,7 +496,7 @@ h1,.btn,footer h4,footer .footer-link a,.contact-info,footer .pub-body,.new-mzad
   position: relative;
   height: 32px;
   width: 30px;
-  margin-right: 4px;
+  /*margin-right: 4px;*/
   display: inline-block;
     color: #D93644;
 }
@@ -508,9 +508,9 @@ h1,.btn,footer h4,footer .footer-link a,.contact-info,footer .pub-body,.new-mzad
   left: 0;
   right: 0;
   margin: auto;
-  font-size: 16px;
+  font-size: 30px;
   font-weight: 700;
-  color: #de4848;
+  color: #23535D;
 }
 .countdown .figure .top:after,
 .countdown .figure .bottom-back:after {
@@ -578,8 +578,8 @@ h1,.btn,footer h4,footer .footer-link a,.contact-info,footer .pub-body,.new-mzad
   -moz-backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
- border-radius: 4px;
- border:1px solid #D93644;
+ /*border-radius: 4px;*/
+ /*border:1px solid #D93644;*/
 
 }
 .countdown .figure .top,.my-pic {

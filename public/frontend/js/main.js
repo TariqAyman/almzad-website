@@ -283,13 +283,13 @@ window.onload = function () {
 function incrementValue(element) {
     var value = parseInt(document.getElementById(element).value, 10);
     value = isNaN(value) ? 0 : value;
-    value++;
+    value += 100;
     document.getElementById(element).value = value;
 }
 
 function decrementValue(element) {
     var value = parseInt(document.getElementById(element).value, 10);
     value = isNaN(value) ? 0 : value;
-    value--;
+    value -= 100;
     document.getElementById(element).value = value;
 }

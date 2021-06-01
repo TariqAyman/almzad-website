@@ -72,6 +72,32 @@
                                 </a>
                             @endif
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ Form::label('company_logo_2', 'اللوجو اضافي', ['class' => 'form-control-label d-block']) }}
+                                @if (setting('company_logo_2'))
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" value="{{ setting('company_logo_2') }}" name="company_logo_2"/>
+                                        <label class="custom-file-label" for="customFile">Choose Photo</label>
+                                    </div>
+                                @else
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="company_logo_2"/>
+                                        <label class="custom-file-label" for="customFile">Choose Photo</label>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            @if (setting('company_logo_2'))
+                                <a href="{{ setting('company_name') }} Logo" target="_blank">
+                                    <img alt="Image placeholder" width="100" height="100"
+                                         class="avatar avatar-xl  rounded-circle"
+                                         data-toggle="tooltip" data-original-title="{{ setting('company_name') }} Logo"
+                                         src="{{ asset(setting('company_logo_2')) }}">
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
