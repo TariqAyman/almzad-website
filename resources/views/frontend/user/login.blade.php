@@ -8,11 +8,11 @@
             <div class="row">
                 <div class="col-md-6 col-sm-8 mx-auto">
                     <div class="form-login">
-                        <div class="form-title">
-                            <a href="{{ url('/') }}">
-                                <img src="{{ setting('company_logo') ? asset(setting('company_logo')) : asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" class="img-fluid">
-                            </a>
-                        </div>
+{{--                        <div class="form-title">--}}
+{{--                            <a href="{{ url('/') }}">--}}
+{{--                                <img src="{{ setting('company_logo') ? asset(setting('company_logo')) : asset('frontend/img/logo.png') }}" alt="{{ setting('company_name') }}" class="img-fluid">--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
                         <div class="form-body">
                             <form class="form-horizontal" action="{{ route('login') }}" method="post">
                                 @csrf

@@ -56,7 +56,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $casts = [
         'status' => 'bool',
-        'phone_verified' => 'bool'
+        'phone_verified' => 'bool',
+        'show_name' => 'bool',
     ];
 
     protected $dates = [
@@ -90,6 +91,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'refreshToken',
         'expiresIn',
         'localId',
+        'show_name'
     ];
 
     protected $appends = [

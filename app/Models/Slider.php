@@ -21,17 +21,19 @@ class Slider extends Model
     protected $fillable = [
         'name_ar',
         'name_en',
-        'title_ar' ,
-        'title_en' ,
-        'sub_title_ar' ,
-        'sub_title_en' ,
-        'description_ar' ,
-        'description_en' ,
+        'title_ar',
+        'title_en',
+        'sub_title_ar',
+        'sub_title_en',
+        'description_ar',
+        'description_en',
+        'image_ar',
+        'image_en',
         'status'
     ];
 
     protected $appends = [
-        'name', 'title' ,'sub_title','description'
+        'name', 'title', 'sub_title', 'description'
     ];
 
     use LogsActivity;
@@ -86,5 +88,24 @@ class Slider extends Model
             return $this->attributes['description_en'];
         }
 
+    }
+
+    public function getImageAttribute()
+    {
+        if (\App::getLocale() == 'ar') {
+            return $this->attributes['image_ar'];
+
+        } else {
+            return $this->attributes['image_en'];
+        }
+    }
+
+    public function getMinBidAttribute()
+    {
+        if (auth('user')->check()){
+            if ($this->attributes['min_bid'] == 0 || $this->attributes['min_bid'] == null ) return setting('min_bid');
+        }
+
+        return $this->attributes['min_bid'];
     }
 }

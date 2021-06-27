@@ -124,6 +124,12 @@
                                 {{ Form::number('purchase_price', $edit ? $auction->purchase_price : old('purchase_price'), ['class' => 'form-control']) }}
                             </div>
                         </div>
+                        <div class="col-6">
+                            <label class="col-form-label">@lang('app.min_bid')</label>
+                            <div class="col-sm-10">
+                                {{ Form::number('min_bid', $edit ? $auction->min_bid : old('min_bid'), ['class' => 'form-control']) }}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -404,7 +410,7 @@
                 url: "{{route('admin.comments.changeStatus')}}",
                 data: {id: id, status: status},
                 success: function (data) {
-                        window.location.href = "";
+                    window.location.href = "";
                 }
             });
         });

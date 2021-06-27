@@ -1,4 +1,4 @@
-<div class="countdown">
+<div class="countdown" style="{{ request()->routeIs('frontend.auctions.show') ? 'padding-left: 170px; padding-right: 170px;' : '' }}">
     <div class="bloc-time days" data-init-value="{{ $auction->expiredIn['days'] }}">
         <div class="figure days days-1">
             <span class="top">{{ $auction->expiredIn['days_split'][1] }}</span>
@@ -51,20 +51,5 @@
             <span class="bottom-back"><span>{{ $auction->expiredIn['minutes_split'][1] }}</span></span>
         </div>
         <span class="count-title">@lang('app.minutes')</span>
-    </div>
-    <div class="bloc-time sec" data-init-value="{{ $auction->expiredIn['seconds'] }}">
-        <div class="figure sec sec-1">
-            <span class="top">{{ $auction->expiredIn['seconds_split'][0] }}</span>
-            <span class="top-back"><span>{{ $auction->expiredIn['seconds_split'][0] }}</span></span>
-            <span class="bottom">{{ $auction->expiredIn['seconds_split'][0] }}</span>
-            <span class="bottom-back"><span>{{ $auction->expiredIn['seconds_split'][0] }}</span></span>
-        </div>
-        <div class="figure sec sec-2">
-            <span class="top">{{ $auction->expiredIn['seconds_split'][1] }}</span>
-            <span class="top-back"><span>{{ $auction->expiredIn['seconds_split'][1] }}</span></span>
-            <span class="bottom">{{ $auction->expiredIn['seconds_split'][1] }}</span>
-            <span class="bottom-back"><span>{{ $auction->expiredIn['seconds_split'][1] }}</span></span>
-        </div>
-        <span class="count-title">@lang('app.seconds')</span>
     </div>
 </div>

@@ -83,7 +83,6 @@ function Countdown(node) {
             days: this.$el.find('.bloc-time.days .figure'),
             hours: this.$el.find('.bloc-time.hours .figure'),
             minutes: this.$el.find('.bloc-time.min .figure'),
-            seconds: this.$el.find('.bloc-time.sec .figure')
         };
 
         // Init countdown values
@@ -91,11 +90,10 @@ function Countdown(node) {
             days: this.$.days.parent().attr('data-init-value'),
             hours: this.$.hours.parent().attr('data-init-value'),
             minutes: this.$.minutes.parent().attr('data-init-value'),
-            seconds: this.$.seconds.parent().attr('data-init-value'),
         };
 
         // Initialize total seconds
-        this.total_seconds = this.values.days * 60 * 60 * 24 + this.values.hours * 60 * 60 + (this.values.minutes * 60) + this.values.seconds;
+        this.total_seconds = this.values.days * 60 * 60 * 24 + this.values.hours * 60 * 60 + (this.values.minutes * 60);
 
         // Animate countdown to the end
         this.count();
@@ -111,10 +109,7 @@ function Countdown(node) {
             $hour_3 = this.$.hours.eq(2),
             $min_1 = this.$.minutes.eq(0),
             $min_2 = this.$.minutes.eq(1),
-            $min_3 = this.$.minutes.eq(2),
-            $sec_1 = this.$.seconds.eq(0),
-            $sec_2 = this.$.seconds.eq(1),
-            $sec_3 = this.$.seconds.eq(2);
+            $min_3 = this.$.minutes.eq(2);
 
         this.countdown_interval = setInterval(function () {
 
@@ -147,9 +142,6 @@ function Countdown(node) {
 
                 // Minutes
                 that.checkHour(that.values.minutes, $min_1, $min_2);
-
-                // Seconds
-                that.checkHour(that.values.seconds, $sec_1, $sec_2);
 
                 --that.total_seconds;
             } else {
@@ -280,16 +272,16 @@ window.onload = function () {
     }
 }
 
-function incrementValue(element) {
+function incrementValue(element,step) {
     var value = parseInt(document.getElementById(element).value, 10);
     value = isNaN(value) ? 0 : value;
-    value += 100;
+    value += step;
     document.getElementById(element).value = value;
 }
 
-function decrementValue(element) {
+function decrementValue(element,step) {
     var value = parseInt(document.getElementById(element).value, 10);
     value = isNaN(value) ? 0 : value;
-    value -= 100;
+    value -= step;
     document.getElementById(element).value = value;
 }

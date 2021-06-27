@@ -182,39 +182,12 @@
                 </div>
             </div>
             <div class="col-lg col-sm-6">
-                <h4>@lang('app.Common category')</h4>
+                <h4>@lang('app.FAQ')</h4>
                 <div class="foot-dept">
-                    @foreach($categoriesLayout->splitIn(2) as $categories)
-                        <ul class="nav footer-link">
-                            @foreach($categories as $category)
-                                <li><a href="{{ route('frontend.auctions.index',['category' => $category->id]) }}"><i class="fas fas fa-angle-left pl-1"></i>{{ $category->name }}</a></li>
-                            @endforeach
-                        </ul>
-                    @endforeach
+
                 </div>
             </div>
-            <div class="col-lg col-sm-6">
-                <h4>@lang('app.Popular Auctions')</h4>
-                <ul class="nav footer-link">
-                    @foreach($auctionsLayout as $auction)
-                        <li class="pub-mzad">
-                            <div class="pub-pic">
-                                <img onclick="location.href='{{ route('frontend.auctions.show',$auction->slug) }}'" alt="{{ $auction->name }}"
-                                     src="{{ !empty($auction->image->image) ? asset($auction->image->image) : asset('frontend/img/new-mzad-01.png') }}"
-                                     class="img-fluid" style="max-height: 37px; max-width: 57px">
-                            </div>
-                            <div class="pub-body">
-                                <h6>
-                                    <a href="{{ route('frontend.auctions.show',$auction->slug) }}">
-                                        {{ $auction->name }}
-                                    </a>
-                                </h6>
-                                <p>{{ $auction->created_at->diffForHumans() }} </p>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+
             <div class="col-lg col-sm-6">
                 <h4>@lang('app.Connect with us')</h4>
                 <div class="footer-contact">

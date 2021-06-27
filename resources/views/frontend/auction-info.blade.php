@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('page-title' , trans('app.auction') . ": {$auction->name}" )
+@section('page-title' , $auction->name )
 
 @section('content')
     <div class="page-header">
@@ -14,20 +14,6 @@
     </div>
     <!--MzadDetials-->
     <div class="container mt-5">
-        @if(auth('user')->check() && (auth('user')->user()->actual_balance <= 0 || auth('user')->user()->actual_balance <= $auction->hold_balance_wallet) )
-            <div class="alert alert-danger" role="alert">
-                @lang('app.you_not_have_balance_to_bid',['value' => ($auction->hold_balance_wallet)])
-                <a href="{{ route('frontend.wallet.index',['credit' => $auction->hold_balance_wallet]) }}"> @lang('app.add_credit_here')</a>
-            </div>
-
-            @if($auction->purchase_price)
-                <div class="alert alert-danger" role="alert">
-                    @lang('app.you_not_have_balance_to_buy',['value' => ($auction->highest_purchase_price)])
-                    <a href="{{ route('frontend.wallet.index',['credit' => $auction->highest_purchase_price]) }}"> @lang('app.add_credit_here')</a>
-                </div>
-            @endif
-
-        @endif
         <div class="product-details">
             <div class="tab-title">
                 <ul class="nav nav-tabs nav-detail">
@@ -39,11 +25,6 @@
                     {{--                            @lang('app.Comments')--}}
                     {{--                        </a>--}}
                     {{--                    </li>--}}
-                    <li>
-                        <a href="#date" class="tabs__trigger" role="tab" data-toggle="tab">
-                            @lang('app.Bid history')
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -51,7 +32,7 @@
                 <div class="tab-pane {{ request()->has('page') ? '' : 'active' }} " role="tabpanel" id="detail">
                     <div class="detail-name mt-3">
                         <div class="row  ">
-                            <div class="col-sm-9">
+                            <div class="col-sm-6">
                                 <div class="new-box">
                                     <h3>{{ $auction->name }}</h3>
                                     <div class="user-name">
@@ -65,12 +46,18 @@
                             </div><!--end detail-name-->
                             <div class="col-sm-3">
                                 <p class="start-with">@lang('app.start_from')</p>
-                                <p class="start-price"><span class="ub-font">{{ $auction->highest_price }}</span> @lang('app.currency')</p>
+                                <p class="start-price"><span class="ub-font">{{ $auction->start_from }}</span> @lang('app.currency')</p>
                                 @if($auction->isExpired)
                                     <p class="dept-end">@lang('app.expired')</p>
                                 @else
                                     <p class="valid">@lang('app.current')</p>
                                 @endif
+                            </div>
+                            <div class="col-sm-3">
+                                <p class="start-with">@lang('app.end_to')</p>
+                                <p class="start-price"><span class="ub-font">{{ $auction->highest_price }}</span> @lang('app.currency')</p>
+
+                                <a class="valid" href="#date" role="tab" data-toggle="tab">@lang('app.Bid history')</a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +71,6 @@
                                 </div>
                             @endif
                             <div class="detail-name mt-3">
-                                <p class="end-in">@lang('app.Bidding')</p>
                                 <div class="add-det">
                                     <p class="det-name">@lang('app.Bid type')</p>
                                     <p class="det-type">{{ $auction->type->name }}</p>
@@ -117,17 +103,38 @@
                             @if(!$auction->isExpired && !$auction->is_sold)
                                 @if(auth('user')->check())
                                     <div class="detail-name mt-3">
+                                        @if(auth('user')->user()->auctions()->where('auction_id',$auction->id)->exists() )
+                                            <div class="alert alert-primary" role="alert">
+                                                @lang('app.This product has been previously bid')
+                                            </div>
+                                        @endif
+
+                                        @if(auth('user')->check() && (auth('user')->user()->actual_balance <= 0 || auth('user')->user()->actual_balance <= $auction->hold_balance_wallet) )
+                                            <div class="alert alert-danger" role="alert">
+                                                @lang('app.you_not_have_balance_to_bid',['value' => ($auction->hold_balance_wallet)])
+                                                <a href="{{ route('frontend.wallet.index',['credit' => $auction->hold_balance_wallet]) }}"> @lang('app.add_credit_here')</a>
+                                            </div>
+                                        @endif
+
                                         {!! Form::open(['route' => 'frontend.auctions.store', 'id' => 'bid-form']) !!}
                                         {!! Form::hidden('auction_id',$auction->id) !!}
                                         <div class="add-icon">
-                                            <a class="det-name det-icon" id="incrementPrice" onclick="incrementValue('price')">+</a>
-                                            <input type="number" name="price" id="price" class="input-num" value="{{ $auction->highest_price ?? $auction->start_from  }}">
-                                            <a class="det-name det-icon01" id="decrementPrice" onclick="decrementValue('price')">-</a>
+                                            <a class="det-name det-icon" id="incrementPrice" onclick="incrementValue('price',{{ $auction->min_bid }})">+</a>
+                                            <input type="number" name="price" id="price" class="input-num" step="{{ $auction->min_bid }}" min="{{ $auction->highest_price ?? $auction->start_from }}"
+                                                   value="{{ $auction->highest_price ?? $auction->start_from  }}">
+                                            <a class="det-name det-icon01" id="decrementPrice" onclick="decrementValue('price',{{ $auction->min_bid}})">-</a>
                                         </div>
                                         <button type="submit" class="btn btn-show w-100 mt-3">@lang('app.Add bid')</button>
                                         {!! Form::close() !!}
                                     </div>
                                     @if($auction->purchase_price)
+                                        @if(auth('user')->check() && (auth('user')->user()->actual_balance <= 0 || auth('user')->user()->actual_balance <= $auction->hold_balance_wallet) )
+
+                                            <div class="alert alert-danger" role="alert">
+                                                @lang('app.you_not_have_balance_to_buy',['value' => ($auction->highest_purchase_price)])
+                                                <a href="{{ route('frontend.wallet.index',['credit' => $auction->highest_purchase_price]) }}"> @lang('app.add_credit_here')</a>
+                                            </div>
+                                        @endif
                                         <div class="detail-name mt-3">
                                             {!! Form::open(['route' => 'frontend.auctions.buyNow', 'id' => 'buyNow-form']) !!}
                                             {!! Form::hidden('auction_id',$auction->id) !!}
@@ -264,6 +271,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">@lang('app.dates')</th>
+                                    <th scope="col">@lang('app.philanthropist')</th>
                                     <th scope="col">@lang('app.price')</th>
                                 </tr>
                                 </thead>
@@ -271,6 +279,7 @@
                                 @foreach($auction->auctionsUsers as $user)
                                     <tr>
                                         <td class="ub-font">{{ $user->created_at->locale(app()->getLocale())->format('Y/m/d H:s a') }}</td>
+                                        <td><span class="ub-font">{{ $user->user->show_name ? $user->user->name : trans('app.hidden_show_name') }}</span></td>
                                         <td><span class="ub-font">{{ $user->price }}</span> @lang('app.currency')</td>
                                     </tr>
                                 @endforeach

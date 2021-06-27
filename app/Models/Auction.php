@@ -74,7 +74,8 @@ class Auction extends Model
         'shipping' => 'bool',
         'shipping_free' => 'bool',
         'multi_auction' => 'bool',
-        'sale_amount' => 'float'
+        'sale_amount' => 'float',
+        'min_bid' => 'int'
     ];
 
     protected $dates = [
@@ -108,7 +109,8 @@ class Auction extends Model
         'last_bid',
         'is_sold',
         'sold_to',
-        'sale_amount'
+        'sale_amount',
+        'min_bid'
     ];
 
     protected $appends = [

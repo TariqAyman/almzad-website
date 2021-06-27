@@ -51,7 +51,8 @@ class AuctionStoreRequest extends FormRequest
             'shipping_free' => 'required|boolean',
             'multi_auction' => 'required|boolean',
             'images' => 'required|array',
-            'images.*' => 'image'
+            'images.*' => 'image',
+            'min_bid' => 'required|numeric|integer',
         ];
     }
 

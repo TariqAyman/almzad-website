@@ -146,12 +146,18 @@
                             </div>
                         </div>
 
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('min_bid', trans('app.min_bid'), ['class' => 'form-control-label'])}}
+                                {{ Form::number('min_bid', setting('min_bid') ?? 1, ['class'=>"form-control"])}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card mb-5">
-                <div class="card-header bg-transparent"><h3 class="mb-0">اكتشف الروابط</h3></div>
+                <div class="card-header bg-transparent"><h3 class="mb-0">روابط ذات صلة</h3></div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-6">

@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\UploadFile;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Slider\SliderStoreRequest;
+use App\Http\Requests\Slider\SliderUpdateRequest;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Slider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class SliderController extends Controller
 {
+    use UploadFile;
+
     public function __construct()
     {
         $this->middleware('permission:view-slider');
@@ -68,13 +71,25 @@ class SliderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CategoryRequest $request
+     * @param SliderStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(SliderStoreRequest $request)
     {
-        $data = $request->all();
+        $data = $request->except(['image_ar','image_en']);
 
+        if ($request->has('image_ar') || $request->has('image_en')) {
+
+            if ($request->hasFile('image_en')){
+                $imageName = $this->uploadFile($request, 'image_en', 'sliders');
+                $data['image_en'] = $imageName;
+            }
+
+            if ($request->hasFile('image_ar')){
+                $imageName = $this->uploadFile($request, 'image_ar', 'sliders');
+                $data['image_ar'] = $imageName;
+            }
+        }
 
         Slider::create($data);
 
@@ -107,13 +122,29 @@ class SliderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Category $category
+     * @param SliderUpdateRequest $request
+     * @param Slider $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Slider $slider)
+    public function update(SliderUpdateRequest $request, Slider $slider)
     {
-        $slider->update($request->all());
+
+        $data = $request->except(['image_ar','image_en']);
+
+        if ($request->has('image_ar') || $request->has('image_en')) {
+
+            if ($request->hasFile('image_en')){
+                $imageName = $this->uploadFile($request, 'image_en', 'sliders');
+                $data['image_en'] = $imageName;
+            }
+
+            if ($request->hasFile('image_ar')){
+                $imageName = $this->uploadFile($request, 'image_ar', 'sliders');
+                $data['image_ar'] = $imageName;
+            }
+        }
+        
+        $slider->update($data);
         return redirect()->back()->withSuccess('Slider updated successfully!');
     }
 

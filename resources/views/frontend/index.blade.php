@@ -7,24 +7,55 @@
     <!--StartMzadhaed-->
     <section class="mzadhead slider">
         <div id="mzadslider" class="carousel container" data-ride="carousel">
-            <ol class="carousel-indicators">
-                @foreach($sliders as $key => $slider)
-                    <li data-target="#mzadslider" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : ''}}"><span></span></li>
-                @endforeach
-            </ol>
-            <div class="carousel-inner">
-                @foreach($sliders as $key => $slider)
-                    <div class="carousel-item {{ $key == 0 ? 'active' : ''}}">
-                        <div class="mzadbox">
-                            <h1 class="animate__animated animate__fadeInDown del-1"><span>{{ $slider->title }} </span></h1>
-                            <h2 class="animate__animated animate__fadeInDown del-2">{{ $slider->sub_title }}</h2>
-                            <p class="animate__animated animate__fadeInDown del-4">
-                                {{ $slider->description }}
-                            </p>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @foreach($sliders as $key => $slider)
+                        <li data-target="#mzadslider" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : ''}}"><span></span></li>
+                    @endforeach
+                </ol>
+                <div class="carousel-inner">
+                    @foreach($sliders as $key => $slider)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <img style="background-size: cover; height: 540px; display: flex; align-items: center; justify-content: center;" src="{{ asset($slider->image) }}" alt="{{ $slider->title }}">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h1 class="animate__animated animate__fadeInDown del-1"><span>{{ $slider->title }} </span></h1>
+                                <h2 class="animate__animated animate__fadeInDown del-2">{{ $slider->sub_title }}</h2>
+                                <p class="animate__animated animate__fadeInDown del-4">
+                                    {{ $slider->description }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">@lang('app.previous')</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">@lang('app.next')</span>
+                </a>
             </div>
+
+            {{-- <ol class="carousel-indicators">
+                 @foreach($sliders as $key => $slider)
+                     <li data-target="#mzadslider" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : ''}}"><span></span></li>
+                 @endforeach
+             </ol>
+             <div class="carousel-inner">
+                 @foreach($sliders as $key => $slider)
+                     <div class="carousel-item {{ $key == 0 ? 'active' : ''}}">
+                         <div class="mzadbox" style="background: '{{ asset($slider->image) }}'">
+                             <img class="d-block w-100" src="{{ asset($slider->image) }}" alt="First slide">
+                             <h1 class="animate__animated animate__fadeInDown del-1"><span>{{ $slider->title }} </span></h1>
+                             <h2 class="animate__animated animate__fadeInDown del-2">{{ $slider->sub_title }}</h2>
+                             <p class="animate__animated animate__fadeInDown del-4">
+                                 {{ $slider->description }}
+                             </p>
+                         </div>
+                     </div>
+                 @endforeach
+             </div>--}}
         </div>
     </section>
     <!--EndMzadhaed-->
@@ -132,4 +163,14 @@
     {{--            </div>--}}
     {{--        </div>--}}
     {{--    </section>--}}
+@endsection
+
+@section('page-script')
+    <script>
+        $('.carousel').carousel({
+            loop: true,
+            margin: 10,
+            interval: 2000
+        })
+    </script>
 @endsection
