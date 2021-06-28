@@ -32,11 +32,11 @@
                 <table class="table table-striped table-bordered tab-wall">
                     <thead>
                     <tr>
-                        <th scope="col">@lang('app.Note')</th>
-                        <th scope="col">@lang('app.dates')</th>
-                        <th scope="col">@lang('app.in_wallet')</th>
-                        <th scope="col">@lang('app.out')</th>
-                        <th scope="col">@lang('app.hold')</th>
+                        <th style="text-align: center;">@lang('app.Note')</th>
+                        <th style="text-align: center;">@lang('app.dates')</th>
+                        <th style="text-align: center;">@lang('app.in_wallet')</th>
+                        <th style="text-align: center;">@lang('app.out')</th>
+                        <th style="text-align: center;">@lang('app.hold')</th>
                     </tr>
                     </thead>
                     <tbody>
