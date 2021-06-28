@@ -3,32 +3,20 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\AlrajhiPayment;
+use App\Models\Donation;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 
-class WalletController extends Controller
+class DonationsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $wallets = Wallet::query()->where('user_id', auth('user')->user()->id)->latest()->paginate(setting('record_per_page'));
-
-        if ($request->has('paymentId')) {
-            $payment = AlrajhiPayment::where('payment_id', $request->paymentId)->first();
-
-            $messageType = 'error';
-
-            if ($payment->status == PaymentController::CAPTURED_STATUS) $messageType = 'success';
-
-            session()->flash($messageType, trans("payment.{$payment->status}"));
-        }
-
-        return view('frontend.user.wallet', compact('wallets'));
+        //
     }
 
     /**
@@ -46,10 +34,32 @@ class WalletController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'note' => 'required',
+            'amount' => 'required|min:1|max:' . auth('user')->user()->available_balance,
+        ]);
+
+        Donation::query()->create([
+            'user_id' => auth('user')->user()->id,
+            'note' => $request->note,
+            'amount' => $request->amount,
+        ]);
+
+        Wallet::query()->create([
+            'type' => 'donation',
+            'user_id' => auth('user')->user()->id,
+            'in' => 0,
+            'out' => $request->amount,
+            'hold' => 0,
+            'balance' => auth('user')->user()->available_balance - $request->amount,
+            'note' => trans('app.An :amount has been donated to the charity', ['amount' => $request->amount])
+        ]);
+
+        return redirect()->back()->withSuccess(trans('app.success_send_donation'));
     }
 
     /**

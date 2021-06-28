@@ -3,32 +3,19 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\AlrajhiPayment;
-use App\Models\Wallet;
+use App\Models\RefundRequest;
 use Illuminate\Http\Request;
 
-class WalletController extends Controller
+class RefundRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $wallets = Wallet::query()->where('user_id', auth('user')->user()->id)->latest()->paginate(setting('record_per_page'));
-
-        if ($request->has('paymentId')) {
-            $payment = AlrajhiPayment::where('payment_id', $request->paymentId)->first();
-
-            $messageType = 'error';
-
-            if ($payment->status == PaymentController::CAPTURED_STATUS) $messageType = 'success';
-
-            session()->flash($messageType, trans("payment.{$payment->status}"));
-        }
-
-        return view('frontend.user.wallet', compact('wallets'));
+        //
     }
 
     /**
@@ -46,16 +33,28 @@ class WalletController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'note' => 'required',
+            'amount' => 'required',
+        ]);
+
+        RefundRequest::query()->create([
+            'user_id' => auth('user')->user()->id,
+            'note' => $request->note,
+            'amount' => $request->amount,
+        ]);
+
+        return redirect()->back()->withSuccess(trans('app.success_refund_request'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -66,7 +65,7 @@ class WalletController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,8 +76,8 @@ class WalletController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -89,7 +88,7 @@ class WalletController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -141,6 +141,28 @@
                 </li>
             @endcan
 
+            @canany(['view-slider', 'refund-request'])
+                <li class="nav-item {{ Route::is('admin.refund-request.*') ? 'active' : '' }} ">
+                    <a href="{{ route('admin.refund-request.index') }}" class="d-flex align-items-center" target="_self">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span class="menu-title text-truncate">@lang('app.refund-request')</span>
+                    </a>
+                </li>
+            @endcan
+
+            @canany(['view-slider', 'donation'])
+                <li class="nav-item {{ Route::is('admin.donation.*') ? 'active' : '' }} ">
+                    <a href="{{ route('admin.donation.index') }}" class="d-flex align-items-center" target="_self">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span class="menu-title text-truncate">@lang('app.donations')</span>
+                    </a>
+                </li>
+            @endcan
+
             @canany(['view-contactus'])
                 <li class="nav-item {{ Route::is('admin.contactus') ? 'active' : '' }} ">
                     <a href="{{ route('admin.contactus') }}" class="d-flex align-items-center" target="_self">

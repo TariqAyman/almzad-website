@@ -4,7 +4,6 @@
 
 
 @section('content')
-
     <div class="page-header">
         <div class="container">
             <h2>@lang('app.my account')</h2>
@@ -16,12 +15,16 @@
     </div>
     <section class="message">
         <div class="container">
+            <div class="alert alert-info" role="alert">
+                @lang('app.wallet_info')
+            </div>
             <div class="add-det aboutme">
                 <p class="det-name px-md-2">{{ auth('user')->user()->name }}</p>
                 <p class="det-name px-md-2"> @lang('app.Available balance:') {{ auth('user')->user()->actual_balance }}</p>
-
                 <div class="update-store">
+                    <a class="dept-name" data-toggle="modal" data-target="#refundRequest">@lang('app.Refund')</a>
                     <a class="dept-name" data-toggle="modal" data-target="#addBalance">@lang('app.Add credit')</a>
+                    <a class="dept-name" data-toggle="modal" data-target="#donation">@lang('app.donation')</a>
                 </div>
             </div>
             <hr>
@@ -44,10 +47,10 @@
                             @else
                                 <td>{{ $wallet->note }}</td>
                             @endif
-                            <td class="ub-font">{{ $wallet->created_at->format('Y/m/d H:s a') }}</td>
-                            <td>{{ $wallet->in }}</td>
-                            <td>{{ $wallet->out }}</td>
-                            <td>{{ $wallet->hold }}</td>
+                            <td style="text-align: center;">{{ $wallet->created_at->format('Y/m/d H:s a') }}</td>
+                            <td style="text-align: center;">{{ $wallet->in }}</td>
+                            <td style="text-align: center;">{{ $wallet->out }}</td>
+                            <td style="text-align: center;">{{ $wallet->hold }}</td>
                             {{--                            <td><a href="#" class="valid ml-1"><i class="fas fa-cog"></i></a></td>--}}
                         </tr>
                     @endforeach
@@ -95,6 +98,71 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="refundRequest" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content blue-color">
+                <div class="modal-box upZindex">
+                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                    <div class="modal-header text-center mx-auto">
+                        <div class="modal-title  blue-color">
+                            <h4 id="addPriceLabel">@lang('app.refund-request')</h4>
+                        </div>
+                    </div>
+                    {!! Form::open(['route' => 'frontend.refund-request.store', 'id' => 'refund-request-form']) !!}
+                    <div class="modal-body">
+                        <div class="form-group my-3">
+                            <h6>@lang('app.note')</h6>
+                            <input type="text" name="note" value="{{ old('note') }}" class="form-control" placeholder="@lang('app.note')" autocomplete="false" required>
+                        </div>
+                        <div class="form-group my-3">
+                            <h6>المبلغ</h6>
+                            <input type="number" id="amount" class="form-control" placeholder="@lang('app.Example: 1234 riyals')" name="amount" autocomplete="false" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-show" data-toggle="modal" type="submit">@lang('app.add-refund-request')</button>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="donation" tabindex="-1" role="dialog" aria-labelledby="addPriceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content blue-color">
+                <div class="modal-box upZindex">
+                    <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                    <div class="modal-header text-center mx-auto">
+                        <div class="modal-title  blue-color">
+                            <h4 id="addPriceLabel">@lang('app.Add donation')</h4>
+                        </div>
+                    </div>
+                    {!! Form::open(['route' => 'frontend.donation.store', 'id' => 'donation-form']) !!}
+                    <div class="modal-body">
+                        <div class="form-group my-3">
+                            <h6>@lang('app.note')</h6>
+                            <input type="text" name="note" value="{{ old('note') }}" class="form-control" placeholder="@lang('app.note')" autocomplete="false" required>
+                        </div>
+                        <div class="form-group my-3">
+                            <h6>المبلغ</h6>
+                            <input type="number" id="amount" class="form-control" placeholder="@lang('app.Example: 1234 riyals')" name="amount" autocomplete="false" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-show" data-toggle="modal" type="submit">@lang('app.add-refund-request')</button>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     @if(session()->has('payUrl'))
         <div id="divPayFrame"></div>

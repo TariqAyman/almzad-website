@@ -50,17 +50,21 @@
                             {{--                            <li class="nav-item">--}}
                             {{--                                <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_store')</a>--}}
                             {{--                            </li>--}}
+                            <li class="nav-item {{ Route::is('frontend.auctions.index') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('frontend.auctions.index') }}">@lang('app.auctions')</a>
+                            </li>
                             @auth('user')
                                 {{--                                <li class="nav-item {{ Route::is('frontend.user.store') ? 'active' : '' }}">--}}
                                 {{--                                    <a class="nav-link" href="{{ route('frontend.user.store') }}">@lang('app.my_auctions')</a>--}}
                                 {{--                                </li>--}}
+
                                 <li class="nav-item {{ Route::is('frontend.wallet.index') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('frontend.wallet.index') }}">@lang('app.wallet')</a>
                                 </li>
+                                <li class="nav-item {{ Route::is('frontend.my-bid') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.my-bid') }}">@lang('app.my-bid')</a>
+                                </li>
                             @endif
-                            <li class="nav-item {{ Route::is('frontend.auctions.index') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('frontend.auctions.index') }}">@lang('app.auctions')</a>
-                            </li>
                             <li class="nav-item {{ Route::is('frontend.contact-us.index') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('frontend.contact-us.index') }}">@lang('app.content_us')</a>
                             </li>

@@ -77,4 +77,10 @@ Route::group(['middleware' => ['auth:admin', 'verified'], 'prefix' => 'admin', '
     Route::get('/settings', 'SettingController@index')->name('settings.index');
 
     Route::post('/settings', 'SettingController@update')->name('settings.update');
+
+    Route::resource('refund-request', 'RefundRequestController')->except('show');
+    Route::get('refund-request-getDatatable', 'RefundRequestController@getDatatable')->name('refund-request.getDatatable');
+
+    Route::resource('donation', 'DonationsController')->except('show');
+    Route::get('donation-getDatatable', 'DonationsController@getDatatable')->name('donation.getDatatable');
 });

@@ -54,6 +54,10 @@ Route::group(['namespace' => 'Frontend', 'middleware' => 'localization'], functi
 
                 Route::resource('auctions', 'AuctionController')->only(['store']);
                 Route::post('auctions/buyNow', 'AuctionController@buyNow')->name('auctions.buyNow');
+                Route::get('my-bid','BidController@index')->name('my-bid');
+
+                Route::post('refund-request','RefundRequestController@store')->name('refund-request.store');
+                Route::post('donation','DonationsController@store')->name('donation.store');
             });
         });
     });

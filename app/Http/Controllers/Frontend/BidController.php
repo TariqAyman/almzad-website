@@ -3,32 +3,25 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\AlrajhiPayment;
-use App\Models\Wallet;
+use App\Models\Auction;
 use Illuminate\Http\Request;
 
-class WalletController extends Controller
+class BidController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $wallets = Wallet::query()->where('user_id', auth('user')->user()->id)->latest()->paginate(setting('record_per_page'));
+        $auctions = Auction::query();
 
-        if ($request->has('paymentId')) {
-            $payment = AlrajhiPayment::where('payment_id', $request->paymentId)->first();
+        $auctions = $auctions->where('status', 1)->whereHas('auctionsUsers', function ($query) {
+            $query->where('user_id', auth('user')->user()->id);
+        })->paginate(setting('record_per_page'));
 
-            $messageType = 'error';
-
-            if ($payment->status == PaymentController::CAPTURED_STATUS) $messageType = 'success';
-
-            session()->flash($messageType, trans("payment.{$payment->status}"));
-        }
-
-        return view('frontend.user.wallet', compact('wallets'));
+        return view('frontend.user.my-bid.auctions', compact('auctions'));
     }
 
     /**

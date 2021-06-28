@@ -465,7 +465,7 @@ h1, .btn, footer h4, footer .footer-link a, .contact-info, footer .pub-body, .ne
 }
 
 .new-mzad h3 {
-    font-size: 28px;
+    font-size: 25px;
 }
 
 .new-mzad h3, .box-detail p.take, .start-with, .end-in, .add-det p.det-name, .my-start, .user-acount .tab-pane p.tit, .com-name {
@@ -1293,7 +1293,7 @@ label.text-d {
 }
 
 .table td {
-    min-width: 200px;
+    /*min-width: 200px;*/
 }
 
 .table .valid {

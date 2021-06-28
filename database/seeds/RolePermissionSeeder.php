@@ -84,6 +84,15 @@ class RolePermissionSeeder extends Seeder
 
             'view-activity-log',
 
+            'view-refund-request',
+            'create-refund-request',
+            'update-refund-request',
+            'destroy-refund-request',
+
+            'view-donation',
+            'create-donation',
+            'update-donation',
+            'destroy-donation',
 
         ];
 
