@@ -7,20 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserRegisteredNotification extends Notification
+class DeductBalanceNotification extends Notification
 {
     use Queueable;
 
-    private $user;
+    private $wallet;
+    private $auction;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($wallet, $auction)
     {
-        $this->user = $user;
+        $this->wallet = $wallet;
+        $this->auction = $auction;
     }
 
     /**
@@ -42,13 +44,16 @@ class UserRegisteredNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        ///شكرا لستفصحم موقع مزادالخير
+        /// تم خصم مبلغ : 10 من المحفطة لميزادتك علي المنتج 1
+        /// وشكرا
+        ///
         return (new MailMessage)
-            ->subject(trans('app.New User Registered'))
+            ->subject(trans('app.deduct_balance'))
             ->greeting(trans('app.welcome'))
-            ->line(trans('app.A new user has been registered'))
-            ->line(trans('app.name') . ": {$this->user->name}")
-            ->line(trans('app.email') . ": {$this->user->email}")
-            ->action(trans('app.View User Details'), route('frontend.profile.index'))
+            ->line(trans('app.welcome'))
+            ->line(trans('app.deduct_balance_bid', ['value' => $this->wallet->hold, 'name' => $this->auction->name]))
+            ->action(trans('app.link'), route('frontend.auctions.show', $this->auction->slug))
             ->line(trans('app.thank_you_for_using_our_app'));
     }
 

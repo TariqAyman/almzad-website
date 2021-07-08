@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserRegisteredNotification extends Notification
+class DonationNotification extends Notification
 {
     use Queueable;
 
-    private $user;
+    private $donation;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($donation)
     {
-        $this->user = $user;
+        $this->donation = $donation;
     }
 
     /**
@@ -42,13 +42,13 @@ class UserRegisteredNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        /// شكرا ل تبرك بملبغ 10 ل مزاد الخير
+        ///
         return (new MailMessage)
-            ->subject(trans('app.New User Registered'))
+            ->subject(trans('app.donation'))
             ->greeting(trans('app.welcome'))
-            ->line(trans('app.A new user has been registered'))
-            ->line(trans('app.name') . ": {$this->user->name}")
-            ->line(trans('app.email') . ": {$this->user->email}")
-            ->action(trans('app.View User Details'), route('frontend.profile.index'))
+            ->line(trans('app.welcome'))
+            ->line(trans('app.donation_action', ['value' => $this->donation->amount]))
             ->line(trans('app.thank_you_for_using_our_app'));
     }
 

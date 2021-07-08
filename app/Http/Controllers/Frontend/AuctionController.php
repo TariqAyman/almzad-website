@@ -9,9 +9,13 @@ use App\Models\AuctionsUser;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Type;
+use App\Models\User;
 use App\Models\Wallet;
 use App\Notifications\BuyAuctionNotification;
+use App\Notifications\DeductBalanceNotification;
+use App\Notifications\DonationNotification;
 use App\Notifications\NewBidNotification;
+use App\Notifications\RefundAmountNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -102,10 +106,16 @@ class AuctionController extends Controller
         ]);
 
         if ($auction->last_bid) {
-            Wallet::query()->where('user_id', $auction->last_bid)->where('type', 'bid')->where('auction_id', $auction->id)->delete();
+            $wallet = Wallet::query()->where('user_id', $auction->last_bid)->where('type', 'bid')->where('auction_id', $auction->id)->first();
+
+            $user = User::query()->find($auction->last_bid);
+
+            Notification::locale(App::getLocale())->send($user, new RefundAmountNotification($wallet, $auction));
+
+            $wallet->delete();
         }
 
-        Wallet::query()->create([
+        $wallet = Wallet::query()->create([
             'type' => 'bid',
             'auction_id' => $auction->id,
             'user_id' => auth('user')->user()->id,
@@ -115,6 +125,8 @@ class AuctionController extends Controller
             'balance' => auth('user')->user()->available_balance - $hold_balance_wallet,
             'note' => "تحصيل 20% من قيمة المزايده للمزاد {$auction->name} لمشاهدة المزارد"
         ]);
+
+        Notification::locale(App::getLocale())->send(auth('user')->user(), new DeductBalanceNotification($wallet, $auction));
 
         $auction->update([
             'last_bid' => auth('user')->user()->id

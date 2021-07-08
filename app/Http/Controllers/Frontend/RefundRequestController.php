@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\RefundRequest;
+use App\Notifications\RefundRequestNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Notification;
 
 class RefundRequestController extends Controller
 {
@@ -42,11 +45,13 @@ class RefundRequestController extends Controller
             'amount' => 'required',
         ]);
 
-        RefundRequest::query()->create([
+        $refundRequest = RefundRequest::query()->create([
             'user_id' => auth('user')->user()->id,
             'note' => $request->note,
             'amount' => $request->amount,
         ]);
+
+        Notification::locale(App::getLocale())->send($refundRequest->user, new RefundRequestNotification($refundRequest));
 
         return redirect()->back()->withSuccess(trans('app.success_refund_request'));
     }

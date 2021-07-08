@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserRegisteredNotification extends Notification
+class RefundRequestNotification extends Notification
 {
     use Queueable;
 
-    private $user;
+    private $refundRequest;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($refundRequest)
     {
-        $this->user = $user;
+        $this->refundRequest = $refundRequest;
     }
 
     /**
@@ -42,13 +42,13 @@ class UserRegisteredNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        /// تم ارسال طلب استراد مبلغ 10 وفي انتظارتوصل الادارة في اقرب وقت
+        ///
         return (new MailMessage)
-            ->subject(trans('app.New User Registered'))
+            ->subject(trans('app.thank_you_for_refund_request'))
             ->greeting(trans('app.welcome'))
-            ->line(trans('app.A new user has been registered'))
-            ->line(trans('app.name') . ": {$this->user->name}")
-            ->line(trans('app.email') . ": {$this->user->email}")
-            ->action(trans('app.View User Details'), route('frontend.profile.index'))
+            ->line(trans('app.you_apply_refund_request', ['value' => $this->refundRequest->amount]))
+            ->line(trans('app.waiting_admin_approve'))
             ->line(trans('app.thank_you_for_using_our_app'));
     }
 

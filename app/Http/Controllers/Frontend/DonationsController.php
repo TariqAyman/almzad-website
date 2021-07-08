@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Donation;
 use App\Models\Wallet;
+use App\Notifications\DonationNotification;
+use App\Notifications\RefundRequestNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Notification;
 
 class DonationsController extends Controller
 {
@@ -43,7 +47,11 @@ class DonationsController extends Controller
             'amount' => 'required|min:1|max:' . auth('user')->user()->available_balance,
         ]);
 
-        Donation::query()->create([
+        if ($request->amount > auth('user')->user()->available_balance){
+            return redirect()->back()->withError(trans('app.you_not_have_balance_to_donation'));
+        }
+
+        $donation = Donation::query()->create([
             'user_id' => auth('user')->user()->id,
             'note' => $request->note,
             'amount' => $request->amount,
@@ -58,6 +66,8 @@ class DonationsController extends Controller
             'balance' => auth('user')->user()->available_balance - $request->amount,
             'note' => trans('app.An :amount has been donated to the charity', ['amount' => $request->amount])
         ]);
+
+        Notification::locale(App::getLocale())->send($donation->user, new DonationNotification($donation));
 
         return redirect()->back()->withSuccess(trans('app.success_send_donation'));
     }
