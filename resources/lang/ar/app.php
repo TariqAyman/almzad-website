@@ -651,7 +651,7 @@ return [
     'you_apply_refund_request' => 'تم ارسال طلب استرداد مبلغ :value',
     'thank_you_for_refund_request' => 'شكرا لطلبك استرداد مبلغ مالي',
     'you_not_have_balance_to_donation' => 'لا تملك رصيد كافي للتبرع',
-    '' => '',
+    'Something went wrong please try again' => 'حدث خطأ ما. أعد المحاولة من فضلك',
     '' => '',
     '' => '',
     '' => '',

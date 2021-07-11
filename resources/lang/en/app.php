@@ -645,7 +645,7 @@ return [
     'you_apply_refund_request' => 'A refund request has been sent :value',
     'thank_you_for_refund_request' => 'Thank you for asking for a refund',
     'you_not_have_balance_to_donation' => 'You do not have enough funds to donate',
-    '' => '',
+    'Something went wrong please try again' => 'Something went wrong please try again',
     '' => '',
     '' => '',
     '' => '',

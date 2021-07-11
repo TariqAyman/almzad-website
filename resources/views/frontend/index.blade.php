@@ -170,7 +170,8 @@
         $('.carousel').carousel({
             loop: true,
             margin: 10,
-            interval: 2000
+            interval: 2000,
+            full_width: true
         })
     </script>
 @endsection
